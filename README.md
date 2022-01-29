@@ -12,7 +12,7 @@
 
 ## Tecnologías Utilizadas
 
-Project is created with:
+El proyecto se creo con:
 
 * Eclipse Photon 2018
 * Java 1.8

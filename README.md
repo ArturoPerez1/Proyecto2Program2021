@@ -4,7 +4,7 @@
 * [Setup](#setup)
 
 ## Información General
-Proyecto2Program2021
+[Proyecto2Program2021](#proyect-documentation)
 * Arturo Jose Perez Diaz
 
 ## Tecnologías Utilizadas

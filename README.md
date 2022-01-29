@@ -6,7 +6,7 @@
 
 ## Información General
 
-[Proyecto2Program2021](#https://github.com/ArturoPerez1/Proyecto2Program2021/blob/develop/assets/PROYECTO-2-OCTUBRE-2021-FEBRERO-2022-CASINO-GRAFICO'version-1.1.pdf)
+[Proyecto2Program2021](https://github.com/ArturoPerez1/Proyecto2Program2021/blob/develop/assets/PROYECTO-2-OCTUBRE-2021-FEBRERO-2022-CASINO-GRAFICO'version-1.1.pdf)
 
 * Arturo Jose Perez Diaz
 

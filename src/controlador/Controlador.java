@@ -14,7 +14,7 @@ public class Controlador {
         this._vistaJuego = vistaJuego;
         this._modeloJuego = modeloJuego;
 
-        _vistaJuego.listenerAction(new listenerVistaJuego());
+//        _vistaJuego.listenerAction(new listenerVistaJuego());
     }
 
     public class listenerVistaJuego implements ActionListener {

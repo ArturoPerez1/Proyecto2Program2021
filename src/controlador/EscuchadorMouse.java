@@ -3,6 +3,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
@@ -22,7 +23,7 @@ public class EscuchadorMouse {
 	        _vistaJuego.addListenerJLabel(new listenerMouseEvent());
 	    }
 
-	    public class listenerMouseEvent implements java.awt.event.MouseListener {
+	    public class listenerMouseEvent implements MouseListener {
         	public void mouseClicked(MouseEvent e) {
         		if(e.getSource() == _vistaJuego.getLabelNuevaPartida()) {
 					Partida juego = new Partida();
@@ -62,10 +63,5 @@ public class EscuchadorMouse {
 				
 			}
 
-
-
-
-
-	
 	    }
 }

@@ -11,23 +11,31 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.peer.LabelPeer;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 
 public class Vista extends JFrame {
-    private JPanel _panel = new JPanel();
-    private JLabel labelNuevaPartida;
-    private JLabel labelCargarPartida;
-    private JLabel labelSalir;
-    
-    public JLabel getLabelNuevaPartida() {
-		return labelNuevaPartida;
+	private JPanel panel1;
+	private JLabel nuevaPartida;
+	private JLabel cargarPartida;
+	private JLabel labelSalir;
+	private JLabel menuPrincipal;
+	private JPanel panel2;
+	private JLabel lblNewLabel;
+	private JButton btnNewButton;
+
+	public JLabel getLabelNuevaPartida() {
+		return nuevaPartida;
 	}
 
 	public JLabel getLabelCargarPartida() {
-		return labelCargarPartida;
+		return cargarPartida;
 	}
 
 	public JLabel getLabelSalir() {
@@ -35,62 +43,80 @@ public class Vista extends JFrame {
 	}
 
 	public Vista() {
-        setSize(1000, 801);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBackground(Color.GRAY);
-        setTitle("Ventana Principal");
-        panel();
-    }
+		setSize(1000, 801);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBackground(Color.GRAY);
+		setTitle("Ventana Principal");
+		iniciarComponetes();
+	}
 
-    private void panel() {
-        this.getContentPane().add(_panel);
-        _panel.setBackground(Color.WHITE);
-        _panel.setLayout(null);
-        
-        JLabel labelMenuPrincipal = new JLabel("MENÚ PRINCIPAL");
-        labelMenuPrincipal.setBackground(Color.LIGHT_GRAY);
-        labelMenuPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
-        labelMenuPrincipal.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 31));
-        labelMenuPrincipal.setBounds(216, 54, 554, 53);
-        _panel.add(labelMenuPrincipal);
-        
-        labelNuevaPartida = new JLabel("1.- NUEVA PARTIDA");
-        labelNuevaPartida.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-        labelNuevaPartida.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        labelNuevaPartida.setHorizontalAlignment(SwingConstants.CENTER);
-        labelNuevaPartida.setForeground(Color.GRAY);
-        labelNuevaPartida.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 20));
-        labelNuevaPartida.setBounds(254, 142, 421, 32);
-        _panel.add(labelNuevaPartida);
-        
-        labelCargarPartida = new JLabel(" 2.-  CARGAR PARTIDA");
-        labelCargarPartida.setBorder(new LineBorder(new Color(0, 0, 0)));
-        labelCargarPartida.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        labelCargarPartida.setForeground(Color.GRAY);
-        labelCargarPartida.setHorizontalAlignment(SwingConstants.CENTER);
-        labelCargarPartida.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 20));
-        labelCargarPartida.setBounds(254, 214, 421, 32);
-        _panel.add(labelCargarPartida);
-        
-        labelSalir = new JLabel("3.- SALIR");
-        labelSalir.setBorder(new LineBorder(new Color(0, 0, 0)));
-        labelSalir.setHorizontalAlignment(SwingConstants.CENTER);
-        labelSalir.setForeground(Color.GRAY);
-        labelSalir.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 20));
-        labelSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        labelSalir.setBounds(254, 276, 295, 32);
-        _panel.add(labelSalir);
-    }
-    
-    public void mensaje(String mensaje) {
-    	JOptionPane.showMessageDialog(this, "Hola");
-    }
+	private void iniciarComponetes() {		
+		panel();
+		LabelMenuPrincipal();
+		labelNuevaPartida();
+		labelCargaPartida();
+		salir();
+	}
 
-    public void addListenerJLabel(java.awt.event.MouseListener listener) {
-    	labelNuevaPartida.addMouseListener(listener);
-    	labelCargarPartida.addMouseListener(listener);
-    	labelSalir.addMouseListener(listener);
-    	
-    }
+	private void panel() {
+		panel1 = new JPanel();
+		getContentPane().setLayout(null);
+		panel1.setBounds(0, 0, 982, 754);
+		panel1.setBackground(Color.WHITE);
+		panel1.setLayout(null);
+		this.getContentPane().add(panel1);
+	}
+	
+	public void LabelMenuPrincipal() {
+		menuPrincipal = new JLabel("MENÚ PRINCIPAL");
+		menuPrincipal.setBackground(Color.LIGHT_GRAY);
+		menuPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
+		menuPrincipal.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 31));
+		menuPrincipal.setBounds(216, 54, 554, 53);
+		panel1.add(menuPrincipal);
+	}
+
+	public void labelNuevaPartida() {
+		nuevaPartida = new JLabel("1.- NUEVA PARTIDA");
+		nuevaPartida.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		nuevaPartida.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		nuevaPartida.setHorizontalAlignment(SwingConstants.CENTER);
+		nuevaPartida.setForeground(Color.GRAY);
+		nuevaPartida.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 20));
+		nuevaPartida.setBounds(254, 142, 421, 32);
+		panel1.add(nuevaPartida);
+	}
+
+	public void labelCargaPartida() {
+		cargarPartida = new JLabel(" 2.-  CARGAR PARTIDA");
+		cargarPartida.setBorder(new LineBorder(new Color(0, 0, 0)));
+		cargarPartida.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cargarPartida.setForeground(Color.GRAY);
+		cargarPartida.setHorizontalAlignment(SwingConstants.CENTER);
+		cargarPartida.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 20));
+		cargarPartida.setBounds(254, 214, 421, 32);
+		panel1.add(cargarPartida);
+	}
+
+	public void salir() {
+		labelSalir = new JLabel("3.- SALIR");
+		labelSalir.setBorder(new LineBorder(new Color(0, 0, 0)));
+		labelSalir.setHorizontalAlignment(SwingConstants.CENTER);
+		labelSalir.setForeground(Color.GRAY);
+		labelSalir.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 20));
+		labelSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		labelSalir.setBounds(254, 276, 295, 32);
+		panel1.add(labelSalir);
+	}
+
+	public void mensaje(String mensaje) {
+		JOptionPane.showMessageDialog(this, "Hola");
+	}
+
+	public void addListenerJLabel(MouseListener listener) {
+		nuevaPartida.addMouseListener(listener);
+		cargarPartida.addMouseListener(listener);
+		labelSalir.addMouseListener(listener);
+	}
 }

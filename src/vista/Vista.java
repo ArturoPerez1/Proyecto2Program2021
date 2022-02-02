@@ -43,7 +43,8 @@ public class Vista extends JFrame {
 	}
 
 	public Vista() {
-		setSize(1000, 801);
+		setResizable(false);
+		setSize(1030, 697);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBackground(Color.GRAY);
@@ -51,12 +52,18 @@ public class Vista extends JFrame {
 		iniciarComponetes();
 	}
 
-	private void iniciarComponetes() {		
-		panel();
-		LabelMenuPrincipal();
-		labelNuevaPartida();
-		labelCargaPartida();
-		salir();
+	private void iniciarComponetes() {
+		JPanelInicioJuego panelJuego = new JPanelInicioJuego();
+		getContentPane().setLayout(null);
+		panelJuego.setBounds(0, 0, 1030, 697);
+		panelJuego.setLayout(null);
+		this.getContentPane().add(panelJuego );
+		
+//		panel();
+//		LabelMenuPrincipal();
+//		labelNuevaPartida();
+//		labelCargaPartida();
+//		salir();
 	}
 
 	private void panel() {

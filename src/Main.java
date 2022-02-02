@@ -9,7 +9,7 @@ public class Main {
         Vista vistaJuego = new Vista();
         Modelo modeloJuego = new Modelo();
 
-        EscuchadorMouse controladorJuego = new EscuchadorMouse(vistaJuego, modeloJuego);
+//        EscuchadorMouse controladorJuego = new EscuchadorMouse(vistaJuego, modeloJuego);
         vistaJuego.setVisible(true);
     }
 

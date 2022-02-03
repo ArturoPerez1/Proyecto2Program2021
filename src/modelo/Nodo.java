@@ -1,6 +1,6 @@
 package modelo;
 
 public class Nodo {
-    int informacion;
-    Nodo siguiente;
+	int informacion;
+	Nodo siguiente;
 }

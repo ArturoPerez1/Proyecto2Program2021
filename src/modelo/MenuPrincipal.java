@@ -11,12 +11,9 @@ public class MenuPrincipal {
 
 		do {
 			try {
-				opcion = Integer.parseInt(JOptionPane.showInputDialog(null, 
-						"\n JUEGO CASINO\n\n"
-						+ "1. Jugar nueva partida\n\n" 
-						+ "2. Jugar partida anterior\n\n" 
-						+ "3. Salir\n\n"));
-							
+				opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "\n JUEGO CASINO\n\n"
+						+ "1. Jugar nueva partida\n\n" + "2. Jugar partida anterior\n\n" + "3. Salir\n\n"));
+
 				switch (opcion) {
 				case 1:
 					Partida juego = new Partida();

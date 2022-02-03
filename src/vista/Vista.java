@@ -16,8 +16,6 @@ import java.awt.event.MouseEvent;
 import java.awt.peer.LabelPeer;
 import javax.swing.border.MatteBorder;
 
-import modelo.ControladorDeArchivos;
-
 import javax.swing.border.LineBorder;
 import java.awt.BorderLayout;
 import javax.swing.JButton;

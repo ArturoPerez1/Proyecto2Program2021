@@ -122,7 +122,7 @@ public class Partida {
 		if (juego.getPersona().getPuntos() > juego.getComputadora().getPuntos()) {
 			System.out.println(" El ganador es " + juego.getPersona().getNombre() + " Felicidades... \n");
 			System.out
-					.println(" " + juego.getPersona().getNombre() + " " + juego.getPersona().getPuntos() + " puntos\n");
+			.println(" " + juego.getPersona().getNombre() + " " + juego.getPersona().getPuntos() + " puntos\n");
 			System.out.println(
 					" " + juego.getComputadora().getNombre() + " " + juego.getComputadora().getPuntos() + " puntos\n");
 		} else {
@@ -130,7 +130,7 @@ public class Partida {
 			System.out.println(
 					" " + juego.getComputadora().getNombre() + " " + juego.getComputadora().getPuntos() + " puntos\n");
 			System.out
-					.println(" " + juego.getPersona().getNombre() + " " + juego.getPersona().getPuntos() + " puntos\n");
+			.println(" " + juego.getPersona().getNombre() + " " + juego.getPersona().getPuntos() + " puntos\n");
 			System.out.println(" Mejor suerte para la proxima\n");
 		}
 		System.out.println(" Fin del Juego \n");

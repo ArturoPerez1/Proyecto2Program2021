@@ -43,7 +43,7 @@ public class JuegoInterno {
 		return opcion;
 	}
 
-// Recoger----------------------------------------------------------------------------------------------------------------------------------------	
+	// Recoger----------------------------------------------------------------------------------------------------------------------------------------	
 	boolean PuedeRecoger(Carta mazoMesa, Mazo mazoJugador, Mazo cartas) {
 		boolean logico = false;
 		Carta mesaRecorrer = new Carta();
@@ -121,8 +121,8 @@ public class JuegoInterno {
 		}
 	}
 
-//--------------------------------------------------------------------------------------------------------------------------------------------------
-// Lanzar Carta------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------------------------------------------
+	// Lanzar Carta------------------------------------------------------------------------------------------------------------------------
 	public void lanzarCarta(Jugador jugadores, Mazo lanzaAmesa, Mazo sacaDMazoJugador, boolean identificar) {
 		int opciones, opcion;
 		Carta lanzarAmesa = new Carta();
@@ -144,8 +144,8 @@ public class JuegoInterno {
 		jugadores.getJuego().setCantidadCartas(jugadores.getJuego().getCantidadCartas() - 1);
 	}
 
-//---------------------------------------------------------------------------------------------------------------------------------------
-//AgruparSumasDeCartas
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	//AgruparSumasDeCartas
 	public void RecogerCartaAgrupada(Mazo mazoJugador, Mazo mazoAgrupadorJugador) {
 		String tipo, numero;
 		Carta carta = new Carta();
@@ -257,33 +257,36 @@ public class JuegoInterno {
 		}
 	}
 
-//------------------------------------------------------------------------------------------------------------------------------------------------------	
+	//------------------------------------------------------------------------------------------------------------------------------------------------------	
 	public void turnoPersonaJugar(boolean salir) {
 		Mazo cartas = new Mazo();
 		int opcion;
 		boolean permitir = true;
+		boolean opcionI = false;
+		Archivos archivo = new Archivos();
 		juego.mostrarJuego(juego);
 		do {
 			do {
 				opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
-						" opciones: \n" + "1. Recoger Carta igual: \n" + " 2. Agrupar suma de carta: \n"
+						" opciones: \n" + " 1. Recoger Carta igual: \n" + " 2. Agrupar suma de carta: \n"
 								+ " 3. Recoger suma de cartas: \n" + " 4. Emparejamiento con mano: \n"
 								+ " 5. Emparejamientos con mesa: \n" + " 6. Robar emparejamientos: \n"
-								+ " 7. Lanzar Carta: \n" + " 0. Salir de la partida: " + "\n\n" + " Su opcion(0-6): "));
-				if ((opcion < 0) || (opcion > 7)) {
+								+ " 7. Lanzar Carta: \n" + " 8. Guardar Partida y Salir. \n" + " Su opcion(1-8): "));
+				if ((opcion < 1) || (opcion > 8)) {
 					System.out.println("\n\tOpcion invalida \n\n\t");
+					opcionI = false;
+				} else {
+					opcionI = true;
 				}
-			} while ((opcion < 0) || (opcion > 7));
+			} while (opcionI != true);
+			/*
+			 * if(opcion != 0){
+			 * if(PuedeRecoger(juego.getMazoMesa().getMazo(),juego.getPersona().getJuego(),
+			 * cartas)) opcion = 1; }
+			 * 
+			 * else opcion = 7;
+			 */
 
-			if (opcion != 0) {
-				/*
-				 * if(PuedeRecoger(juego.getMazoMesa().getMazo(),juego.getPersona().getJuego(),
-				 * cartas)) opcion = 1;
-				 */
-			}
-
-			else
-				opcion = 7;
 			switch (opcion) {
 			case 1:
 				if (PuedeRecoger(juego.getMazoMesa().getMazo(), juego.getPersona().getJuego(), cartas)) {
@@ -299,11 +302,7 @@ public class JuegoInterno {
 						juego.getPersona().getAcumulado());
 				break;
 			case 3:
-				RecogerCartaAgrupada(juego.getPersona().getJuego(), juego.getPersona().getAcumulado());// Mazo
-																										// mazoJugador,
-																										// Mazo
-																										// mazoAgrupadorJugador)
-																										// {
+				RecogerCartaAgrupada(juego.getPersona().getJuego(), juego.getPersona().getAcumulado());
 				break;
 			case 4:
 				System.out.println("No terminado....");
@@ -318,16 +317,26 @@ public class JuegoInterno {
 				lanzarCarta(juego.getPersona(), juego.getMazoMesa(), juego.getPersona().getJuego(), true);
 				permitir = false;
 				break;
-
+			case 8:
+				archivo.GuardarMazoJugador(juego.getPersona().getJuego());
+				archivo.GuardarMazoComputadora(juego.getComputadora().getJuego());
+				archivo.GuardarMazoMesa(juego.getMazoMesa());
+				archivo.GuardarMazoPilon(juego.getMazoPilon());
+				archivo.GuardarMazoAcumuladorJugador(juego.getPersona().getAcumulado());
+				archivo.GuardarMazoAcumuladorComputadora(juego.getComputadora().getAcumulado());
+				archivo.GuardarTurno(juego.isTurnoPersona());
+				archivo.GuardarPuntosJugador(juego.getPersona().getPuntos());
+				archivo.GuardarPuntosComputadora(juego.getComputadora().getPuntos());
+				break;
 			}
 
 			/*
 			 * } else{ permitir = false; salir = true; }
 			 */
-		} while (permitir);
+		} while (permitir && opcion != 8);
 	}
 
-//TURNO COMPUTADOR-----------------------------------------------------------------------------------------
+	//TURNO COMPUTADOR-----------------------------------------------------------------------------------------
 	public void turnoComputadora() {
 		int opcion;
 		Mazo cartas = new Mazo();

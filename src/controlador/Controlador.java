@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import modelo.ControladorDeArchivos;
+import modelo.Archivos;
 import modelo.Modelo;
 import vista.Vista;
 
 public class Controlador {
 	private Vista _vistaJuego = new Vista();
 	private Modelo _modeloJuego = new Modelo();
-	private ControladorDeArchivos archivosControl;
+	private Archivos archivosControl;
 
 	public Controlador(Vista vistaJuego, Modelo modeloJuego) {
 		this._vistaJuego = vistaJuego;
@@ -31,8 +31,8 @@ public class Controlador {
 				}
 
 				else if (eventoVistaJuego.getSource() == _vistaJuego.getRecibir().getBotonRegistrar()) {
-					archivosControl = new ControladorDeArchivos(_vistaJuego);
-					archivosControl.RegistrarNombreJugador();
+					archivosControl = new Archivos();
+					archivosControl.GuardarNombre(_vistaJuego);
 				}
 
 			} catch (Error e) {

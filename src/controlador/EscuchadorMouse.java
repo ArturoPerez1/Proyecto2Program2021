@@ -20,7 +20,7 @@ public class EscuchadorMouse {
 	        this._vistaJuego = vistaJuego;
 	        this._modeloJuego = modeloJuego;
 
-	        _vistaJuego.addListenerJLabel(new listenerMouseEvent());
+		_vistaJuego.addListenerJLabel(new listenerMouseEvent());
 	    }
 
 	    public class listenerMouseEvent implements MouseListener {

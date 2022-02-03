@@ -15,6 +15,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.peer.LabelPeer;
 import javax.swing.border.MatteBorder;
+
+import modelo.ControladorDeArchivos;
+
 import javax.swing.border.LineBorder;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -29,6 +32,37 @@ public class Vista extends JFrame {
 	private JPanel panel2;
 	private JLabel lblNewLabel;
 	private JButton btnNewButton;
+	private JPanelInicioJuego panelJuego;
+	private JPanel panelContenedor;
+	private PanelRecibirNombre recibir;
+	private String textoJTextField;
+
+	public Vista() {
+		setResizable(false);
+		setSize(1030, 697);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBackground(Color.GRAY);
+		setTitle("Ventana Principal");
+		getContentPane().setLayout(null);
+		panelContenedor = new JPanel();
+		panelContenedor.setBounds(0, 0, 1024, 662);
+		getContentPane().add(panelContenedor);
+
+		iniciarComponetes();
+	}
+
+	public String getTextoJTextField() {
+		return recibir.getRecibirNombreJugador().getText();
+	}
+
+	private void iniciarComponetes() {
+		panelStartGame();
+	}
+
+	public PanelRecibirNombre getRecibir() {
+		return recibir;
+	}
 
 	public JLabel getLabelNuevaPartida() {
 		return nuevaPartida;
@@ -42,39 +76,45 @@ public class Vista extends JFrame {
 		return labelSalir;
 	}
 
-	public Vista() {
-		setResizable(false);
-		setSize(1030, 697);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setBackground(Color.GRAY);
-		setTitle("Ventana Principal");
-		iniciarComponetes();
+	public JPanelInicioJuego getPanelJuego() {
+		return panelJuego;
 	}
 
-	private void iniciarComponetes() {
-		JPanelInicioJuego panelJuego = new JPanelInicioJuego();
-		getContentPane().setLayout(null);
-		panelJuego.setBounds(0, 0, 1030, 697);
+	public void panelRecibirNombre() {
+		recibir = new PanelRecibirNombre();
+		recibir.setSize(1024, 662);
+		recibir.setLocation(0, 0);
+		panelContenedor.removeAll();
+		panelContenedor.add(recibir, BorderLayout.CENTER);
+		panelContenedor.revalidate();
+		panelContenedor.repaint();
+	}
+
+	private void panelStartGame() {
+		panelJuego = new JPanelInicioJuego();
+		panelContenedor.setLayout(null);
+		panelJuego.setBounds(0, 0, 1024, 662);
 		panelJuego.setLayout(null);
-		this.getContentPane().add(panelJuego );
-		
-//		panel();
-//		LabelMenuPrincipal();
-//		labelNuevaPartida();
-//		labelCargaPartida();
-//		salir();
+		panelContenedor.add(panelJuego);
 	}
 
-	private void panel() {
+	public void panel() {
 		panel1 = new JPanel();
 		getContentPane().setLayout(null);
-		panel1.setBounds(0, 0, 982, 754);
+		panel1.setBounds(0, 0, 1024, 662);
 		panel1.setBackground(Color.WHITE);
 		panel1.setLayout(null);
-		this.getContentPane().add(panel1);
+		panelContenedor.removeAll();
+		panelContenedor.add(panel1, BorderLayout.CENTER);
+		panelContenedor.revalidate();
+		panelContenedor.repaint();
+
+		LabelMenuPrincipal();
+		labelNuevaPartida();
+		labelCargaPartida();
+		salir();
 	}
-	
+
 	public void LabelMenuPrincipal() {
 		menuPrincipal = new JLabel("MENÚ PRINCIPAL");
 		menuPrincipal.setBackground(Color.LIGHT_GRAY);
@@ -118,7 +158,7 @@ public class Vista extends JFrame {
 	}
 
 	public void mensaje(String mensaje) {
-		JOptionPane.showMessageDialog(this, "Hola");
+		JOptionPane.showMessageDialog(this, mensaje);
 	}
 
 	public void addListenerJLabel(MouseListener listener) {

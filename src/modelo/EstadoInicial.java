@@ -73,7 +73,6 @@ public class EstadoInicial {
     public EstadoInicial estadoInicial(String nombre, boolean turno) {
         EstadoInicial juego = new EstadoInicial();
         Jugador persona = new Jugador(nombre);
-        ;
         Jugador computadora = new Jugador("Computadora");
         Mazo mesa = new Mazo();
         Mazo mazo = new Mazo();
@@ -113,7 +112,5 @@ public class EstadoInicial {
         mostrar.mazoMesa.ImprimirMazo();
         System.out.println();
         mostrarJugadoresYAcumulado(mostrar, mostrar.persona, 1);
-        // System.out.println(" MAZO DEL JUEGO: ");
-        // mostrar.mazoPilon.ImprimirMazo();
     }
 }

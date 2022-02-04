@@ -55,7 +55,6 @@ public class Partida {
         if (juego.isTurnoPersona()) {
             miJuego.turnoPersonaJugar(salir);
             miJuego.juego.setTurnoPersona(false);
-            // System.out.println(salir);
         } else {
             miJuego.turnoComputadora();
             miJuego.juego.setTurnoPersona(true);

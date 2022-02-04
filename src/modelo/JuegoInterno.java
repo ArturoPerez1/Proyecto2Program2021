@@ -91,8 +91,6 @@ public class JuegoInterno {
         cartaOpciones = guardarPosiblesOpciones(sacarMesa, lista.getMazo());
         if (identificar) {
             opcion = mostarOpcionesParaLanzarYRecoger(cartaOpciones, 1);
-            // opciones = sacarJugador.RecorerMazo(cartaOpciones.getMazo());
-            // opcion = (int) (1 + Math.random()*opciones);
             juego.setUltimoRecoger(true);
         } else {
             opciones = sacarJugador.RecorerMazo(cartaOpciones.getMazo());
@@ -127,8 +125,6 @@ public class JuegoInterno {
         Carta lanzarAmesa = new Carta();
         if (identificar) {
             opcion = mostarOpcionesParaLanzarYRecoger(juego.getPersona().getJuego(), 4);
-            // opciones = sacaDMazoJugador.RecorerMazo(sacaDMazoJugador.getMazo());
-            // opcion = (int) (1 + Math.random()*opciones);
         } else {
             opciones = sacaDMazoJugador.RecorerMazo(sacaDMazoJugador.getMazo());
             opcion = (int) (1 + Math.random() * opciones);
@@ -184,7 +180,6 @@ public class JuegoInterno {
 
         System.out.print("\nIngrese el tipo de la carta (de su mano): ");
         tipo = leer.nextLine();
-        // leer.nextLine();
         System.out.print("\nIngrese el numero de la carta (de su mano): ");
         numero = leer.nextLine();
         leer.nextLine();
@@ -202,7 +197,6 @@ public class JuegoInterno {
                 if (carta != null) {
                     System.out.print("\nIngrese la otra carta de tipo (de su mano): ");
                     tip = leer.nextLine();
-                    // leer.nextLine();
                     System.out.print("\nIngrese la otra carta de numero (de su mano): ");
                     num = leer.nextLine();
                     leer.nextLine();
@@ -215,7 +209,6 @@ public class JuegoInterno {
                         for (int i = 1; i <= cantidad; i++) {
                             System.out.print("\nIngrese el tipo de la carta (de la mesa): ");
                             t = leer.nextLine();
-                            // leer.nextLine();
                             System.out.print("\nIngrese el numero de la carta (de la mesa): ");
                             n = leer.nextLine();
                             leer.nextLine();
@@ -278,13 +271,6 @@ public class JuegoInterno {
                     opcionI = true;
                 }
             } while (opcionI != true);
-            /*
-             * if(opcion != 0){
-             * if(PuedeRecoger(juego.getMazoMesa().getMazo(),juego.getPersona().getJuego(),
-             * cartas)) opcion = 1; }
-             *
-             * else opcion = 7;
-             */
 
             switch (opcion) {
                 case 1:
@@ -329,9 +315,6 @@ public class JuegoInterno {
                     break;
             }
 
-            /*
-             * } else{ permitir = false; salir = true; }
-             */
         } while (permitir && opcion != 8);
     }
 

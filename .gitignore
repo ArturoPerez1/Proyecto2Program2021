@@ -86,4 +86,4 @@ nb-configuration.xml
 ##############################
 ## basteDato proyecto
 ##############################
-.txt
+*.txt

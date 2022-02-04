@@ -6,10 +6,14 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
+
+
+
 import java.awt.Cursor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -32,10 +36,10 @@ public class JPanelInicioJuego extends JPanel {
 
 	public void JLabelImagenFondo() {
 		JLabelImagenFondo = new JLabel("New label");
-		JLabelImagenFondo.setIcon(new ImageIcon(JPanelInicioJuego.class.getResource("/imagenes/casino.jpg")));
+		ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("assets/fondos/StartFondo.jpg"));
+		JLabelImagenFondo.setIcon(icon);
 		JLabelImagenFondo.setBounds(0, 0, 1070, 696);
 		add(JLabelImagenFondo);
-		ImageIcon icon = new ImageIcon("imagenes/istockphoto-1158005632-612x612.jpg");
 	}
 
 	public void JButtonStart() {

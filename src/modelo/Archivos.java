@@ -13,7 +13,7 @@ public class Archivos {
 
 	public void GuardarMazoJugador(Mazo jugador) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\MazoJugador.txt");
+		File file = new File("assets\\baseDatos\\MazoJugador.txt");
 		Mazo aux1 = jugador;
 		String tipo, numero;
 
@@ -41,7 +41,7 @@ public class Archivos {
 
 	public void GuardarMazoComputadora(Mazo jugador) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\MazoComputadora.txt");
+		File file = new File("assets\\baseDatos\\MazoComputadora.txt");
 		Mazo aux1 = jugador;
 		String tipo, numero;
 
@@ -69,7 +69,7 @@ public class Archivos {
 
 	public void GuardarMazoMesa(Mazo jugador) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\MazoMesa.txt");
+		File file = new File("assets\\baseDatos\\MazoMesa.txt");
 		Mazo aux1 = jugador;
 		String tipo, numero;
 
@@ -97,7 +97,7 @@ public class Archivos {
 
 	public void GuardarMazoPilon(Mazo jugador) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\MazoPilon.txt");
+		File file = new File("assets\\baseDatos\\MazoPilon.txt");
 		Mazo aux1 = jugador;
 		String tipo, numero;
 
@@ -125,7 +125,7 @@ public class Archivos {
 
 	public void GuardarMazoAcumuladorJugador(Mazo jugador) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\MazoAcumuladorJugador.txt");
+		File file = new File("assets\\baseDatos\\MazoAcumuladorJugador.txt");
 		Mazo aux1 = jugador;
 		String tipo, numero;
 
@@ -153,7 +153,7 @@ public class Archivos {
 
 	public void GuardarMazoAcumuladorComputadora(Mazo jugador) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\MazoAcumuladorComputadora.txt");
+		File file = new File("assets\\baseDatos\\MazoAcumuladorComputadora.txt");
 		Mazo aux1 = jugador;
 		String tipo, numero;
 
@@ -182,7 +182,7 @@ public class Archivos {
 	public void GuardarNombre(Vista vista) {
 		this.vista = vista;
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\Nombre.txt");
+		File file = new File("assets\\baseDatos\\Nombre.txt");
 
 		try {
 			boolean folderCreated = folder.mkdir();
@@ -202,7 +202,7 @@ public class Archivos {
 
 	public void GuardarTurno(boolean turno) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\Turno.txt");
+		File file = new File("assets\\baseDatos\\Turno.txt");
 		boolean aux = turno;
 
 		try {
@@ -223,7 +223,7 @@ public class Archivos {
 
 	public void GuardarPuntosJugador(int puntos) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\PuntosJugador.txt");
+		File file = new File("assets\\baseDatos\\PuntosJugador.txt");
 		int aux = puntos;
 
 		try {
@@ -244,7 +244,7 @@ public class Archivos {
 
 	public void GuardarPuntosComputadora(int puntos) {
 		File folder = new File("CarpetaDelJuego");
-		File file = new File("CarpetaDelJuego\\PuntosComputadora.txt");
+		File file = new File("assets\\baseDatos\\PuntosComputadora.txt");
 		int aux = puntos;
 
 		try {

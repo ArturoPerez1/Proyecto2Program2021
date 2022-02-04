@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 
 import vista.TextPrompt;
@@ -73,10 +75,10 @@ public class PanelRecibirNombre extends JPanel {
 
 	private void JLabelImagenFondo() {
 		JLabel imagenFondo = new JLabel("New label");
+		ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("assets/fondos/RecibirFondo.jpg"));
+		imagenFondo.setIcon(icon);
 		imagenFondo.setBackground(new Color(255, 250, 250));
 		imagenFondo.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		imagenFondo.setIcon(new ImageIcon(PanelRecibirNombre.class
-				.getResource("/imagenes/Interior-del-Rio-Casino-Resort-en-Klerksdorp-1024x640.jpg")));
 		imagenFondo.setBounds(0, 13, 1024, 636);
 		add(imagenFondo);
 	}

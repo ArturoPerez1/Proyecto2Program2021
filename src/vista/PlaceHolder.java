@@ -18,7 +18,7 @@ import java.awt.event.FocusListener;
  * of the parent text component. You are free to change the properties after
  * class construction.
  */
-public class TextPrompt extends JLabel implements FocusListener, DocumentListener {
+public class PlaceHolder extends JLabel implements FocusListener, DocumentListener {
     /**
      *
      */
@@ -29,11 +29,11 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
     private boolean showPromptOnce;
     private int focusLost;
 
-    public TextPrompt(String text, JTextComponent component) {
+    public PlaceHolder(String text, JTextComponent component) {
         this(text, component, Show.ALWAYS);
     }
 
-    public TextPrompt(String text, JTextComponent component, Show show) {
+    public PlaceHolder(String text, JTextComponent component, Show show) {
         this.component = component;
         setShow(show);
         document = component.getDocument();
@@ -41,9 +41,7 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
         setText(text);
         setFont(component.getFont());
 
-//		setForeground(component.getForeground());
         setForeground(Color.gray);
-//		setBorder(new EmptyBorder(component.getInsets()));
         setHorizontalAlignment(JLabel.LEADING);
 
         component.addFocusListener(this);

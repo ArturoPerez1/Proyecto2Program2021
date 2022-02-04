@@ -2,59 +2,59 @@ package modelo;
 
 public class Carta {
 
-	// Atributos
-	private String tipo, numero;
-	private int indiceCarta;
-	private Carta proximo;
+    // Atributos
+    private String tipo, numero;
+    private int indiceCarta;
+    private Carta proximo;
 
-	// Constructor
-	public Carta() {
-		this.tipo = " ";
-		this.numero = " ";
-		this.indiceCarta = 0;
-		this.proximo = null;
-	}
+    // Constructor
+    public Carta() {
+        this.tipo = " ";
+        this.numero = " ";
+        this.indiceCarta = 0;
+        this.proximo = null;
+    }
 
-	public Carta(String tipo, String numero, int indiceCarta, Carta n) {
-		this.tipo = tipo;
-		this.numero = numero;
-		this.indiceCarta = indiceCarta;
-		this.proximo = n;
-	}
+    public Carta(String tipo, String numero, int indiceCarta, Carta n) {
+        this.tipo = tipo;
+        this.numero = numero;
+        this.indiceCarta = indiceCarta;
+        this.proximo = n;
+    }
 
-	// Metodos Getters y Setters
+    // Metodos Getters y Setters
 
-	// set
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+    // get
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public void setProximo(Carta proximo) {
-		this.proximo = proximo;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	public void setIndiceCarta(int indiceCarta) {
-		this.indiceCarta = indiceCarta;
-	}
+    // set
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-	// get
-	public String getNumero() {
-		return numero;
-	}
+    public Carta getProximo() {
+        return proximo;
+    }
 
-	public String getTipo() {
-		return tipo;
-	}
+    public void setProximo(Carta proximo) {
+        this.proximo = proximo;
+    }
 
-	public Carta getProximo() {
-		return proximo;
-	}
+    public int getIndiceCarta() {
+        return indiceCarta;
+    }
 
-	public int getIndiceCarta() {
-		return indiceCarta;
-	}
+    public void setIndiceCarta(int indiceCarta) {
+        this.indiceCarta = indiceCarta;
+    }
 }

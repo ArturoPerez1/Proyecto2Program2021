@@ -4,83 +4,111 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JPanelContenedorCartas extends JPanel {
+	private JPanel JPanelMesa;
+	private JLabel JLabelMesaJuego;
+	private JPanel JPanelPc;
+	private JLabel JLabelCartasPc;
+	private JPanel JPanelJugador;
+	private JLabel JLabelCartasJugador;
+	private JLabel JLabelMaderaFondo;
 
-    public JPanelContenedorCartas() {
-        setLayout(null);
+	public JPanelContenedorCartas() {
+		setLayout(null);
 
-        JPanel JPanelMesa = new JPanel();
-        JPanelMesa.setBounds(177, 154, 614, 350);
-        add(JPanelMesa);
-        JPanelMesa.setLayout(null);
+		JPanelMesa();
+		JLabelMesaJuego();
+		JPanelPc();
+		JLabelCartasPc();
+		JPanelJugador();
+		JLabelCartasJugador();
+		JLabelMaderaFondo();
+	}
 
-        JLabel JLabelMesaJuego = new JLabel("New label");
-        ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("/assets/fondos/PanelCartas.jpg"));
-        JLabelMesaJuego.setIcon(icon);
-        JLabelMesaJuego.setBounds(0, 0, 614, 350);
-        JPanelMesa.add(JLabelMesaJuego);
+	private void JPanelMesa() {
+		JPanelMesa = new JPanel();
+		JPanelMesa.setBounds(177, 154, 614, 350);
+		add(JPanelMesa);
+		JPanelMesa.setLayout(null);
+	}
 
-        JPanel JPanelPc = new JPanel();
-        JPanelPc.setBounds(177, 0, 614, 141);
-        add(JPanelPc);
-        JPanelPc.setLayout(null);
+	private void JLabelMesaJuego() {
+		JLabelMesaJuego = new JLabel("New label");
+        ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("assets/fondos/PanelCartas.jpg"));
+		JLabelMesaJuego.setIcon(icon);
+		JLabelMesaJuego.setBounds(0, 0, 614, 350);
+		JPanelMesa.add(JLabelMesaJuego);
+	}
 
-        JLabel cartar1P = new JLabel("cartar1J");
-        cartar1P.setBackground(new Color(255, 255, 153));
-        cartar1P.setBounds(12, 13, 94, 115);
-        JPanelPc.add(cartar1P);
+	private void JPanelPc() {
+		JPanelPc = new JPanel();
+		JPanelPc.setBounds(177, 0, 614, 141);
+		add(JPanelPc);
+		JPanelPc.setLayout(null);
+	}
 
-        JLabel cartar2P = new JLabel("cartar2J");
-        cartar2P.setBounds(142, 13, 94, 115);
-        JPanelPc.add(cartar2P);
+	private void JLabelCartasPc() {
+		JLabel cartar1P = new JLabel("cartar1J");
+		cartar1P.setBackground(new Color(255, 255, 153));
+		cartar1P.setBounds(12, 13, 94, 115);
+		JPanelPc.add(cartar1P);
 
-        JLabel cartar3P = new JLabel("cartar3J");
-        cartar3P.setBounds(293, 13, 94, 115);
-        JPanelPc.add(cartar3P);
+		JLabel cartar2P = new JLabel("cartar2J");
+		cartar2P.setBounds(142, 13, 94, 115);
+		JPanelPc.add(cartar2P);
 
-        JLabel cartar4P = new JLabel("cartar4J");
-        cartar4P.setBounds(458, 13, 94, 115);
-        JPanelPc.add(cartar4P);
+		JLabel cartar3P = new JLabel("cartar3J");
+		cartar3P.setBounds(293, 13, 94, 115);
+		JPanelPc.add(cartar3P);
 
-        JLabel JLabelCartasPc = new JLabel("New label");
-        ImageIcon icon1 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("/assets/fondos/PanelCartas.jpg"));
-        JLabelMesaJuego.setIcon(icon1);
-        JLabelCartasPc.setBounds(0, 0, 613, 161);
-        JPanelPc.add(JLabelCartasPc);
+		JLabel cartar4P = new JLabel("cartar4J");
+		cartar4P.setBounds(458, 13, 94, 115);
+		JPanelPc.add(cartar4P);
 
-        JPanel JPanelJugador = new JPanel();
-        JPanelJugador.setBackground(new Color(255, 255, 255));
-        JPanelJugador.setBounds(177, 521, 614, 141);
-        add(JPanelJugador);
-        JPanelJugador.setLayout(null);
+		JLabelCartasPc = new JLabel("New label");
+        ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("assets/fondos/PanelCartas.jpg"));
+        JLabelCartasPc.setIcon(icon);
+		JLabelCartasPc.setBounds(0, 0, 613, 161);
+		JPanelPc.add(JLabelCartasPc);
+	}
 
-        JLabel cartar1J = new JLabel("cartar1J");
-        cartar1J.setBackground(new Color(255, 255, 153));
-        cartar1J.setBounds(12, 13, 94, 115);
-        JPanelJugador.add(cartar1J);
+	private void JPanelJugador() {
+		JPanelJugador = new JPanel();
+		JPanelJugador.setBackground(new Color(255, 255, 255));
+		JPanelJugador.setBounds(177, 521, 614, 141);
+		add(JPanelJugador);
+		JPanelJugador.setLayout(null);
+	}
 
-        JLabel cartar2J = new JLabel("cartar2J");
-        cartar2J.setBounds(145, 13, 94, 115);
-        JPanelJugador.add(cartar2J);
+	private void JLabelCartasJugador() {
+		JLabel cartar1J = new JLabel("cartar1J");
+		cartar1J.setBackground(new Color(255, 255, 153));
+		cartar1J.setBounds(12, 13, 94, 115);
+		JPanelJugador.add(cartar1J);
 
-        JLabel cartar3J = new JLabel("cartar3J");
-        cartar3J.setBounds(286, 13, 94, 115);
-        JPanelJugador.add(cartar3J);
+		JLabel cartar2J = new JLabel("cartar2J");
+		cartar2J.setBounds(145, 13, 94, 115);
+		JPanelJugador.add(cartar2J);
 
-        JLabel cartar4J = new JLabel("cartar4J");
-        cartar4J.setBounds(455, 13, 94, 115);
-        JPanelJugador.add(cartar4J);
+		JLabel cartar3J = new JLabel("cartar3J");
+		cartar3J.setBounds(286, 13, 94, 115);
+		JPanelJugador.add(cartar3J);
 
-        JLabel JLabelCartasJugador = new JLabel("New label");
-        ImageIcon icon2 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("/assets/fondos/PanelCartas.jpg"));
-        JLabelCartasJugador.setIcon(icon2);
-        JLabelCartasJugador.setBounds(0, 0, 614, 141);
-        JPanelJugador.add(JLabelCartasJugador);
+		JLabel cartar4J = new JLabel("cartar4J");
+		cartar4J.setBounds(455, 13, 94, 115);
+		JPanelJugador.add(cartar4J);
+				
+		JLabelCartasJugador = new JLabel("New label");
+        ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("assets/fondos/PanelCartas.jpg"));
+		JLabelCartasJugador.setIcon(icon);
+		JLabelCartasJugador.setBounds(0, 0, 614, 141);
+		JPanelJugador.add(JLabelCartasJugador);
+	}
 
-        JLabel JLabelMaderaFondo = new JLabel("New label");
-        ImageIcon icon3 = new ImageIcon(Toolkit.getDefaultToolkit().getImage("/assets/fondos/StartFondo.jpg"));
-        JLabelCartasJugador.setIcon(icon3);
-        JLabelMaderaFondo.setBounds(0, 0, 1024, 662);
-        add(JLabelMaderaFondo);
-
-    }
+	private void JLabelMaderaFondo() {
+		JLabelMaderaFondo = new JLabel("New label");
+		ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("assets/fondos/StartFondo.jpg"));
+		JLabelMaderaFondo.setIcon(icon);
+		JLabelMaderaFondo.setBounds(0, 0, 1024, 662);
+		add(JLabelMaderaFondo);
+	}
 }

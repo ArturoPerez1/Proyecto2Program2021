@@ -43,7 +43,7 @@ public class PanelRecibirNombre extends JPanel {
         recibirNombreJugador.setBounds(277, 335, 447, 42);
         add(recibirNombreJugador);
         recibirNombreJugador.setColumns(10);
-        TextPrompt texto = new TextPrompt("INGRESE SU NOMBRE DE JUGADOR...", recibirNombreJugador);
+        PlacesHolder texto = new PlacesHolder("INGRESE SU NOMBRE DE JUGADOR...", recibirNombreJugador);
         texto.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 15));
     }
 

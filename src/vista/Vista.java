@@ -1,10 +1,7 @@
 package vista;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.awt.event.MouseListener;
 
 public class Vista extends JFrame {
     private JPanelInicioJuego panelJuego;
@@ -28,16 +25,16 @@ public class Vista extends JFrame {
 
         iniciarComponetes();
     }
-    
+
     public JPanelContenedorCartas getPanelContenedorCartas() {
-		return panelContenedorCartas;
-	}
+        return panelContenedorCartas;
+    }
 
-	public JPaneMenuPrincipal getPanelMenuPrincipal() {
-		return panelMenuPrincipal;
-	}
+    public JPaneMenuPrincipal getPanelMenuPrincipal() {
+        return panelMenuPrincipal;
+    }
 
-	public String getTextoJTextField() {
+    public String getTextoJTextField() {
         return recibir.getRecibirNombreJugador().getText();
     }
 
@@ -52,28 +49,28 @@ public class Vista extends JFrame {
     public JPanelInicioJuego getPanelJuego() {
         return panelJuego;
     }
-    
+
     public void panelContenedorCartas() {
-    	panelContenedorCartas = new JPanelContenedorCartas();
-    	panelContenedorCartas.setSize(1024, 662);
-    	panelContenedorCartas.setLocation(0, 0);
+        panelContenedorCartas = new JPanelContenedorCartas();
+        panelContenedorCartas.setSize(1024, 662);
+        panelContenedorCartas.setLocation(0, 0);
         panelContenedor.removeAll();
         panelContenedor.add(panelContenedorCartas, BorderLayout.CENTER);
         panelContenedor.revalidate();
         panelContenedor.repaint();
     }
-    
+
     public void panelMenuPrincipal() {
-    	panelMenuPrincipal = new JPaneMenuPrincipal();
-    	panelMenuPrincipal.setSize(1024, 662);
-    	panelMenuPrincipal.setLocation(0, 0);
+        panelMenuPrincipal = new JPaneMenuPrincipal();
+        panelMenuPrincipal.setSize(1024, 662);
+        panelMenuPrincipal.setLocation(0, 0);
         panelContenedor.removeAll();
         panelContenedor.add(panelMenuPrincipal, BorderLayout.CENTER);
         panelContenedor.revalidate();
         panelContenedor.repaint();
     }
 
-	public void panelRecibirNombre() {
+    public void panelRecibirNombre() {
         recibir = new PanelRecibirNombre();
         recibir.setSize(1024, 662);
         recibir.setLocation(0, 0);

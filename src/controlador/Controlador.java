@@ -27,26 +27,18 @@ public class Controlador {
                 if (eventoVistaJuego.getSource() == _vistaJuego.getPanelJuego().getJLabelStart()) {
                     _vistaJuego.panelRecibirNombre();
                     _vistaJuego.getRecibir().RegistraButton(new listenerVistaJuego());
-                } 
-                
-                else if (eventoVistaJuego.getSource() == _vistaJuego.getRecibir().getBotonRegistrar()) {
+                } else if (eventoVistaJuego.getSource() == _vistaJuego.getRecibir().getBotonRegistrar()) {
                     _vistaJuego.panelMenuPrincipal();
                     _vistaJuego.getPanelMenuPrincipal().addActionLister1(new listenerVistaJuego());
-                	archivosControl = new Archivos();
+                    archivosControl = new Archivos();
                     archivosControl.GuardarNombre(_vistaJuego);
-                }
-                
-                else if(eventoVistaJuego.getSource() == _vistaJuego.getPanelMenuPrincipal().getJButtonEmpezar()) {
-                	_vistaJuego.panelContenedorCartas();
-                	SemilleroCartas semillero = new SemilleroCartas(_vistaJuego);
-                }
-                
-                else if(eventoVistaJuego.getSource() == _vistaJuego.getPanelMenuPrincipal().getJButtonCargar()) {
-                	_vistaJuego.mensaje("hola man1");
-                }
-                
-                else if(eventoVistaJuego.getSource() == _vistaJuego.getPanelMenuPrincipal().getJButtonSalir()) {
-                	System.exit(0);	
+                } else if (eventoVistaJuego.getSource() == _vistaJuego.getPanelMenuPrincipal().getJButtonEmpezar()) {
+                    _vistaJuego.panelContenedorCartas();
+                    SemilleroCartas semillero = new SemilleroCartas(_vistaJuego);
+                } else if (eventoVistaJuego.getSource() == _vistaJuego.getPanelMenuPrincipal().getJButtonCargar()) {
+                    _vistaJuego.mensaje("hola man1");
+                } else if (eventoVistaJuego.getSource() == _vistaJuego.getPanelMenuPrincipal().getJButtonSalir()) {
+                    System.exit(0);
                 }
 
             } catch (Error e) {

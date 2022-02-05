@@ -1,71 +1,71 @@
 package modelo;
 
 public class Cola {
-	private Nodo inicioCola, finalCola;
-	private String colaTexto = " ";
+    private Nodo inicioCola, finalCola;
+    private String colaTexto = " ";
 
-	public Nodo getInicioCola() {
-		return inicioCola;
-	}
+    public Cola() {
+        inicioCola = null;
+        finalCola = null;
+    }
 
-	public Nodo getFinalCola() {
-		return finalCola;
-	}
+    public Nodo getInicioCola() {
+        return inicioCola;
+    }
 
-	public String getColaTexto() {
-		return colaTexto;
-	}
+    public Nodo getFinalCola() {
+        return finalCola;
+    }
 
-	public Cola() {
-		inicioCola = null;
-		finalCola = null;
-	}
+    public String getColaTexto() {
+        return colaTexto;
+    }
 
-	public boolean colaVacia() {
-		if (inicioCola == null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public boolean colaVacia() {
+        if (inicioCola == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public void insertar(int informacion) {
-		Nodo nuevo_nodo = new Nodo();
-		nuevo_nodo.informacion = informacion;
-		nuevo_nodo.siguiente = null;
+    public void insertar(int informacion) {
+        Nodo nuevo_nodo = new Nodo();
+        nuevo_nodo.informacion = informacion;
+        nuevo_nodo.siguiente = null;
 
-		if (colaVacia()) {
-			inicioCola = nuevo_nodo;
-			finalCola = nuevo_nodo;
-		} else {
-			finalCola.siguiente = nuevo_nodo;
-			finalCola = nuevo_nodo;
-		}
-	}
+        if (colaVacia()) {
+            inicioCola = nuevo_nodo;
+            finalCola = nuevo_nodo;
+        } else {
+            finalCola.siguiente = nuevo_nodo;
+            finalCola = nuevo_nodo;
+        }
+    }
 
-	public int mxtraer() {
-		if (!colaVacia()) {
-			int informacion = inicioCola.informacion;
+    public int mxtraer() {
+        if (!colaVacia()) {
+            int informacion = inicioCola.informacion;
 
-			if (inicioCola == finalCola) {
-				inicioCola = null;
-				finalCola = null;
-			} else {
-				inicioCola = inicioCola.siguiente;
-			}
-			return informacion;
-		} else {
-			return Integer.MAX_VALUE;
-		}
-	}
+            if (inicioCola == finalCola) {
+                inicioCola = null;
+                finalCola = null;
+            } else {
+                inicioCola = inicioCola.siguiente;
+            }
+            return informacion;
+        } else {
+            return Integer.MAX_VALUE;
+        }
+    }
 
-	public void mostrarContenido() {
-		Nodo recorrido = inicioCola;
+    public void mostrarContenido() {
+        Nodo recorrido = inicioCola;
 
-		while (recorrido != null) {
-			colaTexto += recorrido.informacion + " ->";
-			recorrido = recorrido.siguiente;
-		}
-		colaTexto += " null";
-	}
+        while (recorrido != null) {
+            colaTexto += recorrido.informacion + " ->";
+            recorrido = recorrido.siguiente;
+        }
+        colaTexto += " null";
+    }
 }

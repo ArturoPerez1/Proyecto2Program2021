@@ -3,9 +3,6 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class JPaneMenuPrincipal extends JPanel {
     private JPanel JPanelSalir;
@@ -19,7 +16,7 @@ public class JPaneMenuPrincipal extends JPanel {
 
     public JPaneMenuPrincipal() {
         setLayout(null);
-        
+
         JPanelSalir();
         JButtonSalir();
         JPanelCargar();
@@ -30,20 +27,20 @@ public class JPaneMenuPrincipal extends JPanel {
         JLabelMenu();
         JLabelFondoMenu();
     }
-    
-	public JButton getJButtonSalir() {
-		return JButtonSalir;
-	}
 
-	public JButton getJButtonCargar() {
-		return JButtonCargar;
-	}
+    public JButton getJButtonSalir() {
+        return JButtonSalir;
+    }
 
-	public JButton getJButtonEmpezar() {
-		return JButtonEmpezar;
-	}
+    public JButton getJButtonCargar() {
+        return JButtonCargar;
+    }
 
-	private void JPanelSalir() {
+    public JButton getJButtonEmpezar() {
+        return JButtonEmpezar;
+    }
+
+    private void JPanelSalir() {
         JPanelSalir = new JPanel();
         JPanelSalir.setBackground(new Color(240, 248, 255));
         JPanelSalir.setBounds(296, 367, 331, 46);
@@ -51,7 +48,7 @@ public class JPaneMenuPrincipal extends JPanel {
         JPanelSalir.setLayout(null);
 
     }
-    
+
     private void JButtonSalir() {
         JButtonSalir = new JButton("3.- SALIR");
         JButtonSalir.setHorizontalAlignment(SwingConstants.CENTER);
@@ -61,7 +58,7 @@ public class JPaneMenuPrincipal extends JPanel {
         JButtonSalir.setBounds(0, 0, 331, 46);
         JPanelSalir.add(JButtonSalir);
     }
-    
+
     private void JPanelCargar() {
         JPanelCargar = new JPanel();
         JPanelCargar.setBackground(new Color(240, 248, 255));
@@ -69,7 +66,7 @@ public class JPaneMenuPrincipal extends JPanel {
         add(JPanelCargar);
         JPanelCargar.setLayout(null);
     }
-    
+
     private void JButtonCargar() {
         JButtonCargar = new JButton(" 2.- CARGAR PARTIDA ANTERIOR");
         JButtonCargar.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 32));
@@ -78,7 +75,7 @@ public class JPaneMenuPrincipal extends JPanel {
         JButtonCargar.setBounds(0, 0, 589, 53);
         JPanelCargar.add(JButtonCargar);
     }
-    
+
     private void JPanelEmpezar() {
         JPanelEmpezar = new JPanel();
         JPanelEmpezar.setBackground(new Color(240, 248, 255));
@@ -86,7 +83,7 @@ public class JPaneMenuPrincipal extends JPanel {
         add(JPanelEmpezar);
         JPanelEmpezar.setLayout(null);
     }
-    
+
     private void JButtonEmpezar() {
         JButtonEmpezar = new JButton("1.- EMPEZAR NUEVA PARTIDA");
         JButtonEmpezar.setBackground(new Color(240, 248, 255));
@@ -95,7 +92,7 @@ public class JPaneMenuPrincipal extends JPanel {
         JButtonEmpezar.setBounds(0, 0, 589, 53);
         JPanelEmpezar.add(JButtonEmpezar);
     }
-    
+
     private void JPanelMenu() {
         JPanelMenu = new JPanel();
         JPanelMenu.setBackground(new Color(255, 255, 204));
@@ -103,15 +100,15 @@ public class JPaneMenuPrincipal extends JPanel {
         add(JPanelMenu);
         JPanelMenu.setLayout(null);
     }
-    
+
     private void JLabelMenu() {
-    	JLabelMenu = new JLabel("MENU PRINCIPAL CASINO GAME");
-    	JLabelMenu.setBounds(0, 0, 859, 69);
-    	JPanelMenu.add(JLabelMenu);
-    	JLabelMenu.setFont(new Font("Showcard Gothic", Font.BOLD, 50));
-    	JLabelMenu.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabelMenu = new JLabel("MENU PRINCIPAL CASINO GAME");
+        JLabelMenu.setBounds(0, 0, 859, 69);
+        JPanelMenu.add(JLabelMenu);
+        JLabelMenu.setFont(new Font("Showcard Gothic", Font.BOLD, 50));
+        JLabelMenu.setHorizontalAlignment(SwingConstants.CENTER);
     }
-    
+
     private void JLabelFondoMenu() {
         JLabel JLabelFondoMenu = new JLabel("New label");
         ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("assets/fondos/MenuFondo.jpg"));
@@ -123,11 +120,11 @@ public class JPaneMenuPrincipal extends JPanel {
         JLabelFondoMenu.setBounds(0, 0, 1024, 662);
         add(JLabelFondoMenu);
     }
-    
+
     public void addActionLister1(ActionListener actionListener) {
-    	JButtonEmpezar.addActionListener(actionListener);
-    	JButtonSalir.addActionListener(actionListener);
-    	JButtonCargar.addActionListener(actionListener);
+        JButtonEmpezar.addActionListener(actionListener);
+        JButtonSalir.addActionListener(actionListener);
+        JButtonCargar.addActionListener(actionListener);
     }
 
 }

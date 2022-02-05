@@ -29,23 +29,26 @@ public class Cola {
 		}
 	}
 
-	public void insertar(int informacion) {
-		Nodo nuevo_nodo = new Nodo();
-		nuevo_nodo.informacion = informacion;
-		nuevo_nodo.siguiente = null;
+	public void insertar(int id, String figura, String imagen) {
+		Nodo nuevoNodo = new Nodo();
+		
+		nuevoNodo.id = id;
+		nuevoNodo.figura = figura;
+		nuevoNodo.imagen = imagen;
+		nuevoNodo.siguiente = null;
 
 		if (colaVacia()) {
-			inicioCola = nuevo_nodo;
-			finalCola = nuevo_nodo;
+			inicioCola = nuevoNodo;
+			finalCola = nuevoNodo;
 		} else {
-			finalCola.siguiente = nuevo_nodo;
-			finalCola = nuevo_nodo;
+			finalCola.siguiente = nuevoNodo;
+			finalCola = nuevoNodo;
 		}
 	}
 
 	public int mxtraer() {
 		if (!colaVacia()) {
-			int informacion = inicioCola.informacion;
+			int informacion = inicioCola.id;
 
 			if (inicioCola == finalCola) {
 				inicioCola = null;
@@ -63,7 +66,7 @@ public class Cola {
 		Nodo recorrido = inicioCola;
 
 		while (recorrido != null) {
-			colaTexto += recorrido.informacion + " ->";
+			colaTexto += recorrido.id + " ->";
 			recorrido = recorrido.siguiente;
 		}
 		colaTexto += " null";

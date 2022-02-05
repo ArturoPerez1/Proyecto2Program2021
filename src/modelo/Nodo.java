@@ -1,6 +1,8 @@
 package modelo;
 
 public class Nodo {
-    int informacion;
+    int id;
+    String figura;
+    String imagen;
     Nodo siguiente;
 }

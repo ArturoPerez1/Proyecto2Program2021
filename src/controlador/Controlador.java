@@ -2,6 +2,7 @@ package controlador;
 
 import modelo.Archivos;
 import modelo.Modelo;
+import modelo.SemilleroCartas;
 import vista.Vista;
 
 import java.awt.event.ActionEvent;
@@ -37,6 +38,7 @@ public class Controlador {
                 
                 else if(eventoVistaJuego.getSource() == _vistaJuego.getPanelMenuPrincipal().getJButtonEmpezar()) {
                 	_vistaJuego.panelContenedorCartas();
+                	SemilleroCartas semillero = new SemilleroCartas(_vistaJuego);
                 }
                 
                 else if(eventoVistaJuego.getSource() == _vistaJuego.getPanelMenuPrincipal().getJButtonCargar()) {

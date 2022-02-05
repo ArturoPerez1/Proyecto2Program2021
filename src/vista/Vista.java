@@ -28,6 +28,10 @@ public class Vista extends JFrame {
 
         iniciarComponetes();
     }
+    
+    public JPanelContenedorCartas getPanelContenedorCartas() {
+		return panelContenedorCartas;
+	}
 
 	public JPaneMenuPrincipal getPanelMenuPrincipal() {
 		return panelMenuPrincipal;
@@ -68,10 +72,6 @@ public class Vista extends JFrame {
         panelContenedor.revalidate();
         panelContenedor.repaint();
     }
-
-    public JPanelContenedorCartas getPanelContenedorCartas() {
-		return panelContenedorCartas;
-	}
 
 	public void panelRecibirNombre() {
         recibir = new PanelRecibirNombre();

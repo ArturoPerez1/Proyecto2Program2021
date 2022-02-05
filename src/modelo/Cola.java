@@ -46,29 +46,14 @@ public class Cola {
 		}
 	}
 
-	public int mxtraer() {
-		if (!colaVacia()) {
-			int informacion = inicioCola.id;
-
-			if (inicioCola == finalCola) {
-				inicioCola = null;
-				finalCola = null;
-			} else {
-				inicioCola = inicioCola.siguiente;
-			}
-			return informacion;
-		} else {
-			return Integer.MAX_VALUE;
-		}
-	}
-
 	public void mostrarContenido() {
 		Nodo recorrido = inicioCola;
 
 		while (recorrido != null) {
-			colaTexto += recorrido.id + " ->";
+			colaTexto += recorrido.id + recorrido.figura + recorrido.imagen+ " ->";
 			recorrido = recorrido.siguiente;
 		}
 		colaTexto += " null";
+		System.out.println(colaTexto);
 	}
 }

@@ -3,15 +3,15 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 
-public class Vista extends JFrame {
+public class VistaInicio extends JFrame {
     private JPanelInicioJuego panelJuego;
     private JPanel panelContenedor;
-    private PanelRecibirNombre recibir;
+    private PanelRecibirNombre _panelRecibirNombre;
     private JPanelContenedorCartas panelContenedorCartas;
     private JPaneMenuPrincipal panelMenuPrincipal;
     private String textoJTextField;
 
-    public Vista() {
+    public VistaInicio() {
         setResizable(false);
         setSize(1030, 697);
         setLocationRelativeTo(null);
@@ -35,7 +35,7 @@ public class Vista extends JFrame {
     }
 
     public String getTextoJTextField() {
-        return recibir.getRecibirNombreJugador().getText();
+        return _panelRecibirNombre.getRecibirNombreJugador();
     }
 
     private void iniciarComponetes() {
@@ -43,7 +43,7 @@ public class Vista extends JFrame {
     }
 
     public PanelRecibirNombre getRecibir() {
-        return recibir;
+        return _panelRecibirNombre;
     }
 
     public JPanelInicioJuego getPanelJuego() {
@@ -71,11 +71,11 @@ public class Vista extends JFrame {
     }
 
     public void panelRecibirNombre() {
-        recibir = new PanelRecibirNombre();
-        recibir.setSize(1024, 662);
-        recibir.setLocation(0, 0);
+        _panelRecibirNombre = new PanelRecibirNombre();
+        _panelRecibirNombre.setSize(1024, 662);
+        _panelRecibirNombre.setLocation(0, 0);
         panelContenedor.removeAll();
-        panelContenedor.add(recibir, BorderLayout.CENTER);
+        panelContenedor.add(_panelRecibirNombre, BorderLayout.CENTER);
         panelContenedor.revalidate();
         panelContenedor.repaint();
     }

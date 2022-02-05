@@ -19,8 +19,8 @@ public class PanelRecibirNombre extends JPanel {
         JLabelImagenFondo();
     }
 
-    public JTextField getRecibirNombreJugador() {
-        return recibirNombreJugador;
+    public String getRecibirNombreJugador() {
+        return (String) recibirNombreJugador.getText();
     }
 
     public JButton getBotonRegistrar() {

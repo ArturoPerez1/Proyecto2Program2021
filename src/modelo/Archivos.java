@@ -1,14 +1,11 @@
 package modelo;
 
-import vista.Vista;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Archivos {
-    Vista vista;
-
+	
     public void GuardarMazoJugador(Mazo jugador) {
         File file = new File("assets/baseDatos/MazoJugador.txt");
         Mazo aux1 = jugador;
@@ -135,14 +132,13 @@ public class Archivos {
         }
     }
 
-    public void GuardarNombre(Vista vista) {
-        this.vista = vista;
+    public void GuardarNombre(String nombreJugador) {
         File file = new File("assets/baseDatos/Nombre.txt");
 
         try {
             boolean fileCreated = file.createNewFile();
             FileWriter f = new FileWriter(file);
-            f.write(vista.getTextoJTextField());
+            f.write(nombreJugador);
             f.close();
         } catch (IOException e) {
             System.out.println("Error al crear el archivo " + e);

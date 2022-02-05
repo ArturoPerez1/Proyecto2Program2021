@@ -1,15 +1,15 @@
-import controlador.Controlador;
-import modelo.Modelo;
-import vista.Vista;
+import controlador.ControladorInicio;
+import modelo.SemilleroCartas;
+import vista.VistaInicio;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Vista vistaJuego = new Vista();
-        Modelo modeloJuego = new Modelo();
+	public static void main(String[] args) {
+		VistaInicio vistaJuegoInicio = new VistaInicio();
+		SemilleroCartas semillero = new SemilleroCartas();
 
-        Controlador controlador = new Controlador(vistaJuego, modeloJuego);
-        vistaJuego.setVisible(true);
-    }
+		ControladorInicio controladorJuegoInicio = new ControladorInicio(vistaJuegoInicio, semillero);
+		vistaJuegoInicio.setVisible(true);
+	}
 
 }

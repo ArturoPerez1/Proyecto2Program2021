@@ -30,7 +30,7 @@ public class Partida {
             if (mazoJugadores.getIndiceCarta() == 49) {
                 puntos += 2;
             }
-            if (mazoJugadores.getNumero().equals("AS")) {
+            if (mazoJugadores.getValor().equals("AS")) {
                 puntos += 1;
             }
             mazoJugadores = mazoJugadores.getProximo();
@@ -66,8 +66,8 @@ public class Partida {
         carta = mazoMeza.getMazo();
         int cantidadCartas = jugadores.getAcumulado().getCantidadCartas();
         while (carta != null) {
-            jugadores.getAcumulado().InsertarCarta(carta.getTipo(), carta.getNumero(), carta.getIndiceCarta());
-            mazoMeza.EliminarCarta(carta.getTipo(), carta.getNumero());
+            jugadores.getAcumulado().InsertarCarta(carta.getFigura(), carta.getValor(), carta.getIndiceCarta());
+            mazoMeza.EliminarCarta(carta.getFigura(), carta.getValor());
             carta = carta.getProximo();
             jugadores.getAcumulado().setCantidadCartas(cantidadCartas++);
         }

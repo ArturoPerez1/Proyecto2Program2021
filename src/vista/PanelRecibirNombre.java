@@ -6,8 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class PanelRecibirNombre extends JPanel {
-    private JTextField recibirNombreJugador;
-    private JButton botonRegistrar;
+    private JTextField _recibirNombreJugador;
+    private JButton _botonRegistrar;
 
     public PanelRecibirNombre() {
         setBackground(new Color(0, 0, 128));
@@ -20,30 +20,30 @@ public class PanelRecibirNombre extends JPanel {
     }
 
     public String getRecibirNombreJugador() {
-        return (String) recibirNombreJugador.getText();
+        return (String) _recibirNombreJugador.getText();
     }
 
     public JButton getBotonRegistrar() {
-        return botonRegistrar;
+        return _botonRegistrar;
     }
 
     private void JButtonRegistrar() {
-        botonRegistrar = new JButton("REGISTRAR");
-        botonRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        botonRegistrar.setForeground(new Color(0, 0, 0));
-        botonRegistrar.setBackground(new Color(255, 250, 205));
-        botonRegistrar.setFont(new Font("Showcard Gothic", Font.BOLD, 20));
-        botonRegistrar.setBounds(375, 435, 236, 42);
-        add(botonRegistrar);
+        _botonRegistrar = new JButton("REGISTRAR");
+        _botonRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        _botonRegistrar.setForeground(new Color(0, 0, 0));
+        _botonRegistrar.setBackground(new Color(255, 250, 205));
+        _botonRegistrar.setFont(new Font("Showcard Gothic", Font.BOLD, 20));
+        _botonRegistrar.setBounds(375, 435, 236, 42);
+        add(_botonRegistrar);
     }
 
     private void JTextFieldJugador() {
-        recibirNombreJugador = new JTextField();
-        recibirNombreJugador.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 15));
-        recibirNombreJugador.setBounds(277, 335, 447, 42);
-        add(recibirNombreJugador);
-        recibirNombreJugador.setColumns(10);
-        PlaceHolder texto = new PlaceHolder("INGRESE SU NOMBRE DE JUGADOR...", recibirNombreJugador);
+        _recibirNombreJugador = new JTextField();
+        _recibirNombreJugador.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 15));
+        _recibirNombreJugador.setBounds(277, 335, 447, 42);
+        add(_recibirNombreJugador);
+        _recibirNombreJugador.setColumns(10);
+        PlaceHolder texto = new PlaceHolder("INGRESE SU NOMBRE DE JUGADOR...", _recibirNombreJugador);
         texto.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 15));
     }
 
@@ -71,7 +71,7 @@ public class PanelRecibirNombre extends JPanel {
     }
 
     public void RegistraButton(ActionListener listener) {
-        botonRegistrar.addActionListener(listener);
+        _botonRegistrar.addActionListener(listener);
     }
 
 }

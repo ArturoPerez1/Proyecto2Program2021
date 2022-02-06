@@ -8,42 +8,42 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ControladorInicio {
-	private VistaInicio _vistaJuegoInicio = new VistaInicio();
-	private ControladorMesaDeJuego _controladorMesaDeJuego;
-	private SemilleroCartas _semillero;
-	private Archivos _archivosControl;
+    private ControladorMesaDeJuego _controladorMesaDeJuego;
+    private VistaInicio _vistaJuegoInicio;
+    private SemilleroCartas _semillero;
+    private Archivos _archivosControl;
 
-	public ControladorInicio(VistaInicio vistaJuego, SemilleroCartas semillero) {
-		this._archivosControl = new Archivos();
-		this._vistaJuegoInicio = vistaJuego;
-		this._semillero = semillero;
+    public ControladorInicio(VistaInicio vistaJuego, SemilleroCartas semillero) {
+        this._archivosControl = new Archivos();
+        this._vistaJuegoInicio = vistaJuego;
+        this._semillero = semillero;
 
-		_vistaJuegoInicio.getPanelJuego().startGameButton(new listenerVistaJuego());
-	}
+        _vistaJuegoInicio.getPanelJuego().startGameButton(new listenerVistaJuego());
+    }
 
-	public class listenerVistaJuego implements ActionListener {
-		public void actionPerformed(ActionEvent eventoVistaJuegoInicio) {
+    public class listenerVistaJuego implements ActionListener {
+        public void actionPerformed(ActionEvent eventoVistaJuegoInicio) {
 
-			try {
-				if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelJuego().getJLabelStart()) {
-					_vistaJuegoInicio.panelRecibirNombre();
-					_vistaJuegoInicio.getRecibir().RegistraButton(new listenerVistaJuego());
-				} else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getRecibir().getBotonRegistrar()) {
-					_vistaJuegoInicio.panelMenuPrincipal();
-					_vistaJuegoInicio.getPanelMenuPrincipal().addActionLister1(new listenerVistaJuego());
-					_archivosControl.GuardarNombre(_vistaJuegoInicio.getTextoJTextField());
-				} else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonEmpezar()) {					
-					_controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio);
-					_semillero.generarMazoDeCartas();
-				} else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonCargar()) {
-					_vistaJuegoInicio.mensaje("hola man1");
-				} else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonSalir()) {
-					System.exit(0);
-				}
+            try {
+                if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelJuego().getJLabelStart()) {
+                    _vistaJuegoInicio.panelRecibirNombre();
+                    _vistaJuegoInicio.getRecibir().RegistraButton(new listenerVistaJuego());
+                } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getRecibir().getBotonRegistrar()) {
+                    _vistaJuegoInicio.panelMenuPrincipal();
+                    _vistaJuegoInicio.getPanelMenuPrincipal().addActionLister1(new listenerVistaJuego());
+                    _archivosControl.GuardarNombre(_vistaJuegoInicio.getTextoJTextField());
+                } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonEmpezar()) {
+                    _controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio);
+                    _semillero.generarMazoPrincipalDeCartas();
+                } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonCargar()) {
+                    _vistaJuegoInicio.mensaje("hola man1");
+                } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonSalir()) {
+                    System.exit(0);
+                }
 
-			} catch (Error e) {
-
-			}
-		}
-	}
+            } catch (Error e) {
+                System.out.println("Error" + e);
+            }
+        }
+    }
 }

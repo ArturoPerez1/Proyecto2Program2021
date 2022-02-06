@@ -3,58 +3,62 @@ package modelo;
 public class Carta {
 
     // Atributos
-    private String tipo, numero;
-    private int indiceCarta;
-    private Carta proximo;
+    private String _figura, _valor, _imagen;
+    private int _indiceCarta;
+    private Carta _proximo;
 
     // Constructor
     public Carta() {
-        this.tipo = " ";
-        this.numero = " ";
-        this.indiceCarta = 0;
-        this.proximo = null;
+        this._indiceCarta = 0;
+        this._figura = "";
+        this._valor = "";
+        this._proximo = null;
     }
 
-    public Carta(String tipo, String numero, int indiceCarta, Carta n) {
-        this.tipo = tipo;
-        this.numero = numero;
-        this.indiceCarta = indiceCarta;
-        this.proximo = n;
+    public Carta(int indiceCarta, String figura, String valor, Carta n) {
+        this._indiceCarta = indiceCarta;
+        this._figura = figura;
+        this._valor = valor;
+        this._proximo = n;
     }
 
-    // Metodos Getters y Setters
-
-    // get
-    public String getNumero() {
-        return numero;
+    public String getFigura() {
+        return _figura;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setFigura(String tipo) {
+        this._figura = tipo;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getValor() {
+        return _valor;
     }
 
-    // set
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setNumero(String valor) {
+        this._valor = valor;
     }
 
-    public Carta getProximo() {
-        return proximo;
+    public String getImagen() {
+        return _imagen;
     }
 
-    public void setProximo(Carta proximo) {
-        this.proximo = proximo;
+    public void setImagen(String imagen) {
+        this._imagen = imagen;
     }
 
     public int getIndiceCarta() {
-        return indiceCarta;
+        return _indiceCarta;
     }
 
     public void setIndiceCarta(int indiceCarta) {
-        this.indiceCarta = indiceCarta;
+        this._indiceCarta = indiceCarta;
+    }
+
+    public Carta getProximo() {
+        return _proximo;
+    }
+
+    public void setProximo(Carta proximo) {
+        this._proximo = proximo;
     }
 }

@@ -51,9 +51,9 @@ public class JuegoInterno {
         jugadoresRecorrer = mazoJugador.getMazo();
         while (mesaRecorrer != null) {
             while (jugadoresRecorrer != null) {
-                if (mesaRecorrer.getNumero().equals(jugadoresRecorrer.getNumero())) {
+                if (mesaRecorrer.getValor().equals(jugadoresRecorrer.getValor())) {
                     if (cartas.buscarRepetidos(cartas, mesaRecorrer.getIndiceCarta()))
-                        cartas.InsertarCarta(mesaRecorrer.getTipo(), mesaRecorrer.getNumero(),
+                        cartas.InsertarCarta(mesaRecorrer.getFigura(), mesaRecorrer.getValor(),
                                 mesaRecorrer.getIndiceCarta());
                     logico = true;
                 }
@@ -72,7 +72,7 @@ public class JuegoInterno {
         while (cartas != null) {
             while (mesaRecorrer != null) {
                 if (mesaRecorrer.getIndiceCarta() == cartas.getIndiceCarta()) {
-                    guardados.InsertarCarta(mesaRecorrer.getTipo(), mesaRecorrer.getNumero(),
+                    guardados.InsertarCarta(mesaRecorrer.getFigura(), mesaRecorrer.getValor(),
                             mesaRecorrer.getIndiceCarta());
                 }
                 mesaRecorrer = mesaRecorrer.getProximo();
@@ -99,16 +99,16 @@ public class JuegoInterno {
         }
         Carta cartaMesa = cartaOpciones.sacarCartaMazo(opcion);
         System.out.println();
-        System.out.println("   " + jugadorPuntos.getNombre() + " recoge la carta: " + cartaMesa.getTipo() + " "
-                + cartaMesa.getNumero());
-        Carta mazoJugador = sacarJugador.sacarCartaPorValor2(cartaMesa.getNumero());
-        System.out.println(" mazoJugador: " + mazoJugador.getTipo() + " " + cartaMesa.getNumero());
-        insertarAcumulado.InsertarCarta(cartaMesa.getTipo(), cartaMesa.getNumero(), cartaMesa.getIndiceCarta());
-        insertarAcumulado.InsertarCarta(mazoJugador.getTipo(), mazoJugador.getNumero(), mazoJugador.getIndiceCarta());
+        System.out.println("   " + jugadorPuntos.getNombre() + " recoge la carta: " + cartaMesa.getFigura() + " "
+                + cartaMesa.getValor());
+        Carta mazoJugador = sacarJugador.sacarCartaPorValor2(cartaMesa.getValor());
+        System.out.println(" mazoJugador: " + mazoJugador.getFigura() + " " + cartaMesa.getValor());
+        insertarAcumulado.InsertarCarta(cartaMesa.getFigura(), cartaMesa.getValor(), cartaMesa.getIndiceCarta());
+        insertarAcumulado.InsertarCarta(mazoJugador.getFigura(), mazoJugador.getValor(), mazoJugador.getIndiceCarta());
         insertarAcumulado.setCantidadCartas(insertarAcumulado.getCantidadCartas() + 2);
-        sacarMesa.EliminarCarta(cartaMesa.getTipo(), cartaMesa.getNumero());
+        sacarMesa.EliminarCarta(cartaMesa.getFigura(), cartaMesa.getValor());
         sacarMesa.setCantidadCartas(sacarMesa.getCantidadCartas() - 1);
-        sacarJugador.EliminarCarta(mazoJugador.getTipo(), mazoJugador.getNumero());
+        sacarJugador.EliminarCarta(mazoJugador.getFigura(), mazoJugador.getValor());
         sacarJugador.setCantidadCartas(sacarJugador.getCantidadCartas() - 1);
 
         if (sacarMesa.getMazo() == null) {
@@ -131,11 +131,11 @@ public class JuegoInterno {
         }
         lanzarAmesa = sacaDMazoJugador.sacarCartaMazo(opcion);
         System.out.println();
-        System.out.println("   " + jugadores.getNombre() + " lanza la carta: " + lanzarAmesa.getTipo() + " "
-                + lanzarAmesa.getNumero());
-        juego.getMazoMesa().InsertarCarta(lanzarAmesa.getTipo(), lanzarAmesa.getNumero(), lanzarAmesa.getIndiceCarta());
+        System.out.println("   " + jugadores.getNombre() + " lanza la carta: " + lanzarAmesa.getFigura() + " "
+                + lanzarAmesa.getValor());
+        juego.getMazoMesa().InsertarCarta(lanzarAmesa.getFigura(), lanzarAmesa.getValor(), lanzarAmesa.getIndiceCarta());
         juego.getMazoMesa().setCantidadCartas(juego.getMazoMesa().getCantidadCartas() + 1);
-        jugadores.getJuego().EliminarCarta(lanzarAmesa.getTipo(), lanzarAmesa.getNumero());
+        jugadores.getJuego().EliminarCarta(lanzarAmesa.getFigura(), lanzarAmesa.getValor());
         jugadores.getJuego().setCantidadCartas(jugadores.getJuego().getCantidadCartas() - 1);
     }
 
@@ -154,9 +154,9 @@ public class JuegoInterno {
         if (mazoJugador != null) {
             carta = mazoJugador.BuscarCarta(mazoJugador, tipo, numero);
             if (carta != null) {
-                if (carta.getNumero().equals(sumaTotal)) {
-                    mazoAgrupadorJugador.InsertarCarta(carta.getTipo(), carta.getNumero(), carta.getIndiceCarta());
-                    mazoJugador.EliminarCarta(carta.getTipo(), carta.getNumero());
+                if (carta.getValor().equals(sumaTotal)) {
+                    mazoAgrupadorJugador.InsertarCarta(carta.getFigura(), carta.getValor(), carta.getIndiceCarta());
+                    mazoJugador.EliminarCarta(carta.getFigura(), carta.getValor());
                 } else {
                     System.out.println("\nLa suma de las carta no es igual a la carta que tienes en la mano.");
                 }
@@ -214,15 +214,15 @@ public class JuegoInterno {
                             leer.nextLine();
                             carta3 = aux2.BuscarCarta(aux2, t, n);
 
-                            if (t.equals(carta3.getTipo()) && n.equals(carta3.getNumero()) && carta3 != null) {
+                            if (t.equals(carta3.getFigura()) && n.equals(carta3.getValor()) && carta3 != null) {
                                 mazoAgrupadorJugador.InsertarCarta(t, n, i++);
                                 mazoAgrupadorJugador.InsertarCarta(tip, num, i + 1);
                                 mazoMesa.EliminarCarta(t, n);
                                 mazoJugador.EliminarCarta(tip, num);
-                                if (carta3.getNumero().equals("AS")) {
+                                if (carta3.getValor().equals("AS")) {
                                     suma++;
                                 } else {
-                                    suma = suma + (Integer.parseInt(carta3.getNumero()));
+                                    suma = suma + (Integer.parseInt(carta3.getValor()));
                                 }
                             } else {
                                 System.out.println("\nEsta carta no esta en la mesa ingrese otra por favor.");

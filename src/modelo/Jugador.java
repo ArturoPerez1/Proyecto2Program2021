@@ -1,59 +1,55 @@
 package modelo;
 
 public class Jugador {
-    private String nombre;
-    private Mazo juego;
-    private Mazo acumulado;
-    private int puntos;
+    private String _nombre;
+    private Mazo _juego;
+    private Mazo _acumulado;
+    private int _puntos;
 
     public Jugador() {
-        nombre = "";
-        juego = null;
-        acumulado = null;
-        puntos = 0;
+        _nombre = "";
+        _juego = null;
+        _acumulado = null;
+        _puntos = 0;
     }
 
     public Jugador(String nombre) {
-        this.nombre = nombre;
-        juego = new Mazo();
-        acumulado = new Mazo();
-        puntos = 0;
+        this._nombre = nombre;
+        _juego = new Mazo();
+        _acumulado = new Mazo();
+        _puntos = 0;
     }
 
     public String getNombre() {
-        return nombre;
+        return _nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this._nombre = nombre;
     }
 
     public Mazo getJuego() {
-        return juego;
+        return _juego;
     }
 
     public void setJuego(Mazo juego) {
-        this.juego = juego;
+        this._juego = juego;
     }
 
     public Mazo getAcumulado() {
-        return acumulado;
+        return _acumulado;
     }
 
     public void setAcumulado(Mazo acumulado) {
-        this.acumulado = acumulado;
+        this._acumulado = acumulado;
     }
 
     public int getPuntos() {
-        return puntos;
+        return _puntos;
     }
 
     public void setPuntos(int puntos) {
-        this.puntos = puntos;
+        this._puntos = puntos;
     }
 
-    public void a() {
-        Jugador a = new Jugador("hola");
-        a.acumulado.ImprimirMazo();
-    }
 }

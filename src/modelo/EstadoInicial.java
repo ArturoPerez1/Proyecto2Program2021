@@ -1,73 +1,73 @@
 package modelo;
 
 public class EstadoInicial {
-    private Mazo mazoPilon;
-    private Mazo mazoMesa;
-    private Jugador persona;
-    private Jugador computadora;
-    private boolean ultimoRecoger;
-    private boolean repartePersona;
-    private boolean turnoPersona;
+    private Mazo _mazoPilo;
+    private Mazo _mazoMesa;
+    private Jugador _persona;
+    private Jugador _computadora;
+    private boolean _ultimoRecoger;
+    private boolean _repartePersona;
+    private boolean _turnoPersona;
 
     public EstadoInicial() {
-        mazoPilon = null;
-        mazoMesa = null;
+        _mazoPilo = null;
+        _mazoMesa = null;
     }
 
     public Mazo getMazoPilon() {
-        return mazoPilon;
+        return _mazoPilo;
     }
 
     public void setMazoPilon(Mazo mazoPilon) {
-        this.mazoPilon = mazoPilon;
+        this._mazoPilo = mazoPilon;
     }
 
     public Mazo getMazoMesa() {
-        return mazoMesa;
+        return _mazoMesa;
     }
 
     public void setMazoMesa(Mazo mazoMesa) {
-        this.mazoMesa = mazoMesa;
+        this._mazoMesa = mazoMesa;
     }
 
     public Jugador getPersona() {
-        return persona;
+        return _persona;
     }
 
     public void setPersona(Jugador persona) {
-        this.persona = persona;
+        this._persona = persona;
     }
 
     public Jugador getComputadora() {
-        return computadora;
+        return _computadora;
     }
 
     public void setComputadora(Jugador computadora) {
-        this.computadora = computadora;
+        this._computadora = computadora;
     }
 
     public boolean isUltimoRecoger() {
-        return ultimoRecoger;
+        return _ultimoRecoger;
     }
 
     public void setUltimoRecoger(boolean ultimoRecoger) {
-        this.ultimoRecoger = ultimoRecoger;
+        this._ultimoRecoger = ultimoRecoger;
     }
 
     public boolean isRepartePersona() {
-        return repartePersona;
+        return _repartePersona;
     }
 
     public void setRepartePersona(boolean repartePersona) {
-        this.repartePersona = repartePersona;
+        this._repartePersona = repartePersona;
     }
 
     public boolean isTurnoPersona() {
-        return turnoPersona;
+        return _turnoPersona;
     }
 
     public void setTurnoPersona(boolean turnoPersona) {
-        this.turnoPersona = turnoPersona;
+        this._turnoPersona = turnoPersona;
     }
 
     public EstadoInicial estadoInicial(String nombre, boolean turno) {
@@ -78,12 +78,12 @@ public class EstadoInicial {
         Mazo mazo = new Mazo();
         mazo.LlenarMazo();
         mazo.barajearMazo();
-        juego.persona = persona;
-        juego.computadora = computadora;
-        juego.mazoPilon = mazo;
-        juego.mazoMesa = mesa;
-        juego.turnoPersona = turno;
-        juego.repartePersona = !turno;
+        juego._persona = persona;
+        juego._computadora = computadora;
+        juego._mazoPilo = mazo;
+        juego._mazoMesa = mesa;
+        juego._turnoPersona = turno;
+        juego._repartePersona = !turno;
         return juego;
     }
 
@@ -102,15 +102,13 @@ public class EstadoInicial {
 
     public void mostrarJuego(EstadoInicial mostrar) {
         System.out.println("\n JUEGO CASINO\n");
-        if (mostrar.turnoPersona)
-            System.out.println("Turno de " + mostrar.persona.getNombre() + "\n");
-        else
-            System.out.println("Turno del " + mostrar.computadora.getNombre() + "\n");
-        mostrarJugadoresYAcumulado(mostrar, mostrar.computadora, 0);
+        if (mostrar._turnoPersona) System.out.println("Turno de " + mostrar._persona.getNombre() + "\n");
+        else System.out.println("Turno del " + mostrar._computadora.getNombre() + "\n");
+        mostrarJugadoresYAcumulado(mostrar, mostrar._computadora, 0);
         System.out.println();
         System.out.println("Mesa:");
-        mostrar.mazoMesa.ImprimirMazo();
+        mostrar._mazoMesa.ImprimirMazo();
         System.out.println();
-        mostrarJugadoresYAcumulado(mostrar, mostrar.persona, 1);
+        mostrarJugadoresYAcumulado(mostrar, mostrar._persona, 1);
     }
 }

@@ -10,10 +10,8 @@ public class Partida {
     public boolean turnoAleatorio() {
         boolean turnoPersona;
         int aleatorio = (int) (1 + Math.random() * 2);
-        if (aleatorio == 1)
-            turnoPersona = true;
-        else
-            turnoPersona = false;
+        if (aleatorio == 1) turnoPersona = true;
+        else turnoPersona = false;
         return turnoPersona;
     }
 
@@ -66,7 +64,7 @@ public class Partida {
         carta = mazoMeza.getMazo();
         int cantidadCartas = jugadores.getAcumulado().getCantidadCartas();
         while (carta != null) {
-            jugadores.getAcumulado().InsertarCarta(carta.getFigura(), carta.getValor(), carta.getIndiceCarta());
+            jugadores.getAcumulado().InsertarCarta(carta.getIndiceCarta(), carta.getFigura(), carta.getValor(), "");
             mazoMeza.EliminarCarta(carta.getFigura(), carta.getValor());
             carta = carta.getProximo();
             jugadores.getAcumulado().setCantidadCartas(cantidadCartas++);
@@ -83,8 +81,7 @@ public class Partida {
         boolean reparte = juego.isRepartePersona();
         boolean reparteMesa = true;
         while (juego.getMazoPilon().getMazo() != null) {
-            juego.getMazoPilon().RepartirCartas(reparteMesa, juego.isRepartePersona(), juego.getPersona().getJuego(),
-                    juego.getComputadora().getJuego(), juego.getMazoMesa());
+            juego.getMazoPilon().RepartirCartas(reparteMesa, juego.isRepartePersona(), juego.getPersona().getJuego(), juego.getComputadora().getJuego(), juego.getMazoMesa());
             reparteMesa = false;
             if (reparte) {
                 while (juego.getPersona().getJuego().getMazo() != null) {
@@ -120,16 +117,12 @@ public class Partida {
         System.out.println();
         if (juego.getPersona().getPuntos() > juego.getComputadora().getPuntos()) {
             System.out.println(" El ganador es " + juego.getPersona().getNombre() + " Felicidades... \n");
-            System.out
-                    .println(" " + juego.getPersona().getNombre() + " " + juego.getPersona().getPuntos() + " puntos\n");
-            System.out.println(
-                    " " + juego.getComputadora().getNombre() + " " + juego.getComputadora().getPuntos() + " puntos\n");
+            System.out.println(" " + juego.getPersona().getNombre() + " " + juego.getPersona().getPuntos() + " puntos\n");
+            System.out.println(" " + juego.getComputadora().getNombre() + " " + juego.getComputadora().getPuntos() + " puntos\n");
         } else {
             System.out.println(" El ganador es " + juego.getComputadora().getNombre() + "\n");
-            System.out.println(
-                    " " + juego.getComputadora().getNombre() + " " + juego.getComputadora().getPuntos() + " puntos\n");
-            System.out
-                    .println(" " + juego.getPersona().getNombre() + " " + juego.getPersona().getPuntos() + " puntos\n");
+            System.out.println(" " + juego.getComputadora().getNombre() + " " + juego.getComputadora().getPuntos() + " puntos\n");
+            System.out.println(" " + juego.getPersona().getNombre() + " " + juego.getPersona().getPuntos() + " puntos\n");
             System.out.println(" Mejor suerte para la proxima\n");
         }
         System.out.println(" Fin del Juego \n");

@@ -33,8 +33,11 @@ public class ControladorInicio {
                     _vistaJuegoInicio.getPanelMenuPrincipal().addActionLister1(new listenerVistaJuego());
                     _archivosControl.GuardarNombre(_vistaJuegoInicio.getTextoJTextField());
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonEmpezar()) {
-                    _controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio);
                     _semillero.generarMazoPrincipalDeCartas();
+                    _semillero.getMazoPrincipal().ImprimirMazo();
+                    _semillero.getMazoPrincipal().barajearMazo();
+                    _semillero.getMazoPrincipal().ImprimirMazo();
+                    _controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio, _semillero);
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonCargar()) {
                     _vistaJuegoInicio.mensaje("hola man1");
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonSalir()) {

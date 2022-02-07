@@ -1,12 +1,15 @@
 package controlador;
 
+import modelo.SemilleroCartas;
 import vista.VistaInicio;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ControladorMesaDeJuego {
-    public ControladorMesaDeJuego(VistaInicio vistaMesaJuego) {
+    private SemilleroCartas _semillero;
+
+    public ControladorMesaDeJuego(VistaInicio vistaMesaJuego , SemilleroCartas semillero) {
         vistaMesaJuego.panelContenedorCartas();
         vistaMesaJuego.getPanelContenedorCartas().CartasMesa("assets/cartas/13p.png", 100, 50, 82, 101, new listenerVistaJuego());
         vistaMesaJuego.getPanelContenedorCartas().CartasMesa("assets/cartas/12p.png", 190, 50, 82, 101, new listenerVistaJuego());

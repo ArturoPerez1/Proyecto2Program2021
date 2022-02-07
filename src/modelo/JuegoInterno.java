@@ -17,23 +17,17 @@ public class JuegoInterno {
             System.out.println("Opciones: \n");
             mazoJugador.ImprimirMazoConIndice();
             opciones = mazoJugador.RecorerMazo(mazoJugador.getMazo());
-            if (identificar == 1)
-                System.out.println("Que carta desea recoger: ");
-            if (identificar == 2)
-                System.out.println("Con que carta desea recoger la suma: ");
+            if (identificar == 1) System.out.println("Que carta desea recoger: ");
+            if (identificar == 2) System.out.println("Con que carta desea recoger la suma: ");
             if (identificar == 3) {
                 System.out.println("Si ya termino de escoger las cartas de la suma... ");
                 System.out.println("introduzca 0\n\n");
                 return 0;
             }
-            if (identificar == 4)
-                System.out.println("Que carta desea Lanzar: ");
-            if (identificar == 5)
-                System.out.println("Que carta desea emparejar con la mesa: ");
-            if (identificar == 6)
-                System.out.println("Con cual carta desea recoger lo emparejado: ");
-            if (identificar == 7)
-                System.out.println("Con caul carta desea robar el emparejamiento: ");
+            if (identificar == 4) System.out.println("Que carta desea Lanzar: ");
+            if (identificar == 5) System.out.println("Que carta desea emparejar con la mesa: ");
+            if (identificar == 6) System.out.println("Con cual carta desea recoger lo emparejado: ");
+            if (identificar == 7) System.out.println("Con caul carta desea robar el emparejamiento: ");
             opcion = leer.nextInt();
             if ((opcion > opciones) || (opcion < 1)) {
                 System.out.println("Opcion no valida");
@@ -53,8 +47,7 @@ public class JuegoInterno {
             while (jugadoresRecorrer != null) {
                 if (mesaRecorrer.getValor().equals(jugadoresRecorrer.getValor())) {
                     if (cartas.buscarRepetidos(cartas, mesaRecorrer.getIndiceCarta()))
-                        cartas.InsertarCarta(mesaRecorrer.getFigura(), mesaRecorrer.getValor(),
-                                mesaRecorrer.getIndiceCarta());
+                        cartas.InsertarCarta(mesaRecorrer.getIndiceCarta(), mesaRecorrer.getFigura(), mesaRecorrer.getValor(), "");
                     logico = true;
                 }
                 jugadoresRecorrer = jugadoresRecorrer.getProximo();
@@ -72,8 +65,7 @@ public class JuegoInterno {
         while (cartas != null) {
             while (mesaRecorrer != null) {
                 if (mesaRecorrer.getIndiceCarta() == cartas.getIndiceCarta()) {
-                    guardados.InsertarCarta(mesaRecorrer.getFigura(), mesaRecorrer.getValor(),
-                            mesaRecorrer.getIndiceCarta());
+                    guardados.InsertarCarta(mesaRecorrer.getIndiceCarta(), mesaRecorrer.getFigura(), mesaRecorrer.getValor(), "");
                 }
                 mesaRecorrer = mesaRecorrer.getProximo();
             }
@@ -99,12 +91,11 @@ public class JuegoInterno {
         }
         Carta cartaMesa = cartaOpciones.sacarCartaMazo(opcion);
         System.out.println();
-        System.out.println("   " + jugadorPuntos.getNombre() + " recoge la carta: " + cartaMesa.getFigura() + " "
-                + cartaMesa.getValor());
+        System.out.println("   " + jugadorPuntos.getNombre() + " recoge la carta: " + cartaMesa.getFigura() + " " + cartaMesa.getValor());
         Carta mazoJugador = sacarJugador.sacarCartaPorValor2(cartaMesa.getValor());
         System.out.println(" mazoJugador: " + mazoJugador.getFigura() + " " + cartaMesa.getValor());
-        insertarAcumulado.InsertarCarta(cartaMesa.getFigura(), cartaMesa.getValor(), cartaMesa.getIndiceCarta());
-        insertarAcumulado.InsertarCarta(mazoJugador.getFigura(), mazoJugador.getValor(), mazoJugador.getIndiceCarta());
+        insertarAcumulado.InsertarCarta(cartaMesa.getIndiceCarta(), cartaMesa.getFigura(), cartaMesa.getValor(), "");
+        insertarAcumulado.InsertarCarta(mazoJugador.getIndiceCarta(), mazoJugador.getFigura(), mazoJugador.getValor(), "");
         insertarAcumulado.setCantidadCartas(insertarAcumulado.getCantidadCartas() + 2);
         sacarMesa.EliminarCarta(cartaMesa.getFigura(), cartaMesa.getValor());
         sacarMesa.setCantidadCartas(sacarMesa.getCantidadCartas() - 1);
@@ -113,8 +104,7 @@ public class JuegoInterno {
 
         if (sacarMesa.getMazo() == null) {
             jugadorPuntos.setPuntos(jugadorPuntos.getPuntos() + 1);
-            System.out.println("----------------------------------------------------------Clareza en la mesa para "
-                    + jugadorPuntos.getNombre());
+            System.out.println("----------------------------------------------------------Clareza en la mesa para " + jugadorPuntos.getNombre());
         }
     }
 
@@ -131,9 +121,8 @@ public class JuegoInterno {
         }
         lanzarAmesa = sacaDMazoJugador.sacarCartaMazo(opcion);
         System.out.println();
-        System.out.println("   " + jugadores.getNombre() + " lanza la carta: " + lanzarAmesa.getFigura() + " "
-                + lanzarAmesa.getValor());
-        juego.getMazoMesa().InsertarCarta(lanzarAmesa.getFigura(), lanzarAmesa.getValor(), lanzarAmesa.getIndiceCarta());
+        System.out.println("   " + jugadores.getNombre() + " lanza la carta: " + lanzarAmesa.getFigura() + " " + lanzarAmesa.getValor());
+        juego.getMazoMesa().InsertarCarta(lanzarAmesa.getIndiceCarta(), lanzarAmesa.getFigura(), lanzarAmesa.getValor(), "");
         juego.getMazoMesa().setCantidadCartas(juego.getMazoMesa().getCantidadCartas() + 1);
         jugadores.getJuego().EliminarCarta(lanzarAmesa.getFigura(), lanzarAmesa.getValor());
         jugadores.getJuego().setCantidadCartas(jugadores.getJuego().getCantidadCartas() - 1);
@@ -155,7 +144,7 @@ public class JuegoInterno {
             carta = mazoJugador.BuscarCarta(mazoJugador, tipo, numero);
             if (carta != null) {
                 if (carta.getValor().equals(sumaTotal)) {
-                    mazoAgrupadorJugador.InsertarCarta(carta.getFigura(), carta.getValor(), carta.getIndiceCarta());
+                    mazoAgrupadorJugador.InsertarCarta(carta.getIndiceCarta(), carta.getFigura(), carta.getValor(), "");
                     mazoJugador.EliminarCarta(carta.getFigura(), carta.getValor());
                 } else {
                     System.out.println("\nLa suma de las carta no es igual a la carta que tienes en la mano.");
@@ -184,9 +173,7 @@ public class JuegoInterno {
         numero = leer.nextLine();
         leer.nextLine();
 
-        if (numero.equals("AS") || numero.equals("2") || numero.equals("3") || numero.equals("4") || numero.equals("5")
-                || numero.equals("6") || numero.equals("7") || numero.equals("8") || numero.equals("9")
-                || numero.equals("10")) {
+        if (numero.equals("AS") || numero.equals("2") || numero.equals("3") || numero.equals("4") || numero.equals("5") || numero.equals("6") || numero.equals("7") || numero.equals("8") || numero.equals("9") || numero.equals("10")) {
             if (numero.equals("AS")) {
                 auxSuma = 1;
             } else {
@@ -215,8 +202,8 @@ public class JuegoInterno {
                             carta3 = aux2.BuscarCarta(aux2, t, n);
 
                             if (t.equals(carta3.getFigura()) && n.equals(carta3.getValor()) && carta3 != null) {
-                                mazoAgrupadorJugador.InsertarCarta(t, n, i++);
-                                mazoAgrupadorJugador.InsertarCarta(tip, num, i + 1);
+                                mazoAgrupadorJugador.InsertarCarta(i++, t, n, "");
+                                mazoAgrupadorJugador.InsertarCarta(i + 1, tip, num, "");
                                 mazoMesa.EliminarCarta(t, n);
                                 mazoJugador.EliminarCarta(tip, num);
                                 if (carta3.getValor().equals("AS")) {
@@ -259,11 +246,7 @@ public class JuegoInterno {
         juego.mostrarJuego(juego);
         do {
             do {
-                opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
-                        " opciones: \n" + " 1. Recoger Carta igual: \n" + " 2. Agrupar suma de carta: \n"
-                                + " 3. Recoger suma de cartas: \n" + " 4. Emparejamiento con mano: \n"
-                                + " 5. Emparejamientos con mesa: \n" + " 6. Robar emparejamientos: \n"
-                                + " 7. Lanzar Carta: \n" + " 8. Guardar Partida y Salir. \n" + " Su opcion(1-8): "));
+                opcion = Integer.parseInt(JOptionPane.showInputDialog(null, " opciones: \n" + " 1. Recoger Carta igual: \n" + " 2. Agrupar suma de carta: \n" + " 3. Recoger suma de cartas: \n" + " 4. Emparejamiento con mano: \n" + " 5. Emparejamientos con mesa: \n" + " 6. Robar emparejamientos: \n" + " 7. Lanzar Carta: \n" + " 8. Guardar Partida y Salir. \n" + " Su opcion(1-8): "));
                 if ((opcion < 1) || (opcion > 8)) {
                     System.out.println("\n\tOpcion invalida \n\n\t");
                     opcionI = false;
@@ -275,16 +258,14 @@ public class JuegoInterno {
             switch (opcion) {
                 case 1:
                     if (PuedeRecoger(juego.getMazoMesa().getMazo(), juego.getPersona().getJuego(), cartas)) {
-                        recogerCartas(juego.getMazoMesa(), juego.getPersona(), juego.getPersona().getAcumulado(), cartas,
-                                true);
+                        recogerCartas(juego.getMazoMesa(), juego.getPersona(), juego.getPersona().getAcumulado(), cartas, true);
                         permitir = false;
                     } else {
                         System.out.println("No hay carta para recoger");
                     }
                     break;
                 case 2:
-                    AgruparSumaDeCartas(juego.getPersona().getJuego(), juego.getMazoMesa(),
-                            juego.getPersona().getAcumulado());
+                    AgruparSumaDeCartas(juego.getPersona().getJuego(), juego.getMazoMesa(), juego.getPersona().getAcumulado());
                     break;
                 case 3:
                     RecogerCartaAgrupada(juego.getPersona().getJuego(), juego.getPersona().getAcumulado());
@@ -324,8 +305,7 @@ public class JuegoInterno {
         Mazo cartas = new Mazo();
         boolean validar = false;
         juego.mostrarJuego(juego);
-        if (PuedeRecoger(juego.getMazoMesa().getMazo(), juego.getComputadora().getJuego(), cartas))
-            validar = true;
+        if (PuedeRecoger(juego.getMazoMesa().getMazo(), juego.getComputadora().getJuego(), cartas)) validar = true;
         if (validar) {
             opcion = 1;
         } else {
@@ -342,8 +322,7 @@ public class JuegoInterno {
         switch (opcion) {
             case 1:
                 if (validar)
-                    recogerCartas(juego.getMazoMesa(), juego.getComputadora(), juego.getComputadora().getAcumulado(),
-                            cartas, false);
+                    recogerCartas(juego.getMazoMesa(), juego.getComputadora(), juego.getComputadora().getAcumulado(), cartas, false);
                 break;
             case 4:
                 lanzarCarta(juego.getComputadora(), juego.getMazoMesa(), juego.getComputadora().getJuego(), false);

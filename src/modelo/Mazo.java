@@ -2,7 +2,6 @@ package modelo;
 
 public class Mazo {
     private Carta _mazo, _inicioCola, _finalCola;
-    ;
     private int _cantidadCartas;
 
     public Mazo() {
@@ -91,6 +90,7 @@ public class Mazo {
     public void LlenarMazo() {
         int indiceCarta = 1;
         String tipo = " ", numero = " ";
+        String imagen = " ";
 
         tipo = "♣";// Treboles
         CartasMazo(tipo, numero, indiceCarta);
@@ -278,20 +278,20 @@ public class Mazo {
         if (aux != null) {
             if (reparte) {
                 while (repartir <= 4) {
-                    mazoComputadora.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), "");
+                    mazoComputadora.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), aux.getImagen());
                     EliminarCarta(aux.getFigura(), aux.getValor());
                     aux = aux.getProximo();
-                    mazoJugador.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), "");
+                    mazoJugador.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), aux.getImagen());
                     EliminarCarta(aux.getFigura(), aux.getValor());
                     aux = aux.getProximo();
                     repartir++;
                 }
             } else {
                 while (repartir <= 4) {
-                    mazoJugador.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), "");
+                    mazoJugador.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), aux.getImagen());
                     EliminarCarta(aux.getFigura(), aux.getValor());
                     aux = aux.getProximo();
-                    mazoComputadora.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), "");
+                    mazoComputadora.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), aux.getImagen());
                     EliminarCarta(aux.getFigura(), aux.getValor());
                     aux = aux.getProximo();
                     repartir++;
@@ -300,7 +300,7 @@ public class Mazo {
             repartir = 1;
             if (reparteMesa) {
                 while (repartir <= 4) {
-                    mazoMesa.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), "");
+                    mazoMesa.InsertarCarta(aux.getIndiceCarta(), aux.getFigura(), aux.getValor(), aux.getImagen());
                     EliminarCarta(aux.getFigura(), aux.getValor());
                     aux = aux.getProximo();
                     repartir++;

@@ -1,6 +1,8 @@
 package controlador;
 
 import modelo.Archivos;
+import modelo.EstadoInicial;
+import modelo.Partida;
 import modelo.SemilleroCartas;
 import vista.VistaInicio;
 
@@ -12,6 +14,11 @@ public class ControladorInicio {
     private VistaInicio _vistaJuegoInicio;
     private SemilleroCartas _semillero;
     private Archivos _archivosControl;
+    private EstadoInicial _controladorCartas;
+    
+    public ControladorInicio() {
+    	
+    }
 
     public ControladorInicio(VistaInicio vistaJuego, SemilleroCartas semillero) {
         this._archivosControl = new Archivos();
@@ -19,6 +26,10 @@ public class ControladorInicio {
         this._semillero = semillero;
 
         _vistaJuegoInicio.getPanelJuego().startGameButton(new listenerVistaJuego());
+    }
+    
+    public void recibirCartas(EstadoInicial controladorCartas) {
+    	this._controladorCartas = controladorCartas;
     }
 
     public class listenerVistaJuego implements ActionListener {
@@ -33,11 +44,14 @@ public class ControladorInicio {
                     _vistaJuegoInicio.getPanelMenuPrincipal().addActionLister1(new listenerVistaJuego());
                     _archivosControl.GuardarNombre(_vistaJuegoInicio.getTextoJTextField());
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonEmpezar()) {
-                    _semillero.generarMazoPrincipalDeCartas();
-                    _semillero.getMazoPrincipal().ImprimirMazo();
-                    _semillero.getMazoPrincipal().barajearMazo();
-                    _semillero.getMazoPrincipal().ImprimirMazo();
-                    _controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio, _semillero);
+                	Partida partida = new Partida();
+                	partida.partidaNueva();
+                	
+//                    _semillero.generarMazoPrincipalDeCartas();
+//                    _semillero.getMazoPrincipal().ImprimirMazo();
+//                    _semillero.getMazoPrincipal().barajearMazo();
+//                    _semillero.getMazoPrincipal().ImprimirMazo();
+                    _controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio, _controladorCartas);
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonCargar()) {
                     _vistaJuegoInicio.mensaje("hola man1");
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonSalir()) {

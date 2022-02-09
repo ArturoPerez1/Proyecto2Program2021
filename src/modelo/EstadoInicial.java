@@ -1,7 +1,7 @@
 package modelo;
 
 public class EstadoInicial {
-    private Mazo _mazoPilo;
+    private Mazo _mazoPrincipal;
     private Mazo _mazoMesa;
     private Jugador _persona;
     private Jugador _computadora;
@@ -10,16 +10,16 @@ public class EstadoInicial {
     private boolean _turnoPersona;
 
     public EstadoInicial() {
-        _mazoPilo = null;
+        _mazoPrincipal = null;
         _mazoMesa = null;
     }
 
-    public Mazo getMazoPilon() {
-        return _mazoPilo;
+    public Mazo getMazoPilon() { // retorna el mazo principal de la partida
+        return _mazoPrincipal;
     }
 
-    public void setMazoPilon(Mazo mazoPilon) {
-        this._mazoPilo = mazoPilon;
+    public void setMazoPilon(Mazo mazoPrincipal) { //setea el mazo principal de la partida al repartir cartas
+        this._mazoPrincipal = mazoPrincipal;
     }
 
     public Mazo getMazoMesa() {
@@ -30,7 +30,7 @@ public class EstadoInicial {
         this._mazoMesa = mazoMesa;
     }
 
-    public Jugador getPersona() {
+    public Jugador getMazoPersona() {
         return _persona;
     }
 
@@ -38,7 +38,7 @@ public class EstadoInicial {
         this._persona = persona;
     }
 
-    public Jugador getComputadora() {
+    public Jugador getMazoComputadora() {
         return _computadora;
     }
 
@@ -71,20 +71,22 @@ public class EstadoInicial {
     }
 
     public EstadoInicial estadoInicial(String nombre, boolean turno) {
-        EstadoInicial juego = new EstadoInicial();
-        Jugador persona = new Jugador(nombre);
-        Jugador computadora = new Jugador("Computadora");
-        Mazo mesa = new Mazo();
-        Mazo mazo = new Mazo();
-        mazo.LlenarMazo();
-        mazo.barajearMazo();
-        juego._persona = persona;
-        juego._computadora = computadora;
-        juego._mazoPilo = mazo;
-        juego._mazoMesa = mesa;
-        juego._turnoPersona = turno;
-        juego._repartePersona = !turno;
-        return juego;
+        EstadoInicial controladorJuego = new EstadoInicial();
+        Jugador mazoPersona = new Jugador(nombre);
+        Jugador mazoComputadora = new Jugador("Computadora");
+        Mazo mazoMesa = new Mazo();
+        Mazo mazoPrincipal = new Mazo();
+        SemilleroCartas semillero = new SemilleroCartas();
+//        mazoPrincipal.LlenarMazo();
+//        mazoPrincipal.barajearMazo();
+        mazoPrincipal = semillero.getMazoPrincipal();
+        controladorJuego._persona = mazoPersona;
+        controladorJuego._computadora = mazoComputadora;
+        controladorJuego._mazoPrincipal = mazoPrincipal;
+        controladorJuego._mazoMesa = mazoMesa;
+        controladorJuego._turnoPersona = turno;
+        controladorJuego._repartePersona = !turno;
+        return controladorJuego;
     }
 
     void mostrarJugadoresYAcumulado(EstadoInicial juego, Jugador mostrar, int personaMostrar) {

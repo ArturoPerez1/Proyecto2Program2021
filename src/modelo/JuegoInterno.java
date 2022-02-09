@@ -114,7 +114,7 @@ public class JuegoInterno {
         int opciones, opcion;
         Carta lanzarAmesa = new Carta();
         if (identificar) {
-            opcion = mostarOpcionesParaLanzarYRecoger(juego.getPersona().getJuego(), 4);
+            opcion = mostarOpcionesParaLanzarYRecoger(juego.getMazoPersona().getJuego(), 4);
         } else {
             opciones = sacaDMazoJugador.RecorerMazo(sacaDMazoJugador.getMazo());
             opcion = (int) (1 + Math.random() * opciones);
@@ -257,18 +257,18 @@ public class JuegoInterno {
 
             switch (opcion) {
                 case 1:
-                    if (PuedeRecoger(juego.getMazoMesa().getMazo(), juego.getPersona().getJuego(), cartas)) {
-                        recogerCartas(juego.getMazoMesa(), juego.getPersona(), juego.getPersona().getAcumulado(), cartas, true);
+                    if (PuedeRecoger(juego.getMazoMesa().getMazo(), juego.getMazoPersona().getJuego(), cartas)) {
+                        recogerCartas(juego.getMazoMesa(), juego.getMazoPersona(), juego.getMazoPersona().getAcumulado(), cartas, true);
                         permitir = false;
                     } else {
                         System.out.println("No hay carta para recoger");
                     }
                     break;
                 case 2:
-                    AgruparSumaDeCartas(juego.getPersona().getJuego(), juego.getMazoMesa(), juego.getPersona().getAcumulado());
+                    AgruparSumaDeCartas(juego.getMazoPersona().getJuego(), juego.getMazoMesa(), juego.getMazoPersona().getAcumulado());
                     break;
                 case 3:
-                    RecogerCartaAgrupada(juego.getPersona().getJuego(), juego.getPersona().getAcumulado());
+                    RecogerCartaAgrupada(juego.getMazoPersona().getJuego(), juego.getMazoPersona().getAcumulado());
                     break;
                 case 4:
                     System.out.println("No terminado....");
@@ -280,19 +280,19 @@ public class JuegoInterno {
                     System.out.println("No terminado....");
                     break;
                 case 7:
-                    lanzarCarta(juego.getPersona(), juego.getMazoMesa(), juego.getPersona().getJuego(), true);
+                    lanzarCarta(juego.getMazoPersona(), juego.getMazoMesa(), juego.getMazoPersona().getJuego(), true);
                     permitir = false;
                     break;
                 case 8:
-                    archivo.GuardarMazoJugador(juego.getPersona().getJuego());
-                    archivo.GuardarMazoComputadora(juego.getComputadora().getJuego());
+                    archivo.GuardarMazoJugador(juego.getMazoPersona().getJuego());
+                    archivo.GuardarMazoComputadora(juego.getMazoComputadora().getJuego());
                     archivo.GuardarMazoMesa(juego.getMazoMesa());
                     archivo.GuardarMazoPilon(juego.getMazoPilon());
-                    archivo.GuardarMazoAcumuladorJugador(juego.getPersona().getAcumulado());
-                    archivo.GuardarMazoAcumuladorComputadora(juego.getComputadora().getAcumulado());
+                    archivo.GuardarMazoAcumuladorJugador(juego.getMazoPersona().getAcumulado());
+                    archivo.GuardarMazoAcumuladorComputadora(juego.getMazoComputadora().getAcumulado());
                     archivo.GuardarTurno(juego.isTurnoPersona());
-                    archivo.GuardarPuntosJugador(juego.getPersona().getPuntos());
-                    archivo.GuardarPuntosComputadora(juego.getComputadora().getPuntos());
+                    archivo.GuardarPuntosJugador(juego.getMazoPersona().getPuntos());
+                    archivo.GuardarPuntosComputadora(juego.getMazoComputadora().getPuntos());
                     break;
             }
 
@@ -305,7 +305,7 @@ public class JuegoInterno {
         Mazo cartas = new Mazo();
         boolean validar = false;
         juego.mostrarJuego(juego);
-        if (PuedeRecoger(juego.getMazoMesa().getMazo(), juego.getComputadora().getJuego(), cartas)) validar = true;
+        if (PuedeRecoger(juego.getMazoMesa().getMazo(), juego.getMazoComputadora().getJuego(), cartas)) validar = true;
         if (validar) {
             opcion = 1;
         } else {
@@ -322,10 +322,10 @@ public class JuegoInterno {
         switch (opcion) {
             case 1:
                 if (validar)
-                    recogerCartas(juego.getMazoMesa(), juego.getComputadora(), juego.getComputadora().getAcumulado(), cartas, false);
+                    recogerCartas(juego.getMazoMesa(), juego.getMazoComputadora(), juego.getMazoComputadora().getAcumulado(), cartas, false);
                 break;
             case 4:
-                lanzarCarta(juego.getComputadora(), juego.getMazoMesa(), juego.getComputadora().getJuego(), false);
+                lanzarCarta(juego.getMazoComputadora(), juego.getMazoMesa(), juego.getMazoComputadora().getJuego(), false);
                 break;
         }
     }

@@ -1,13 +1,15 @@
 package modelo;
 
-import java.util.Scanner;
-
 import controlador.ControladorInicio;
 
 public class Partida {
-	private EstadoInicial controladorJuego = new EstadoInicial();
-	private JuegoInterno miJuego = new JuegoInterno();
-	private Scanner entrada;
+	private EstadoInicial _controladorJuego;
+	private JuegoInterno _miJuego;
+	
+	public Partida() {
+		this._controladorJuego = new EstadoInicial();
+//		this._miJuego = new JuegoInterno();
+	}
 
 	public boolean turnoAleatorio() {
 		boolean turnoPersona;
@@ -53,13 +55,13 @@ public class Partida {
 	}
 
 	public void turnosDeJuego(boolean salir) {
-		miJuego.juego = controladorJuego;
-		if (controladorJuego.isTurnoPersona()) {
-			miJuego.turnoPersonaJugar(salir);
-			miJuego.juego.setTurnoPersona(false);
+		_miJuego.juego = _controladorJuego;
+		if (_controladorJuego.isTurnoPersona()) {
+			_miJuego.turnoPersonaJugar(salir);
+			_miJuego.juego.setTurnoPersona(false);
 		} else {
-			miJuego.turnoComputadora();
-			miJuego.juego.setTurnoPersona(true);
+			_miJuego.turnoComputadora();
+			_miJuego.juego.setTurnoPersona(true);
 		}
 	}
 
@@ -75,23 +77,19 @@ public class Partida {
 		}
 	}
 
-	public void partidaNueva() {
-		entrada = new Scanner(System.in);
-		String nombre;
+	public void partidaNueva(String nombre) {
 		boolean salir = false;
-		System.out.print(" Cual es tu nombre: ");
-		nombre = entrada.nextLine();
-		controladorJuego = controladorJuego.estadoInicial(nombre, turnoAleatorio());
-		boolean reparte = controladorJuego.isRepartePersona();
+		_controladorJuego = _controladorJuego.estadoInicial(nombre, turnoAleatorio());
+		boolean reparte = _controladorJuego.isRepartePersona();
 		boolean reparteMesa = true;
 		
 		//REPARTIMOS LAS CARTAS PARA PROBAR CON EL CONTROLADOR
 		//-------------------------------------------------
-		controladorJuego.getMazoPilon().RepartirCartas(reparteMesa, controladorJuego.isRepartePersona(),
-				controladorJuego.getMazoPersona().getJuego(), controladorJuego.getMazoComputadora().getJuego(),
-				controladorJuego.getMazoMesa());
+		_controladorJuego.getMazoPilon().RepartirCartas(reparteMesa, _controladorJuego.isRepartePersona(),
+				_controladorJuego.getMazoPersona().getJuego(), _controladorJuego.getMazoComputadora().getJuego(),
+				_controladorJuego.getMazoMesa());
 		ControladorInicio controlador = new ControladorInicio();
-		controlador.recibirCartas(controladorJuego);
+		controlador.recibirCartas(_controladorJuego);
 		//-------------------------------------------------
 //		while (controladorJuego.getMazoPilon().getMazo() != null) {
 //			controladorJuego.getMazoPilon().RepartirCartas(reparteMesa, controladorJuego.isRepartePersona(),

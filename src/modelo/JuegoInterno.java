@@ -46,7 +46,7 @@ public class JuegoInterno {
         while (mesaRecorrer != null) {
             while (jugadoresRecorrer != null) {
                 if (mesaRecorrer.getValor().equals(jugadoresRecorrer.getValor())) {
-                    if (cartas.buscarRepetidos(cartas, mesaRecorrer.getIndiceCarta()))
+                    if (cartas.BuscarRepetidos(cartas, mesaRecorrer.getIndiceCarta()))
                         cartas.InsertarCarta(mesaRecorrer.getIndiceCarta(), mesaRecorrer.getFigura(), mesaRecorrer.getValor(), "");
                     logico = true;
                 }

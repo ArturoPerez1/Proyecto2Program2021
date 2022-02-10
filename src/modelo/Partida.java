@@ -3,94 +3,96 @@ package modelo;
 import controlador.ControladorInicio;
 
 public class Partida {
-	private EstadoInicial _controladorJuego;
-	private JuegoInterno _miJuego;
-	
-	public Partida() {
-		this._controladorJuego = new EstadoInicial();
+    private EstadoInicial _gestionInicialJuego;
+    private JuegoInterno _miJuego;
+
+    public Partida() {
+        this._gestionInicialJuego = new EstadoInicial();
 //		this._miJuego = new JuegoInterno();
-	}
+    }
 
-	public boolean turnoAleatorio() {
-		boolean turnoPersona;
-		int aleatorio = (int) (1 + Math.random() * 2);
-		if (aleatorio == 1)
-			turnoPersona = true;
-		else
-			turnoPersona = false;
-		return turnoPersona;
-	}
+    public boolean turnoAleatorio() {
+        boolean turnoPersona;
+        int aleatorio = (int) (1 + Math.random() * 2);
+        if (aleatorio == 1)
+            turnoPersona = true;
+        else
+            turnoPersona = false;
+        return turnoPersona;
+    }
 
-	public void ValoracionCartas(Jugador jugadores) {
-		Carta mazoJugadores = jugadores.getAcumulado().getMazo();
-		int contarCartas = 0, cartaCorNegro = 0, puntos = 0;
-		while (mazoJugadores != null) {
-			if ((mazoJugadores.getIndiceCarta() > 26) && (mazoJugadores.getIndiceCarta() < 40)) {
-				cartaCorNegro++;
-			}
-			if (mazoJugadores.getIndiceCarta() == 28) {
-				puntos += 1;
-			}
-			if (mazoJugadores.getIndiceCarta() == 49) {
-				puntos += 2;
-			}
-			if (mazoJugadores.getValor().equals("AS")) {
-				puntos += 1;
-			}
-			mazoJugadores = mazoJugadores.getProximo();
-			contarCartas++;
-		}
-		if (contarCartas > 26) {
-			puntos += 3;
-		}
-		if (cartaCorNegro > 6) {
-			puntos += 1;
-		}
-		if (jugadores.getAcumulado().getCantidadCartas() == 26) {
-			if (cartaCorNegro > 6) {
-				puntos += 3;
-			}
-		}
-		jugadores.setPuntos(puntos);
-	}
+    public void ValoracionCartas(Jugador jugadores) {
+        Carta mazoJugadores = jugadores.getAcumulado().getMazo();
+        int contarCartas = 0, cartaCorNegro = 0, puntos = 0;
+        while (mazoJugadores != null) {
+            if ((mazoJugadores.getIndiceCarta() > 26) && (mazoJugadores.getIndiceCarta() < 40)) {
+                cartaCorNegro++;
+            }
+            if (mazoJugadores.getIndiceCarta() == 28) {
+                puntos += 1;
+            }
+            if (mazoJugadores.getIndiceCarta() == 49) {
+                puntos += 2;
+            }
+            if (mazoJugadores.getValor().equals("AS")) {
+                puntos += 1;
+            }
+            mazoJugadores = mazoJugadores.getProximo();
+            contarCartas++;
+        }
+        if (contarCartas > 26) {
+            puntos += 3;
+        }
+        if (cartaCorNegro > 6) {
+            puntos += 1;
+        }
+        if (jugadores.getAcumulado().getCantidadCartas() == 26) {
+            if (cartaCorNegro > 6) {
+                puntos += 3;
+            }
+        }
+        jugadores.setPuntos(puntos);
+    }
 
-	public void turnosDeJuego(boolean salir) {
-		_miJuego.juego = _controladorJuego;
-		if (_controladorJuego.isTurnoPersona()) {
-			_miJuego.turnoPersonaJugar(salir);
-			_miJuego.juego.setTurnoPersona(false);
-		} else {
-			_miJuego.turnoComputadora();
-			_miJuego.juego.setTurnoPersona(true);
-		}
-	}
+    public void turnosDeJuego(boolean salir) {
+        _miJuego.juego = _gestionInicialJuego;
+        if (_gestionInicialJuego.isTurnoPersona()) {
+            _miJuego.turnoPersonaJugar(salir);
+            _miJuego.juego.setTurnoPersona(false);
+        } else {
+            _miJuego.turnoComputadora();
+            _miJuego.juego.setTurnoPersona(true);
+        }
+    }
 
-	public void ultimoRecoger(Mazo mazoMeza, Jugador jugadores) {
-		Carta carta = new Carta();
-		carta = mazoMeza.getMazo();
-		int cantidadCartas = jugadores.getAcumulado().getCantidadCartas();
-		while (carta != null) {
-			jugadores.getAcumulado().InsertarCarta(carta.getIndiceCarta(), carta.getFigura(), carta.getValor(), "");
-			mazoMeza.EliminarCarta(carta.getFigura(), carta.getValor());
-			carta = carta.getProximo();
-			jugadores.getAcumulado().setCantidadCartas(cantidadCartas++);
-		}
-	}
+    public void ultimoRecoger(Mazo mazoMeza, Jugador jugadores) {
+        Carta carta = new Carta();
+        carta = mazoMeza.getMazo();
+        int cantidadCartas = jugadores.getAcumulado().getCantidadCartas();
+        while (carta != null) {
+            jugadores.getAcumulado().InsertarCarta(carta.getIndiceCarta(), carta.getFigura(), carta.getValor(), "");
+            mazoMeza.EliminarCarta(carta.getFigura(), carta.getValor());
+            carta = carta.getProximo();
+            jugadores.getAcumulado().setCantidadCartas(cantidadCartas++);
+        }
+    }
 
-	public void partidaNueva(String nombre) {
-		boolean salir = false;
-		_controladorJuego = _controladorJuego.estadoInicial(nombre, turnoAleatorio());
-		boolean reparte = _controladorJuego.isRepartePersona();
-		boolean reparteMesa = true;
-		
-		//REPARTIMOS LAS CARTAS PARA PROBAR CON EL CONTROLADOR
-		//-------------------------------------------------
-		_controladorJuego.getMazoPilon().RepartirCartas(reparteMesa, _controladorJuego.isRepartePersona(),
-				_controladorJuego.getMazoPersona().getJuego(), _controladorJuego.getMazoComputadora().getJuego(),
-				_controladorJuego.getMazoMesa());
-		ControladorInicio controlador = new ControladorInicio();
-		controlador.recibirCartas(_controladorJuego);
-		//-------------------------------------------------
+    public void partidaNueva(String nombre) {
+        _gestionInicialJuego = _gestionInicialJuego.estadoInicial(nombre, turnoAleatorio());
+        boolean reparte = _gestionInicialJuego.isRepartePersona();
+        boolean reparteMesa = true;
+        boolean salir = false;
+
+
+        _gestionInicialJuego.getMazoPilon().RepartirCartas(reparteMesa, _gestionInicialJuego.isRepartePersona(),
+                _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
+                _gestionInicialJuego.getMazoMesa());
+
+        ControladorInicio controlador = new ControladorInicio();
+        controlador.recibirCartas(_gestionInicialJuego);
+
+
+        //-------------------------------------------------
 //		while (controladorJuego.getMazoPilon().getMazo() != null) {
 //			controladorJuego.getMazoPilon().RepartirCartas(reparteMesa, controladorJuego.isRepartePersona(),
 //					controladorJuego.getMazoPersona().getJuego(), controladorJuego.getMazoComputadora().getJuego(),
@@ -148,5 +150,5 @@ public class Partida {
 //		}
 //		System.out.println(" Fin del Juego \n");
 //		System.out.println(" Gracias por jugar....");
-	}
+    }
 }

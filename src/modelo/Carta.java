@@ -15,8 +15,9 @@ public class Carta {
         this._proximo = null;
     }
 
-    public Carta(int indiceCarta, String figura, String valor, Carta n) {
+    public Carta(int indiceCarta, String figura, String valor, String imagen, Carta n) {
         this._indiceCarta = indiceCarta;
+        this._imagen = imagen;
         this._figura = figura;
         this._valor = valor;
         this._proximo = n;

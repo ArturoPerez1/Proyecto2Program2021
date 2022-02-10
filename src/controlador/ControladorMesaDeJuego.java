@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 
 public class ControladorMesaDeJuego {
 
-    public ControladorMesaDeJuego(VistaInicio vistaMesaJuego , EstadoInicial controladorCartas) {
+    public ControladorMesaDeJuego(VistaInicio vistaMesaJuego, EstadoInicial controladorCartas) {
         vistaMesaJuego.panelContenedorCartas();
         vistaMesaJuego.getPanelContenedorCartas().CartasMesa("assets/cartas/" + controladorCartas.getMazoPersona().getJuego().getMazo().getImagen(), 100, 50, 82, 101, new listenerVistaJuego());
         vistaMesaJuego.getPanelContenedorCartas().CartasMesa("assets/cartas/" + controladorCartas.getMazoPersona().getJuego().getMazo().getImagen(), 190, 50, 82, 101, new listenerVistaJuego());

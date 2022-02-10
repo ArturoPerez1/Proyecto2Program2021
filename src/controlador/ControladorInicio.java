@@ -14,9 +14,9 @@ public class ControladorInicio {
     private Archivos _archivosControl;
     private EstadoInicial _controladorCartas;
     private Partida _partida;
-    
+
     public ControladorInicio() {
-    	
+
     }
 
     public ControladorInicio(VistaInicio vistaJuego, Partida partida) {
@@ -26,9 +26,9 @@ public class ControladorInicio {
 
         _vistaJuegoInicio.getPanelJuego().startGameButton(new listenerVistaJuego());
     }
-    
+
     public void recibirCartas(EstadoInicial controladorCartas) {
-    	this._controladorCartas = controladorCartas;
+        this._controladorCartas = controladorCartas;
     }
 
     public class listenerVistaJuego implements ActionListener {
@@ -43,8 +43,8 @@ public class ControladorInicio {
                     _vistaJuegoInicio.getPanelMenuPrincipal().addActionLister1(new listenerVistaJuego());
                     _archivosControl.GuardarNombre(_vistaJuegoInicio.getTextoJTextField());
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonEmpezar()) {
-                   _partida.partidaNueva(_vistaJuegoInicio.getTextoJTextField());
-                	_controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio, _controladorCartas);
+                    _partida.partidaNueva(_vistaJuegoInicio.getTextoJTextField());
+                    _controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio, _controladorCartas);
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonCargar()) {
                     _vistaJuegoInicio.mensaje("hola man1");
                 } else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonSalir()) {

@@ -6,6 +6,10 @@ public class Partida {
     private EstadoInicial _gestionInicialJuego;
     private JuegoInterno _miJuego;
 
+	public EstadoInicial getGestionInicialJuego() {
+		return _gestionInicialJuego;
+	}
+	
     public Partida() {
         this._gestionInicialJuego = new EstadoInicial();
 //		this._miJuego = new JuegoInterno();
@@ -88,10 +92,6 @@ public class Partida {
                 _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
                 _gestionInicialJuego.getMazoMesa());
 
-        ControladorInicio controlador = new ControladorInicio();
-        controlador.recibirCartas(_gestionInicialJuego);
-
-
         //-------------------------------------------------
 //		while (controladorJuego.getMazoPilon().getMazo() != null) {
 //			controladorJuego.getMazoPilon().RepartirCartas(reparteMesa, controladorJuego.isRepartePersona(),
@@ -151,4 +151,5 @@ public class Partida {
 //		System.out.println(" Fin del Juego \n");
 //		System.out.println(" Gracias por jugar....");
     }
+
 }

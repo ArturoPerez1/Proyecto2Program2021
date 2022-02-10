@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 public class Archivos {
 
     public void GuardarMazoJugador(Mazo jugador) {
@@ -188,6 +190,21 @@ public class Archivos {
         } catch (IOException e) {
             System.out.println("Error al crear el archivo " + e);
         }
+    }
+    
+    public void GuardadoDeIdCartas(String nombreDelArchivo, int idCarta) {
+    	File file = new File("assets/baseDatos/" + nombreDelArchivo);
+    	boolean crearArchivo;
+    	FileWriter escribirArchivo;
+    	
+    	try {
+    		crearArchivo = file.createNewFile();
+    		escribirArchivo = new FileWriter(file);
+    		escribirArchivo.write(idCarta + "\n");
+    		escribirArchivo.close();    		
+    	}catch (IOException e) {
+    		System.out.println("Hubo una excepción del tipo: " + e);
+		}    	
     }
 
 }

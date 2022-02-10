@@ -253,6 +253,18 @@ public class Mazo {
         indiceCarta++;
         InsertarCarta(indiceCarta, tipo, numero, "");
     }
+    
+    /**
+     * @author Arturo Perez
+     * @param
+     * <p>
+     * Esta función la realicé para poder pasarle a cada 
+     * jLabel de la mesa su respectiva carta*/
+    
+    public void CargarCartasDelJuego(EstadoInicial gestionInicialJuego) {
+    	
+    	
+    }
 
     // Imprimir Cartas del Juego
     public void ImprimirMazo() {

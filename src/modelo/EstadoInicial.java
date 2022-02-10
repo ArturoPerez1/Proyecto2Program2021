@@ -76,10 +76,9 @@ public class EstadoInicial {
         Jugador mazoComputadora = new Jugador("Computadora");
         Mazo mazoMesa = new Mazo();
         Mazo mazoPrincipal = new Mazo();
-        SemilleroCartas semillero = new SemilleroCartas();
-//        mazoPrincipal.LlenarMazo();
-//        mazoPrincipal.barajearMazo();
-        mazoPrincipal = semillero.getMazoPrincipal();
+        mazoPrincipal.GenerarMazoPrincipalDeCartas();
+        mazoPrincipal.BarajearMazo();
+        mazoPrincipal.getMazo();
         controladorJuego._persona = mazoPersona;
         controladorJuego._computadora = mazoComputadora;
         controladorJuego._mazoPrincipal = mazoPrincipal;

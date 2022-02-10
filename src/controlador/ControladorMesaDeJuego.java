@@ -1,14 +1,12 @@
 package controlador;
 
 import modelo.EstadoInicial;
-import modelo.SemilleroCartas;
 import vista.VistaInicio;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ControladorMesaDeJuego {
-    private SemilleroCartas _semillero;
 
     public ControladorMesaDeJuego(VistaInicio vistaMesaJuego , EstadoInicial controladorCartas) {
         vistaMesaJuego.panelContenedorCartas();

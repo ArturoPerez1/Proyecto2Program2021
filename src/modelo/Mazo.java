@@ -2,12 +2,18 @@ package modelo;
 
 public class Mazo {
     private Carta _mazo;
+//    private Carta _listaCartasInterfaz;
     private int _cantidadCartas;
 
     public Mazo() {
+//    	this._listaCartasInterfaz = new Carta();
         this._mazo = new Carta();
         this._cantidadCartas = 0;
     }
+    
+//    public int getIndiceCarta() {
+//		return _listaCartasInterfaz.getIndiceCarta();
+//	}
 
     public int getCantidadCartas() {
         return _cantidadCartas;
@@ -45,8 +51,27 @@ public class Mazo {
             cartaAuxiliar2.setProximo(cartaAuxiliar);
         }
     }
+    
+    //revisar con wilmer
+//    public void InsertarId(String idCarta) {
+//    	Carta idCartaAuxiliar = new Carta();
+//    	Carta idCartaAuxiliar2 = new Carta();
+//    	int convertId = Integer.valueOf(idCarta);
+//    	
+//    	idCartaAuxiliar.setIndiceCarta(convertId);
+//    	
+//    	if(_listaCartasInterfaz == null) {
+//    		_listaCartasInterfaz = idCartaAuxiliar;
+//    	}else {
+//    		idCartaAuxiliar2 = _listaCartasInterfaz;
+//    		while(idCartaAuxiliar2.getProximo() != null) {
+//    			idCartaAuxiliar2 = idCartaAuxiliar2.getProximo();
+//    		}
+//    		idCartaAuxiliar2.setProximo(idCartaAuxiliar);
+//    	}
+//    }
 
-    public void BarajearMazo() {
+	public void BarajearMazo() {
         Mazo mazoBarajeado = new Mazo();
         Carta lista = new Carta();
         Carta actual = new Carta();

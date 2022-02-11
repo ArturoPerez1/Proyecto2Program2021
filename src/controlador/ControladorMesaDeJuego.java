@@ -1,7 +1,9 @@
 package controlador;
 
+import modelo.Archivos;
 import modelo.Carta;
 import modelo.EstadoInicial;
+import modelo.Mazo;
 import vista.VistaInicio;
 
 import java.awt.event.MouseEvent;
@@ -58,7 +60,6 @@ public class ControladorMesaDeJuego {
 		}
 
 		this._vistaInicio = vistaMesaJuego;
-
 	}
 
 	public class listenerVistaJuego implements MouseListener {
@@ -69,12 +70,12 @@ public class ControladorMesaDeJuego {
 				System.out.println("e.getSource is an instance of JLabelObject");
 
 				if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas().getJPanelMesa()) {
-					System.out.println("nada");
+					System.out.println("hola");
 				}
 
-				else if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas()
-						.getJLabelCartasJugador()) {
-					System.out.println("nada1");
+				else if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas().getJLabelCartasJugador()) {
+					String nada = (String) _listenerCartas.getText();
+					System.out.println("este es el id: " + nada);
 				}
 			}
 		}

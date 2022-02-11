@@ -15,6 +15,11 @@ public class JPanelContenedorCartas extends JPanel {
 	private JLabel _cartaMesa;
 	private JLabel _cartaJugador;
 	private JLabel _cartaPc;
+	private String _idCartaJugador;
+
+	public String getIdCartaJugador() {
+		return _idCartaJugador;
+	}
 
 	public JPanelContenedorCartas() {
 		setLayout(null);
@@ -99,7 +104,7 @@ public class JPanelContenedorCartas extends JPanel {
 	}
 
 	private void JLabelCartasJugador() {
-		_jLabelCartasJugador = new JLabel("New label");
+		_jLabelCartasJugador = new JLabel("hola");
 		ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage("assets/fondos/PanelCartas.jpg"));
 		_jLabelCartasJugador.setIcon(icon);
 		_jLabelCartasJugador.setBounds(0, 0, 614, 141);
@@ -107,7 +112,7 @@ public class JPanelContenedorCartas extends JPanel {
 	}
 
 	public void CartasJugador(String imagen, int x, int y, int witdh, int height, int id, MouseListener mouseListener) {
-		_cartaJugador = new JLabel();
+		_cartaJugador = new JLabel(""+id);
 		_cartaJugador.setBounds(x, y, witdh, height);
 		ImageIcon icon = new ImageIcon(
 				Toolkit.getDefaultToolkit().getImage(imagen).getScaledInstance(witdh, height, Image.SCALE_SMOOTH));

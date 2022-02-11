@@ -17,6 +17,16 @@ public class ControladorMesaDeJuego {
 	private Mazo _listaCartasJugadorInterfaz;
 	private Mazo _listaCartaMesaInterfaz;
 	private int _ingresarDataJugador;
+	private boolean _tomarCarta;
+	private EstadoInicial _gestorDeCartas;
+
+	public Mazo get_listaCartasJugadorInterfaz() {
+		return _listaCartasJugadorInterfaz;
+	}
+
+	public Mazo get_listaCartaMesaInterfaz() {
+		return _listaCartaMesaInterfaz;
+	}
 
 	/**
 	 * @author Arturo Perez
@@ -26,28 +36,39 @@ public class ControladorMesaDeJuego {
 	 */
 
 	public ControladorMesaDeJuego(VistaInicio vistaMesaJuego, EstadoInicial gestorDeCartas) {
+		this._gestorDeCartas = gestorDeCartas;
+		this._vistaInicio = vistaMesaJuego;
+		this._listaCartasJugadorInterfaz = new Mazo();
+		this._listaCartaMesaInterfaz = new Mazo();
+		this._ingresarDataJugador = 1;
+		this._tomarCarta = false;
+		vistaMesaJuego.panelContenedorCartas();
+
+		iniciarComponentes();
+	}
+
+	public void iniciarComponentes() {
 		int x = 20;
 		int y = 50;
 		int width = 82;
 		int height = 101;
 		int cont = 1;
 
-		vistaMesaJuego.panelContenedorCartas();
-		_recorrerMazos = gestorDeCartas.getMazoMesa().getMazo();
+		_recorrerMazos = _gestorDeCartas.getMazoMesa().getMazo();
 		_recorrerMazos = _recorrerMazos.getProximo();
 		while (_recorrerMazos != null) {
-			vistaMesaJuego.getPanelContenedorCartas().CartasMesa("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
+			_vistaInicio.getPanelContenedorCartas().CartasMesa("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
 					width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
 			_recorrerMazos = _recorrerMazos.getProximo();
 			x += 125;
 		}
 
-		_recorrerMazos = gestorDeCartas.getMazoPersona().getJuego().getMazo();
+		_recorrerMazos = _gestorDeCartas.getMazoPersona().getJuego().getMazo();
 		_recorrerMazos = _recorrerMazos.getProximo();
 		x = 10;
 		y = 10;
 		while (_recorrerMazos != null) {
-			vistaMesaJuego.getPanelContenedorCartas().CartasJugador("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
+			_vistaInicio.getPanelContenedorCartas().CartasJugador("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
 					width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
 			_recorrerMazos = _recorrerMazos.getProximo();
 			x += 125;
@@ -56,15 +77,11 @@ public class ControladorMesaDeJuego {
 		x = 10;
 		y = 10;
 		while (cont <= 4) {
-			vistaMesaJuego.getPanelContenedorCartas().CartasPc("assets/cartas/back.png", x, y, width, height);
+			_vistaInicio.getPanelContenedorCartas().CartasPc("assets/cartas/back.png", x, y, width, height);
 			x += 125;
 			cont++;
 		}
 
-		this._vistaInicio = vistaMesaJuego;
-		_listaCartasJugadorInterfaz = new Mazo();
-		_listaCartaMesaInterfaz = new Mazo();
-		_ingresarDataJugador = 1;
 	}
 
 	public class listenerVistaJuego implements MouseListener {
@@ -76,23 +93,25 @@ public class ControladorMesaDeJuego {
 				if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas().getJPanelMesa()) {
 					String idCartaMesaInstance = (String) _listenerCartas.getText();
 					_listaCartaMesaInterfaz.InsertarId(idCartaMesaInstance);
-
-					Carta listaAux = _listaCartaMesaInterfaz.getListaCartasInterfaz();
-					listaAux = listaAux.getProximo();
-
-					while (listaAux != null) {
-						System.out.println("id = " + listaAux.getIndiceCarta());
-						listaAux = listaAux.getProximo();
-					}
+					_tomarCarta = true;
 				}
 
 				else if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas()
 						.getJLabelCartasJugador()) {
-					String idCartaJugadorInstance = (String) _listenerCartas.getText();
-					if (_ingresarDataJugador == 1) {
-						_listaCartasJugadorInterfaz.InsertarId(idCartaJugadorInstance);
-						_ingresarDataJugador++;
+					if (_tomarCarta) {
+						String idCartaJugadorInstance = (String) _listenerCartas.getText();
+						if (_ingresarDataJugador == 1) {
+							System.out.println("entre");
+							_listaCartasJugadorInterfaz.InsertarId(idCartaJugadorInstance);
+							_listaCartasJugadorInterfaz.VerificarSumaCartas(_listaCartaMesaInterfaz,
+									_listaCartasJugadorInterfaz, _gestorDeCartas.getMazoMesa().getMazo(),
+									_gestorDeCartas.getMazoPersona().getJuego().getMazo());
+							_ingresarDataJugador++;
+						}
+					} else {
+						_vistaInicio.mensaje("SELECCIONE UNA CARTA DE LA MESA PRIMERO");
 					}
+
 				}
 
 			}

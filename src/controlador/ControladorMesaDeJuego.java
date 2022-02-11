@@ -14,6 +14,7 @@ public class ControladorMesaDeJuego {
 	private Carta _recorrerMazos;
 	private JLabel _listenerCartas;
 	private VistaInicio _vistaInicio;
+	private Mazo _gestorDeCartasJuego;
 	private Mazo _listaCartasJugadorInterfaz;
 	private Mazo _listaCartaMesaInterfaz;
 	private int _ingresarDataJugador;
@@ -45,6 +46,53 @@ public class ControladorMesaDeJuego {
 		vistaMesaJuego.panelContenedorCartas();
 
 		iniciarComponentes();
+	}
+	
+	public ControladorMesaDeJuego(VistaInicio vistaIncio, Mazo gestorCartas ) {
+		
+		this._vistaInicio = vistaIncio;
+		this._gestorDeCartasJuego = gestorCartas;
+		this._ingresarDataJugador = 1;
+		this._tomarCarta = false;
+		_vistaInicio.panelContenedorCartas();
+		
+		iniciarComponentesJugadas();		
+	}
+	
+	public void iniciarComponentesJugadas() {
+		int x = 20;
+		int y = 50;
+		int width = 82;
+		int height = 101;
+		int cont = 1;
+
+		_recorrerMazos = _gestorDeCartasJuego.getCartasRestantesMesa();
+		_recorrerMazos = _recorrerMazos.getProximo();
+		while (_recorrerMazos != null) {
+			_vistaInicio.getPanelContenedorCartas().CartasMesa("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
+					width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
+			_recorrerMazos = _recorrerMazos.getProximo();
+			x += 125;
+		}
+
+		_recorrerMazos = _gestorDeCartasJuego.getCartasRestantesJugador();
+		_recorrerMazos = _recorrerMazos.getProximo();
+		x = 10;
+		y = 10;
+		while (_recorrerMazos != null) {
+			_vistaInicio.getPanelContenedorCartas().CartasJugador("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
+					width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
+			_recorrerMazos = _recorrerMazos.getProximo();
+			x += 125;
+		}
+
+		x = 10;
+		y = 10;
+		while (cont <= 4) {
+			_vistaInicio.getPanelContenedorCartas().CartasPc("assets/cartas/back.png", x, y, width, height);
+			x += 125;
+			cont++;
+		}
 	}
 
 	public void iniciarComponentes() {
@@ -83,6 +131,16 @@ public class ControladorMesaDeJuego {
 		}
 
 	}
+	
+	public void GestionDeturnos() {
+		if(_listaCartasJugadorInterfaz.getGestorDeTurnos().isTurnoPersona() == false) {
+			System.out.println("computadora no implementada");
+			_listaCartasJugadorInterfaz.getGestorDeTurnos().setTurnoPersona(true);
+		}else {
+			System.out.println("Se recoge lo antes sumado por el jugador");
+			ControladorMesaDeJuego controlSecundario = new ControladorMesaDeJuego(_vistaInicio, _listaCartasJugadorInterfaz);
+		}
+	}
 
 	public class listenerVistaJuego implements MouseListener {
 
@@ -106,12 +164,12 @@ public class ControladorMesaDeJuego {
 							_listaCartasJugadorInterfaz.InsertarId(idCartaJugadorInstance);
 							_listaCartasJugadorInterfaz.VerificarSumaCartas(_listaCartaMesaInterfaz,
 									_listaCartasJugadorInterfaz, _gestorDeCartas.getMazoMesa().getMazo(),
-									_gestorDeCartas.getMazoPersona().getJuego().getMazo());
+									_gestorDeCartas.getMazoPersona().getJuego().getMazo(), _gestorDeCartas);
 							
-							Carta listaAux = _listaCartasJugadorInterfaz.getMazo().getProximo();
-							while(listaAux != null) {
-								System.out.println("Estas son las Cartas no sumadas: " + listaAux.getValor());
-								listaAux = listaAux.getProximo();
+							int cont = 0;
+							while(cont <= 1) {
+								GestionDeturnos();
+								cont++;
 							}
 							_ingresarDataJugador++;
 						}

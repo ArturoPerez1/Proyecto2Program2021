@@ -1,16 +1,32 @@
 package modelo;
 
+import com.sun.javafx.scene.control.ControlAcceleratorSupport;
+
+import controlador.ControladorMesaDeJuego;
+
 public class Mazo {
 	private Carta _mazo;
+	private Carta _listaCartasSumadasJugador;
 	private Carta _listaCartasInterfaz;
-	private Carta _listaCartasSumadas;
+	private Carta _listaCartasSumadasMesa;
+	private Carta _cartasRestantesMesa;
+	private Carta _cartasRestantesJugador;
 	private int _cantidadCartas;
 	private boolean _VerificarSumarCartas;
+	private EstadoInicial _gestorDeTurnos;
 
 	public Mazo() {
 		this._listaCartasInterfaz = new Carta();
 		this._mazo = new Carta();
+		this._cartasRestantesJugador = new Carta();
+		this._listaCartasSumadasJugador = new Carta();
+		this._cartasRestantesMesa = new Carta();
+		this._cartasRestantesJugador = new Carta();
 		this._cantidadCartas = 0;
+	}
+
+	public Carta getListaCartasSumadasJugador() {
+		return _listaCartasSumadasJugador;
 	}
 
 	public Carta getListaCartasInterfaz() {
@@ -33,8 +49,20 @@ public class Mazo {
 		this._mazo = mazo;
 	}
 
-	public Carta getListaCartasSumadas() {
-		return _listaCartasSumadas;
+	public Carta getListaCartasSumadasMesa() {
+		return _listaCartasSumadasMesa;
+	}
+
+	public Carta getCartasRestantesMesa() {
+		return _cartasRestantesMesa;
+	}
+
+	public Carta getCartasRestantesJugador() {
+		return _cartasRestantesJugador;
+	}
+
+	public EstadoInicial getGestorDeTurnos() {
+		return _gestorDeTurnos;
 	}
 
 	public void InsertarCarta(int id, String figura, String valor, String imagen) {
@@ -59,7 +87,7 @@ public class Mazo {
 	}
 
 //--------------------------------------------------------------------------------------
-	public void InsertarSuma(int id, String figura, String valor, String imagen) {
+	public void InsertarNoSumados(int id, String figura, String valor, String imagen, boolean alternarInsercion) {
 		Carta cartaAuxiliar = new Carta();
 		Carta cartaAuxiliar2 = new Carta();
 
@@ -69,26 +97,70 @@ public class Mazo {
 		cartaAuxiliar.setImagen(imagen);
 		cartaAuxiliar.setProximo(null);
 
-		if (_listaCartasSumadas == null) {
-			_listaCartasSumadas = cartaAuxiliar;
-		} else {
-			cartaAuxiliar2 = _listaCartasSumadas;
-			while (cartaAuxiliar2.getProximo() != null) {
-				cartaAuxiliar2 = cartaAuxiliar2.getProximo();
+		if (alternarInsercion) {
+			if (_cartasRestantesMesa == null) {
+				_cartasRestantesMesa = cartaAuxiliar;
+			} else if (BuscarIDRepetido(_cartasRestantesMesa, cartaAuxiliar.getIndiceCarta())) {
+				cartaAuxiliar2 = _cartasRestantesMesa;
+				while (cartaAuxiliar2.getProximo() != null) {
+					cartaAuxiliar2 = cartaAuxiliar2.getProximo();
+				}
+				cartaAuxiliar2.setProximo(cartaAuxiliar);
 			}
-			cartaAuxiliar2.setProximo(cartaAuxiliar);
+		} else if (alternarInsercion == false) {
+			if (_cartasRestantesJugador == null) {
+				_cartasRestantesJugador = cartaAuxiliar;
+			} else if (BuscarIDRepetido(_cartasRestantesJugador, cartaAuxiliar.getIndiceCarta())) {
+				cartaAuxiliar2 = _cartasRestantesJugador;
+				while (cartaAuxiliar2.getProximo() != null) {
+					cartaAuxiliar2 = cartaAuxiliar2.getProximo();
+				}
+				cartaAuxiliar2.setProximo(cartaAuxiliar);
+			}
 		}
 	}
 
-	public void sumarCartas(Mazo listaCartasMesa, Mazo listaCartaJugador, Carta mesaPrincipal, Carta jugadorPrincipal) {
+	public void InsertarSuma(int id, String figura, String valor, String imagen, boolean alternarInsercion) {
+		Carta cartaAuxiliar = new Carta();
+		Carta cartaAuxiliar2 = new Carta();
+
+		cartaAuxiliar.setIndiceCarta(id);
+		cartaAuxiliar.setFigura(figura);
+		cartaAuxiliar.setNumero(valor);
+		cartaAuxiliar.setImagen(imagen);
+		cartaAuxiliar.setProximo(null);
+
+		if (alternarInsercion) {
+			if (_listaCartasSumadasMesa == null) {
+				_listaCartasSumadasMesa = cartaAuxiliar;
+			} else if (BuscarIDRepetido(_listaCartasSumadasMesa, cartaAuxiliar.getIndiceCarta())) {
+				cartaAuxiliar2 = _listaCartasSumadasMesa;
+				while (cartaAuxiliar2.getProximo() != null) {
+					cartaAuxiliar2 = cartaAuxiliar2.getProximo();
+				}
+				cartaAuxiliar2.setProximo(cartaAuxiliar);
+			}
+		} else if (alternarInsercion == false) {
+			if (_listaCartasSumadasJugador == null) {
+				_listaCartasSumadasJugador = cartaAuxiliar;
+			} else if (BuscarIDRepetido(_listaCartasSumadasJugador, cartaAuxiliar.getIndiceCarta())) {
+				cartaAuxiliar2 = _listaCartasSumadasJugador;
+				while (cartaAuxiliar2.getProximo() != null) {
+					cartaAuxiliar2 = cartaAuxiliar2.getProximo();
+				}
+				cartaAuxiliar2.setProximo(cartaAuxiliar);
+			}
+		}
+	}
+
+	public void sumarCartas(Carta listaCartasMesa, Carta listaCartaJugador, Carta mesaPrincipal,
+			Carta jugadorPrincipal) {
 		if (_VerificarSumarCartas) {
 			Carta listaCartasMesaAux = new Carta();
 			Carta listaCartaJugadorAux = new Carta();
 
-			listaCartasMesaAux = listaCartasMesa.getListaCartasInterfaz();
-			listaCartaJugadorAux = listaCartaJugador.getListaCartasInterfaz();
-			listaCartaJugadorAux = listaCartaJugadorAux.getProximo();
-			listaCartasMesaAux = listaCartasMesaAux.getProximo();
+			listaCartasMesaAux = listaCartasMesa;
+			listaCartaJugadorAux = listaCartaJugador;
 
 			mesaPrincipal = mesaPrincipal.getProximo();
 			jugadorPrincipal = jugadorPrincipal.getProximo();
@@ -98,31 +170,54 @@ public class Mazo {
 					if (mesaPrincipal.getIndiceCarta() == listaCartasMesaAux.getIndiceCarta()) {
 						if (mesaPrincipal.getValor() == "A") {
 							InsertarSuma(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
-									mesaPrincipal.getValor(), mesaPrincipal.getImagen());
+									mesaPrincipal.getValor(), mesaPrincipal.getImagen(), true);
 						} else if (mesaPrincipal.getValor() != "J" && mesaPrincipal.getValor() != "Q"
-								&& mesaPrincipal.getValor() != "K") {
+								&& mesaPrincipal.getValor() != "k") {
 							InsertarSuma(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
-									mesaPrincipal.getValor(), mesaPrincipal.getImagen());
+									mesaPrincipal.getValor(), mesaPrincipal.getImagen(), true);
 						}
 					} else {
-						InsertarCarta(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
-								mesaPrincipal.getValor(), mesaPrincipal.getImagen());
+						InsertarNoSumados(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
+								mesaPrincipal.getValor(), mesaPrincipal.getImagen(), true);
 					}
 
 					listaCartasMesaAux = listaCartasMesaAux.getProximo();
 				}
-				listaCartasMesaAux = listaCartasMesa.getListaCartasInterfaz().getProximo();
+				listaCartasMesaAux = listaCartasMesa;
 				mesaPrincipal = mesaPrincipal.getProximo();
+			}
+			
+			while (jugadorPrincipal != null) {
+				while (listaCartaJugadorAux != null) {
+					if (jugadorPrincipal.getIndiceCarta() == listaCartaJugadorAux.getIndiceCarta()) {
+						if (jugadorPrincipal.getValor() == "A") {
+							InsertarSuma(jugadorPrincipal.getIndiceCarta(), jugadorPrincipal.getFigura(),
+									jugadorPrincipal.getValor(), jugadorPrincipal.getImagen(), false);
+						} else if (jugadorPrincipal.getValor() != "J" && jugadorPrincipal.getValor() != "Q"
+								&& jugadorPrincipal.getValor() != "k") {
+							InsertarSuma(jugadorPrincipal.getIndiceCarta(), jugadorPrincipal.getFigura(),
+									jugadorPrincipal.getValor(), jugadorPrincipal.getImagen(), false);
+						}
+					} else {
+						InsertarNoSumados(jugadorPrincipal.getIndiceCarta(), jugadorPrincipal.getFigura(),
+								jugadorPrincipal.getValor(), jugadorPrincipal.getImagen(), false);
+					}
+					listaCartaJugadorAux = listaCartaJugadorAux.getProximo();
+				}
+
+				listaCartaJugadorAux = listaCartaJugador;
+				jugadorPrincipal = jugadorPrincipal.getProximo();			
 			}
 		}
 	}
 
 	public void VerificarSumaCartas(Mazo listaCartasMesa, Mazo listaCartaJugador, Carta mesaPrincipal,
-			Carta jugadorPrincipal) {
+			Carta jugadorPrincipal, EstadoInicial gestorTurnosAndJuego) {
 		Carta listaCartasMesaAux = new Carta();
 		Carta listaCartaJugadorAux = new Carta();
 		Carta mesaPrincipalAux = new Carta();
 		Carta jugadorPrincipalAux = new Carta();
+		this._gestorDeTurnos = gestorTurnosAndJuego;
 		int valorCartaMesaFinal = 0;
 		int valorJugadorFinal = 0;
 
@@ -142,7 +237,7 @@ public class Mazo {
 					if (mesaPrincipal.getValor() == "A") {
 						valorCartaMesaFinal = 1;
 					} else if (mesaPrincipal.getValor() != "J" && mesaPrincipal.getValor() != "Q"
-							&& mesaPrincipal.getValor() != "K") {
+							&& mesaPrincipal.getValor() != "k") {
 						valorCartaMesaFinal += Integer.valueOf(mesaPrincipal.getValor());
 					}
 				}
@@ -158,7 +253,7 @@ public class Mazo {
 					if (jugadorPrincipal.getValor() == "A") {
 						valorJugadorFinal = 1;
 					} else if (jugadorPrincipal.getValor() != "J" && jugadorPrincipal.getValor() != "Q"
-							&& jugadorPrincipal.getValor() != "K") {
+							&& jugadorPrincipal.getValor() != "k") {
 						valorJugadorFinal += Integer.valueOf(jugadorPrincipal.getValor());
 					}
 				}
@@ -170,10 +265,12 @@ public class Mazo {
 
 		jugadorPrincipal = jugadorPrincipalAux;
 		mesaPrincipal = mesaPrincipalAux;
+
 		if (valorJugadorFinal == valorCartaMesaFinal) {
 			_VerificarSumarCartas = true;
-			sumarCartas(listaCartasMesa, listaCartaJugador, mesaPrincipal, jugadorPrincipal);
-
+			sumarCartas(listaCartasMesa.getListaCartasInterfaz().getProximo(),
+					listaCartaJugador.getListaCartasInterfaz().getProximo(), mesaPrincipal, jugadorPrincipal);
+			_gestorDeTurnos.setTurnoPersona(false);
 		} else {
 			_VerificarSumarCartas = false;
 			System.out.println("no puedes jajja");

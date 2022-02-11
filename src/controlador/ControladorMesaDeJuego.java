@@ -91,6 +91,7 @@ public class ControladorMesaDeJuego {
 				_listenerCartas = (JLabel) e.getSource();
 
 				if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas().getJPanelMesa()) {
+					System.out.println("entre1");
 					String idCartaMesaInstance = (String) _listenerCartas.getText();
 					_listaCartaMesaInterfaz.InsertarId(idCartaMesaInstance);
 					_tomarCarta = true;
@@ -106,6 +107,12 @@ public class ControladorMesaDeJuego {
 							_listaCartasJugadorInterfaz.VerificarSumaCartas(_listaCartaMesaInterfaz,
 									_listaCartasJugadorInterfaz, _gestorDeCartas.getMazoMesa().getMazo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo());
+							
+							Carta listaAux = _listaCartasJugadorInterfaz.getMazo().getProximo();
+							while(listaAux != null) {
+								System.out.println("Estas son las Cartas no sumadas: " + listaAux.getValor());
+								listaAux = listaAux.getProximo();
+							}
 							_ingresarDataJugador++;
 						}
 					} else {

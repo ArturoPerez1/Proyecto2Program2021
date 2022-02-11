@@ -3,7 +3,9 @@ package modelo;
 public class Mazo {
 	private Carta _mazo;
 	private Carta _listaCartasInterfaz;
+	private Carta _listaCartasSumadas;
 	private int _cantidadCartas;
+	private boolean _VerificarSumarCartas;
 
 	public Mazo() {
 		this._listaCartasInterfaz = new Carta();
@@ -31,6 +33,10 @@ public class Mazo {
 		this._mazo = mazo;
 	}
 
+	public Carta getListaCartasSumadas() {
+		return _listaCartasSumadas;
+	}
+
 	public void InsertarCarta(int id, String figura, String valor, String imagen) {
 		Carta cartaAuxiliar = new Carta();
 		Carta cartaAuxiliar2 = new Carta();
@@ -53,15 +59,77 @@ public class Mazo {
 	}
 
 //--------------------------------------------------------------------------------------
+	public void InsertarSuma(int id, String figura, String valor, String imagen) {
+		Carta cartaAuxiliar = new Carta();
+		Carta cartaAuxiliar2 = new Carta();
+
+		cartaAuxiliar.setIndiceCarta(id);
+		cartaAuxiliar.setFigura(figura);
+		cartaAuxiliar.setNumero(valor);
+		cartaAuxiliar.setImagen(imagen);
+		cartaAuxiliar.setProximo(null);
+
+		if (_listaCartasSumadas == null) {
+			_listaCartasSumadas = cartaAuxiliar;
+		} else {
+			cartaAuxiliar2 = _listaCartasSumadas;
+			while (cartaAuxiliar2.getProximo() != null) {
+				cartaAuxiliar2 = cartaAuxiliar2.getProximo();
+			}
+			cartaAuxiliar2.setProximo(cartaAuxiliar);
+		}
+	}
+
+	public void sumarCartas(Mazo listaCartasMesa, Mazo listaCartaJugador, Carta mesaPrincipal, Carta jugadorPrincipal) {
+		if (_VerificarSumarCartas) {
+			Carta listaCartasMesaAux = new Carta();
+			Carta listaCartaJugadorAux = new Carta();
+
+			listaCartasMesaAux = listaCartasMesa.getListaCartasInterfaz();
+			listaCartaJugadorAux = listaCartaJugador.getListaCartasInterfaz();
+			listaCartaJugadorAux = listaCartaJugadorAux.getProximo();
+			listaCartasMesaAux = listaCartasMesaAux.getProximo();
+
+			mesaPrincipal = mesaPrincipal.getProximo();
+			jugadorPrincipal = jugadorPrincipal.getProximo();
+
+			while (mesaPrincipal != null) {
+				while (listaCartasMesaAux != null) {
+					if (mesaPrincipal.getIndiceCarta() == listaCartasMesaAux.getIndiceCarta()) {
+						if (mesaPrincipal.getValor() == "A") {
+							InsertarSuma(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
+									mesaPrincipal.getValor(), mesaPrincipal.getImagen());
+						} else if (mesaPrincipal.getValor() != "J" && mesaPrincipal.getValor() != "Q"
+								&& mesaPrincipal.getValor() != "K") {
+							InsertarSuma(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
+									mesaPrincipal.getValor(), mesaPrincipal.getImagen());
+						}
+					} else {
+						InsertarCarta(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
+								mesaPrincipal.getValor(), mesaPrincipal.getImagen());
+					}
+
+					listaCartasMesaAux = listaCartasMesaAux.getProximo();
+				}
+				listaCartasMesaAux = listaCartasMesa.getListaCartasInterfaz().getProximo();
+				mesaPrincipal = mesaPrincipal.getProximo();
+			}
+		}
+	}
+
 	public void VerificarSumaCartas(Mazo listaCartasMesa, Mazo listaCartaJugador, Carta mesaPrincipal,
 			Carta jugadorPrincipal) {
 		Carta listaCartasMesaAux = new Carta();
 		Carta listaCartaJugadorAux = new Carta();
+		Carta mesaPrincipalAux = new Carta();
+		Carta jugadorPrincipalAux = new Carta();
 		int valorCartaMesaFinal = 0;
 		int valorJugadorFinal = 0;
 
 		listaCartasMesaAux = listaCartasMesa.getListaCartasInterfaz();
 		listaCartaJugadorAux = listaCartaJugador.getListaCartasInterfaz();
+		mesaPrincipalAux = mesaPrincipal;
+		jugadorPrincipalAux = jugadorPrincipal;
 		listaCartaJugadorAux = listaCartaJugadorAux.getProximo();
 		listaCartasMesaAux = listaCartasMesaAux.getProximo();
 
@@ -78,9 +146,9 @@ public class Mazo {
 						valorCartaMesaFinal += Integer.valueOf(mesaPrincipal.getValor());
 					}
 				}
-				listaCartaJugadorAux = listaCartasMesaAux.getProximo();
+				listaCartasMesaAux = listaCartasMesaAux.getProximo();
 			}
-			listaCartasMesaAux = listaCartasMesa.getListaCartasInterfaz();
+			listaCartasMesaAux = listaCartasMesa.getListaCartasInterfaz().getProximo();
 			mesaPrincipal = mesaPrincipal.getProximo();
 		}
 
@@ -94,17 +162,21 @@ public class Mazo {
 						valorJugadorFinal += Integer.valueOf(jugadorPrincipal.getValor());
 					}
 				}
-
 				listaCartaJugadorAux = listaCartaJugadorAux.getProximo();
 			}
-			listaCartaJugadorAux = listaCartaJugador.getListaCartasInterfaz();
+			listaCartaJugadorAux = listaCartaJugador.getListaCartasInterfaz().getProximo();
 			jugadorPrincipal = jugadorPrincipal.getProximo();
 		}
 
+		jugadorPrincipal = jugadorPrincipalAux;
+		mesaPrincipal = mesaPrincipalAux;
 		if (valorJugadorFinal == valorCartaMesaFinal) {
-			System.out.println("Si se puede sumar");
+			_VerificarSumarCartas = true;
+			sumarCartas(listaCartasMesa, listaCartaJugador, mesaPrincipal, jugadorPrincipal);
+
 		} else {
-			System.out.println("No se puede sumar");
+			_VerificarSumarCartas = false;
+			System.out.println("no puedes jajja");
 		}
 	}
 

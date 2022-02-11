@@ -53,7 +53,7 @@ public class JPanelContenedorCartas extends JPanel {
 	}
 
 	public void CartasMesa(String imagen, int x, int y, int witdh, int height, int id, MouseListener mouseListener) {
-		_cartaMesa = new JLabel();
+		_cartaMesa = new JLabel(""+id);
 		_cartaMesa.setBounds(x, y, witdh, height);
 		ImageIcon icon = new ImageIcon(
 				Toolkit.getDefaultToolkit().getImage(imagen).getScaledInstance(witdh, height, Image.SCALE_SMOOTH));

@@ -1,6 +1,5 @@
 package controlador;
 
-import modelo.Archivos;
 import modelo.Carta;
 import modelo.EstadoInicial;
 import modelo.Mazo;
@@ -15,6 +14,9 @@ public class ControladorMesaDeJuego {
 	private Carta _recorrerMazos;
 	private JLabel _listenerCartas;
 	private VistaInicio _vistaInicio;
+	private Mazo _listaCartasJugadorInterfaz;
+	private Mazo _listaCartaMesaInterfaz;
+	private int _ingresarDataJugador;
 
 	/**
 	 * @author Arturo Perez
@@ -60,6 +62,9 @@ public class ControladorMesaDeJuego {
 		}
 
 		this._vistaInicio = vistaMesaJuego;
+		_listaCartasJugadorInterfaz = new Mazo();
+		_listaCartaMesaInterfaz = new Mazo();
+		_ingresarDataJugador = 1;
 	}
 
 	public class listenerVistaJuego implements MouseListener {
@@ -67,16 +72,29 @@ public class ControladorMesaDeJuego {
 		public void mouseClicked(MouseEvent e) {
 			if (e.getSource() instanceof JLabel) {
 				_listenerCartas = (JLabel) e.getSource();
-				System.out.println("e.getSource is an instance of JLabelObject");
 
 				if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas().getJPanelMesa()) {
-					System.out.println("hola");
+					String idCartaMesaInstance = (String) _listenerCartas.getText();
+					_listaCartaMesaInterfaz.InsertarId(idCartaMesaInstance);
+
+					Carta listaAux = _listaCartaMesaInterfaz.getListaCartasInterfaz();
+					listaAux = listaAux.getProximo();
+
+					while (listaAux != null) {
+						System.out.println("id = " + listaAux.getIndiceCarta());
+						listaAux = listaAux.getProximo();
+					}
 				}
 
-				else if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas().getJLabelCartasJugador()) {
-					String nada = (String) _listenerCartas.getText();
-					System.out.println("este es el id: " + nada);
+				else if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas()
+						.getJLabelCartasJugador()) {
+					String idCartaJugadorInstance = (String) _listenerCartas.getText();
+					if (_ingresarDataJugador == 1) {
+						_listaCartasJugadorInterfaz.InsertarId(idCartaJugadorInstance);
+						_ingresarDataJugador++;
+					}
 				}
+
 			}
 		}
 

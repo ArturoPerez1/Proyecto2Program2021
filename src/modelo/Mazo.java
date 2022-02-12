@@ -19,6 +19,7 @@ public class Mazo {
         this._cartasRestantesMesa = new Carta();
         this._cartasRestantesJugador = new Carta();
         this._cantidadCartas = 0;
+        this._gestorDeTurnos = new EstadoInicial();
     }
 
     public Carta getListaCartasSumadasJugador() {
@@ -83,6 +84,36 @@ public class Mazo {
     }
 
     //--------------------------------------------------------------------------------------
+    public void LanzarCartaAMesa(int idInstace, Carta mesa, Carta jugador) {
+    	Carta jugadorAux = new Carta();
+    	Carta cabeza = new Carta();
+    	jugadorAux.setIndiceCarta(idInstace);
+    	jugadorAux.setProximo(null);
+    	cabeza = jugadorAux;
+    	jugador = jugador.getProximo();
+    	mesa = mesa.getProximo();
+    	
+    	while(jugador != null) {
+    		if(jugador.getIndiceCarta() == jugadorAux.getIndiceCarta()) {
+    			jugadorAux.setImagen(jugador.getImagen());
+    			jugadorAux.setFigura(jugador.getFigura());
+    			jugadorAux.setNumero(jugador.getValor());
+    			jugador = jugador.getProximo();
+    		}
+    		InsertarNoSumados(jugador.getIndiceCarta(), jugador.getFigura(), jugador.getValor(), jugador.getImagen(), false);
+    	    jugador = jugador.getProximo();
+    	}
+    	
+    	while(mesa != null) {
+        	InsertarNoSumados(mesa.getIndiceCarta(), mesa.getFigura(), mesa.getValor(), mesa.getImagen(), true);
+        	mesa = mesa.getProximo();
+    	}
+    	
+    	jugadorAux = cabeza;
+    	InsertarNoSumados(jugadorAux.getIndiceCarta(), jugadorAux.getFigura(), jugadorAux.getValor(), jugadorAux.getImagen(), true);
+    	_gestorDeTurnos.setTurnoPersona(true);
+    }
+    
     public void InsertarNoSumados(int id, String figura, String valor, String imagen, boolean alternarInsercion) {
         Carta cartaAuxiliar = new Carta();
         Carta cartaAuxiliar2 = new Carta();

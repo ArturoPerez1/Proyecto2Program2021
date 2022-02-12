@@ -1,12 +1,8 @@
 package modelo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 public class Archivos {
 
@@ -193,7 +189,7 @@ public class Archivos {
             System.out.println("Error al crear el archivo " + e);
         }
     }
-    
+
 //    public void GuardadoDeIdCartas(String nombreDelArchivo, int idCarta) {
 //    	File file = new File("assets/baseDatos/" + nombreDelArchivo);
 //    	boolean crearArchivo;

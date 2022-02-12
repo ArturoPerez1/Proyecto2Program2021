@@ -1,18 +1,16 @@
 package modelo;
 
-import controlador.ControladorInicio;
-
 public class Partida {
     private EstadoInicial _gestionInicialJuego;
     private JuegoInterno _miJuego;
 
-	public EstadoInicial getGestionInicialJuego() {
-		return _gestionInicialJuego;
-	}
-	
     public Partida() {
         this._gestionInicialJuego = new EstadoInicial();
 //		this._miJuego = new JuegoInterno();
+    }
+
+    public EstadoInicial getGestionInicialJuego() {
+        return _gestionInicialJuego;
     }
 
     public boolean turnoAleatorio() {

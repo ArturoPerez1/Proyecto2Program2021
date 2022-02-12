@@ -135,17 +135,17 @@ public class ControladorMesaDeJuego {
 			if (e.getSource() instanceof JLabel) {
 				_listenerCartas = (JLabel) e.getSource();
 				if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas().getJPanelMesa()) {
-					System.out.println("entre1");
 					String idCartaMesaInstance = (String) _listenerCartas.getText();
+					System.out.println("TOMÓ LA CARTA DE LA MESA CON ID: " + idCartaMesaInstance);
 					_idCartasMesa = _mazoControladorDeListas.InsertarId(idCartaMesaInstance, _idCartasMesa);
 					_tomarCarta = true;
 				} else if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas()
 						.getJLabelCartasJugador()) {
 					if (_tomarCarta) {
-						System.out.println("Chiquita");
 						String idCartaJugadorInstance = (String) _listenerCartas.getText();
+						System.out.println("TOMÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
 						_idCartaJugador = _mazoControladorDeListas.InsertarId(idCartaJugadorInstance, _idCartaJugador);
-						if(_lanzar){ // revisa esta mierda coño e madre
+						if(_lanzar == false){
 							_mazoControladorDeListas.VerificarSumaCartas(_idCartasMesa, _idCartaJugador,
 									_gestorDeCartas.getMazoMesa().getMazo().getProximo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo().getProximo());
@@ -155,9 +155,10 @@ public class ControladorMesaDeJuego {
 							_mazoControladorDeListas.VerificarSumaCartas(_idCartasMesa, _idCartaJugador,
 									_gestorDeCartas.getMazoMesa().getMazo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo());
-							_tomarCarta = false;
+							_tomarCarta = true;
 							_lanzar = true;
 						}
+						
 						if(_mazoControladorDeListas.is_VerificarSumarCartas()) {
 							_gestorDeCartas.setTurnoPersona(false);
 							_lanzar = true;
@@ -174,6 +175,7 @@ public class ControladorMesaDeJuego {
 					}else {
 						if(_lanzar == false) {
 							String idCartaJugadorInstance = (String) _listenerCartas.getText();
+							System.out.println("SE LANZÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
 							_mazoControladorDeListas.LanzarCartaAMesa(Integer.valueOf(idCartaJugadorInstance),
 									_gestorDeCartas.getMazoMesa().getMazo().getProximo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo().getProximo());
@@ -182,6 +184,7 @@ public class ControladorMesaDeJuego {
 							GestionDeturnos();
 						}else if(_lanzar) {
 							String idCartaJugadorInstance = (String) _listenerCartas.getText();
+							System.out.println("SE LANZÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
 							_mazoControladorDeListas.LanzarCartaAMesa(Integer.valueOf(idCartaJugadorInstance),
 									_gestorDeCartas.getMazoMesa().getMazo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo());

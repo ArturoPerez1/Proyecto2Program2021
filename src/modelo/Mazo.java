@@ -59,7 +59,7 @@ public class Mazo {
 	public boolean is_VerificarSumarCartas() {
 		return _VerificarSumarCartas;
 	}
-	
+
 	public void InsertarCarta(int id, String figura, String valor, String imagen) {
 		Carta cartaAuxiliar = new Carta();
 		Carta cartaAuxiliar2 = new Carta();
@@ -94,17 +94,16 @@ public class Mazo {
 				jugadorAux.setImagen(jugador.getImagen());
 				jugadorAux.setFigura(jugador.getFigura());
 				jugadorAux.setNumero(jugador.getValor());
-			}else {
-				_cartasRestantesJugador = InsertarNoSumados(jugador.getIndiceCarta(),
-					jugador.getFigura(), jugador.getValor(), jugador.getImagen(),
-					_cartasRestantesJugador);
+			} else {
+				_cartasRestantesJugador = InsertarNoSumados(jugador.getIndiceCarta(), jugador.getFigura(),
+						jugador.getValor(), jugador.getImagen(), _cartasRestantesJugador);
 			}
 			jugador = jugador.getProximo();
 		}
 
 		while (mesa != null) {
-			_cartasRestantesMesa = InsertarNoSumados(mesa.getIndiceCarta(), mesa.getFigura(),
-					mesa.getValor(), mesa.getImagen(), _cartasRestantesMesa);
+			_cartasRestantesMesa = InsertarNoSumados(mesa.getIndiceCarta(), mesa.getFigura(), mesa.getValor(),
+					mesa.getImagen(), _cartasRestantesMesa);
 			mesa = mesa.getProximo();
 		}
 
@@ -217,16 +216,18 @@ public class Mazo {
 			listaCartaJugadorAux = listaCartaJugador;
 
 			while (mesaPrincipal != null) {
-				if(listaCartasMesaAux.getProximo() != null) {
+				if (listaCartasMesaAux.getProximo() != null) {
 					if (mesaPrincipal.getIndiceCarta() != listaCartasMesaAux.getIndiceCarta()
 							&& mesaPrincipal.getIndiceCarta() != listaCartasMesaAux.getProximo().getIndiceCarta()) {
-						_cartasRestantesMesa = InsertarNoSumados(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
-								mesaPrincipal.getValor(), mesaPrincipal.getImagen(), _cartasRestantesMesa);
+						_cartasRestantesMesa = InsertarNoSumados(mesaPrincipal.getIndiceCarta(),
+								mesaPrincipal.getFigura(), mesaPrincipal.getValor(), mesaPrincipal.getImagen(),
+								_cartasRestantesMesa);
 					}
-				}else {
-					if (mesaPrincipal.getIndiceCarta() != listaCartasMesaAux.getIndiceCarta()){
-						_cartasRestantesMesa = InsertarNoSumados(mesaPrincipal.getIndiceCarta(), mesaPrincipal.getFigura(),
-								mesaPrincipal.getValor(), mesaPrincipal.getImagen(), _cartasRestantesMesa);
+				} else {
+					if (mesaPrincipal.getIndiceCarta() != listaCartasMesaAux.getIndiceCarta()) {
+						_cartasRestantesMesa = InsertarNoSumados(mesaPrincipal.getIndiceCarta(),
+								mesaPrincipal.getFigura(), mesaPrincipal.getValor(), mesaPrincipal.getImagen(),
+								_cartasRestantesMesa);
 					}
 				}
 				mesaPrincipal = mesaPrincipal.getProximo();
@@ -256,8 +257,8 @@ public class Mazo {
 		cabezaMesa = listaCartasMesa;
 		cabezaJugador = listaCartaJugador;
 
-		mesaPrincipalAux = mesaPrincipal.getProximo();
-		jugadorPrincipalAux = jugadorPrincipal.getProximo();
+		mesaPrincipalAux = mesaPrincipal;
+		jugadorPrincipalAux = jugadorPrincipal;
 
 		while (mesaPrincipal != null) {
 			while (listaCartasMesa != null) {
@@ -267,14 +268,14 @@ public class Mazo {
 					} else if (mesaPrincipal.getValor() != "J" && mesaPrincipal.getValor() != "Q"
 							&& mesaPrincipal.getValor() != "k") {
 						valorCartaMesaFinal += Integer.valueOf(mesaPrincipal.getValor());
-					}else if(mesaPrincipal.getValor() == "J" || mesaPrincipal.getValor() == "Q"
+					} else if (mesaPrincipal.getValor() == "J" || mesaPrincipal.getValor() == "Q"
 							|| mesaPrincipal.getValor() == "k") {
-						
-						if(mesaPrincipal.getValor() == "k") {
+
+						if (mesaPrincipal.getValor() == "k") {
 							valorCartaMesaFinal += 13;
-						}else if(mesaPrincipal.getValor() == "Q") {
+						} else if (mesaPrincipal.getValor() == "Q") {
 							valorCartaMesaFinal += 12;
-						}else if(mesaPrincipal.getValor() == "J") {
+						} else if (mesaPrincipal.getValor() == "J") {
 							valorCartaMesaFinal += 11;
 						}
 
@@ -294,14 +295,14 @@ public class Mazo {
 					} else if (jugadorPrincipal.getValor() != "J" && jugadorPrincipal.getValor() != "Q"
 							&& jugadorPrincipal.getValor() != "k") {
 						valorJugadorFinal += Integer.valueOf(jugadorPrincipal.getValor());
-					}else if(jugadorPrincipal.getValor() == "J" || jugadorPrincipal.getValor() == "Q"
+					} else if (jugadorPrincipal.getValor() == "J" || jugadorPrincipal.getValor() == "Q"
 							|| jugadorPrincipal.getValor() == "k") {
-						
-						if(jugadorPrincipal.getValor() == "k") {
+
+						if (jugadorPrincipal.getValor() == "k") {
 							valorJugadorFinal += 13;
-						}else if(jugadorPrincipal.getValor() == "Q") {
+						} else if (jugadorPrincipal.getValor() == "Q") {
 							valorJugadorFinal += 12;
-						}else if(jugadorPrincipal.getValor() == "J") {
+						} else if (jugadorPrincipal.getValor() == "J") {
 							valorJugadorFinal += 11;
 						}
 
@@ -331,7 +332,6 @@ public class Mazo {
 			System.out.println("no puedes jajja");
 		}
 	}
-
 
 	public Carta InsertarId(String idCarta, Carta cartaInsertar) {
 		Carta cartaAux = new Carta();

@@ -48,8 +48,7 @@ public class ControladorMesaDeJuego {
 		iniciarComponentes();
 	}
 	
-	public ControladorMesaDeJuego(VistaInicio vistaIncio, Mazo gestorCartas ) {
-		
+	public ControladorMesaDeJuego(VistaInicio vistaIncio, Mazo gestorCartas ) {		
 		this._vistaInicio = vistaIncio;
 		this._gestorDeCartasJuego = gestorCartas;
 		this._ingresarDataJugador = 1;

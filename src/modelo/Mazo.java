@@ -7,6 +7,7 @@ public class Mazo {
 	private Carta _listaCartasSumadasMesa;
 	private Carta _cartasRestantesMesa;
 	private Carta _cartasRestantesJugador;
+	private Archivos _controlArchivos;
 	private int _cantidadCartas;
 	private boolean _VerificarSumarCartas;
 
@@ -18,6 +19,7 @@ public class Mazo {
 		this._cartasRestantesMesa = null;
 		this._cartasRestantesJugador = null;
 		this._cantidadCartas = 0;
+		this._controlArchivos = new Archivos();
 	}
 
 	public Carta getListaCartasSumadasJugador() {
@@ -82,6 +84,7 @@ public class Mazo {
 	}
 
 	// --------------------------------------------------------------------------------------
+
 	public void LanzarCartaAMesa(int idInstace, Carta mesa, Carta jugador) {
 		Carta jugadorAux = new Carta();
 		Carta cabeza = new Carta();
@@ -241,7 +244,8 @@ public class Mazo {
 				}
 				jugadorPrincipal = jugadorPrincipal.getProximo();
 			}
-
+			_controlArchivos.GuardarMazoAcumuladorJugador(_listaCartasSumadasJugador);
+			_controlArchivos.GuardarMazoAcumuladorJugador(_listaCartasSumadasMesa);
 		}
 	}
 
@@ -366,7 +370,7 @@ public class Mazo {
 		}
 		return true;
 	}
-//----------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------
 
 	public void BarajearMazo() {
 		Mazo mazoBarajeado = new Mazo();

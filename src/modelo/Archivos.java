@@ -6,235 +6,243 @@ import java.io.IOException;
 
 public class Archivos {
 
-    public void GuardarMazoJugador(Mazo jugador) {
-        File file = new File("assets/baseDatos/MazoJugador.txt");
-        String tipo, numero;
+	public void GuardarMazoJugador(Mazo jugador) {
+		File file = new File("assets/baseDatos/MazoJugador.txt");
+		String tipo, numero;
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
 
-            while (jugador.getMazo() != null) {
-                tipo = jugador.getMazo().getFigura();
-                numero = jugador.getMazo().getValor();
-                f.write(tipo + "\n");
-                f.write(numero + "\n");
-                jugador.setMazo(jugador.getMazo().getProximo());
-            }
-            f.close();
+			while (jugador.getMazo() != null) {
+				tipo = jugador.getMazo().getFigura();
+				numero = jugador.getMazo().getValor();
+				f.write(tipo + "\n");
+				f.write(numero + "\n");
+				jugador.setMazo(jugador.getMazo().getProximo());
+			}
+			f.close();
 
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-    public void GuardarMazoComputadora(Mazo jugador) {
-        File file = new File("assets/baseDatos/MazoComputadora.txt");
-        String tipo, numero;
+	public void GuardarMazoComputadora(Mazo jugador) {
+		File file = new File("assets/baseDatos/MazoComputadora.txt");
+		String tipo, numero;
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
 
-            while (jugador.getMazo() != null) {
-                tipo = jugador.getMazo().getFigura();
-                numero = jugador.getMazo().getValor();
-                f.write(tipo + "\n");
-                f.write(numero + "\n");
-                jugador.setMazo(jugador.getMazo().getProximo());
-            }
-            f.close();
+			while (jugador.getMazo() != null) {
+				tipo = jugador.getMazo().getFigura();
+				numero = jugador.getMazo().getValor();
+				f.write(tipo + "\n");
+				f.write(numero + "\n");
+				jugador.setMazo(jugador.getMazo().getProximo());
+			}
+			f.close();
 
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-    public void GuardarMazoMesa(Mazo jugador) {
-        File file = new File("assets/baseDatos/MazoMesa.txt");
-        String tipo, numero;
+	public void GuardarMazoMesa(Mazo jugador) {
+		File file = new File("assets/baseDatos/MazoMesa.txt");
+		String tipo, numero;
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
 
-            while (jugador.getMazo() != null) {
-                tipo = jugador.getMazo().getFigura();
-                numero = jugador.getMazo().getValor();
-                f.write(tipo + "\n");
-                f.write(numero + "\n");
-                jugador.setMazo(jugador.getMazo().getProximo());
-            }
-            f.close();
+			while (jugador.getMazo() != null) {
+				tipo = jugador.getMazo().getFigura();
+				numero = jugador.getMazo().getValor();
+				f.write(tipo + "\n");
+				f.write(numero + "\n");
+				jugador.setMazo(jugador.getMazo().getProximo());
+			}
+			f.close();
 
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-    public void GuardarMazoPilon(Mazo jugador) {
-        File file = new File("assets/baseDatos/MazoPilon.txt");
-        String tipo, numero;
+	public void GuardarMazoPilon(Mazo jugador) {
+		File file = new File("assets/baseDatos/MazoPilon.txt");
+		String tipo, numero;
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
 
-            while (jugador.getMazo() != null) {
-                tipo = jugador.getMazo().getFigura();
-                numero = jugador.getMazo().getValor();
-                f.write(tipo + "\n");
-                f.write(numero + "\n");
-                jugador.setMazo(jugador.getMazo().getProximo());
-            }
-            f.close();
+			while (jugador.getMazo() != null) {
+				tipo = jugador.getMazo().getFigura();
+				numero = jugador.getMazo().getValor();
+				f.write(tipo + "\n");
+				f.write(numero + "\n");
+				jugador.setMazo(jugador.getMazo().getProximo());
+			}
+			f.close();
 
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-    public void GuardarMazoAcumuladorJugador(Mazo jugador) {
-        File file = new File("assets/baseDatos/MazoAcumuladorJugador.txt");
-        String tipo, numero;
+	public void GuardarMazoAcumuladorJugador(Carta jugador) {
+		File file = new File("assets/baseDatos/MazoAcumuladorJugador.txt");
+		String tipo, numero;
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file.getAbsoluteFile(), true);
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
+			while (jugador != null) {
+				tipo = jugador.getFigura();
+				numero = jugador.getValor();
+				f.write(tipo + "\n");
+				f.write(numero + "\n");
+				jugador = jugador.getProximo();
+			}
+			f.close();
 
-            while (jugador.getMazo() != null) {
-                tipo = jugador.getMazo().getFigura();
-                numero = jugador.getMazo().getValor();
-                f.write(tipo + "\n");
-                f.write(numero + "\n");
-                jugador.setMazo(jugador.getMazo().getProximo());
-            }
-            f.close();
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+	public void GuardarMazoAcumuladorComputadora(Mazo jugador) {
+		File file = new File("assets/baseDatos/MazoAcumuladorComputadora.txt");
+		String tipo, numero;
 
-    public void GuardarMazoAcumuladorComputadora(Mazo jugador) {
-        File file = new File("assets/baseDatos/MazoAcumuladorComputadora.txt");
-        String tipo, numero;
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
+			while (jugador.getMazo() != null) {
+				tipo = jugador.getMazo().getFigura();
+				numero = jugador.getMazo().getValor();
+				f.write(tipo + "\n");
+				f.write(numero + "\n");
+				jugador.setMazo(jugador.getMazo().getProximo());
+			}
+			f.close();
 
-            while (jugador.getMazo() != null) {
-                tipo = jugador.getMazo().getFigura();
-                numero = jugador.getMazo().getValor();
-                f.write(tipo + "\n");
-                f.write(numero + "\n");
-                jugador.setMazo(jugador.getMazo().getProximo());
-            }
-            f.close();
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+	public void GuardarNombre(String nombreJugador) {
+		File file = new File("assets/baseDatos/Nombre.txt");
 
-    public void GuardarNombre(String nombreJugador) {
-        File file = new File("assets/baseDatos/Nombre.txt");
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
+			f.write(nombreJugador);
+			f.close();
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
-            f.write(nombreJugador);
-            f.close();
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+	public void GuardarTurno(boolean turno) {
+		File file = new File("assets/baseDatos/Turno.txt");
 
-    public void GuardarTurno(boolean turno) {
-        File file = new File("assets/baseDatos/Turno.txt");
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
+			f.write(turno + "\n");
+			f.close();
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
-            f.write(turno + "\n");
-            f.close();
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+	public void GuardarPuntosJugador(int puntos) {
+		File file = new File("assets/baseDatos/PuntosJugador.txt");
 
-    public void GuardarPuntosJugador(int puntos) {
-        File file = new File("assets/baseDatos/PuntosJugador.txt");
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
+			f.write(puntos + "\n");
+			f.close();
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
-            f.write(puntos + "\n");
-            f.close();
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+	public void GuardarPuntosComputadora(int puntos) {
+		File file = new File("assets/baseDatos/PuntosComputadora.txt");
 
-    public void GuardarPuntosComputadora(int puntos) {
-        File file = new File("assets/baseDatos/PuntosComputadora.txt");
+		try {
+			boolean fileCreated = file.createNewFile();
+			FileWriter f = new FileWriter(file);
+			f.write(puntos + "\n");
+			f.close();
+		} catch (IOException e) {
+			System.out.println("Error al crear el archivo " + e);
+		}
+	}
 
-        try {
-            boolean fileCreated = file.createNewFile();
-            FileWriter f = new FileWriter(file);
-            f.write(puntos + "\n");
-            f.close();
-        } catch (IOException e) {
-            System.out.println("Error al crear el archivo " + e);
-        }
-    }
+	public void DeleteArchivo(String archivoBorrar) {
+		File file = new File(archivoBorrar);
+		try {
+			file.delete();
+		} catch (Exception e) {
+			System.out.println("Excepcion: " + e);
+		}
+	}
 
-//    public void GuardadoDeIdCartas(String nombreDelArchivo, int idCarta) {
-//    	File file = new File("assets/baseDatos/" + nombreDelArchivo);
-//    	boolean crearArchivo;
-//    	FileWriter escribirArchivo;
-//    	
-//    	try {
-//    		crearArchivo = file.createNewFile();
-//    		escribirArchivo = new FileWriter(file);
-//    		escribirArchivo.write(idCarta + "\n");
-//    		escribirArchivo.close();    		
-//    	}catch (IOException e) {
-//    		System.out.println("Hubo una excepción del tipo: " + e);
-//		}    	
-//    }
-//    
-//    public void CargarIdGuardado(String nombreDelArchivo) {
-//    	File file = new File("assets/baseDatos/" + nombreDelArchivo);
-//		try {
-//			Scanner sc = new Scanner(file);			
-//			while(sc.hasNextLine()) {
-//				String salida = sc.nextLine();
-//				System.out.println(salida);
-//			}
-//			
-//		}
-//		catch(FileNotFoundException e) {
-//			
-//			System.out.println("Hubo una excepción del tipo: " + e);
-//			
-//		}
-//    	
-//    }
-//    
-//    public void BorrarId(String nombreDelArchivo) {
-//    	File file = new File("assets/baseDatos/" + nombreDelArchivo);		
-//		
-//    	if(file.exists()) {
-//			if(file.delete()) {
-//				System.out.println("jeo");
-//			}
-//			else {
-//					System.out.println("nose borrro");
-//			}
-//		}
-//
-//    }
+	//    public void GuardadoDeIdCartas(String nombreDelArchivo, int idCarta) {
+	//    	File file = new File("assets/baseDatos/" + nombreDelArchivo);
+	//    	boolean crearArchivo;
+	//    	FileWriter escribirArchivo;
+	//    	
+	//    	try {
+	//    		crearArchivo = file.createNewFile();
+	//    		escribirArchivo = new FileWriter(file);
+	//    		escribirArchivo.write(idCarta + "\n");
+	//    		escribirArchivo.close();    		
+	//    	}catch (IOException e) {
+	//    		System.out.println("Hubo una excepción del tipo: " + e);
+	//		}    	
+	//    }
+	//    
+	//    public void CargarIdGuardado(String nombreDelArchivo) {
+	//    	File file = new File("assets/baseDatos/" + nombreDelArchivo);
+	//		try {
+	//			Scanner sc = new Scanner(file);			
+	//			while(sc.hasNextLine()) {
+	//				String salida = sc.nextLine();
+	//				System.out.println(salida);
+	//			}
+	//			
+	//		}
+	//		catch(FileNotFoundException e) {
+	//			
+	//			System.out.println("Hubo una excepción del tipo: " + e);
+	//			
+	//		}
+	//    	
+	//    }
+	//    
+	//    public void BorrarId(String nombreDelArchivo) {
+	//    	File file = new File("assets/baseDatos/" + nombreDelArchivo);		
+	//		
+	//    	if(file.exists()) {
+	//			if(file.delete()) {
+	//				System.out.println("jeo");
+	//			}
+	//			else {
+	//					System.out.println("nose borrro");
+	//			}
+	//		}
+	//
+	//    }
 
 }

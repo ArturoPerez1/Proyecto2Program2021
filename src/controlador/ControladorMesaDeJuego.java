@@ -1,11 +1,17 @@
 package controlador;
 
+import modelo.Archivos;
 import modelo.Carta;
 import modelo.EstadoInicial;
 import modelo.Mazo;
 import vista.VistaInicio;
 
 import javax.swing.*;
+
+import controlador.ControladorInicio.listenerVistaJuego;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -28,6 +34,8 @@ public class ControladorMesaDeJuego {
 	 */
 
 	public ControladorMesaDeJuego(VistaInicio vistaMesaJuego, EstadoInicial gestorDeCartas) {
+		Archivos controlArchivos = new Archivos();
+		controlArchivos.DeleteArchivo("assets/baseDatos/MazoAcumuladorJugador.txt");
 		this._gestorDeCartas = gestorDeCartas;
 		this._vistaInicio = vistaMesaJuego;
 		this._mazoControladorDeListas = new Mazo();
@@ -47,6 +55,11 @@ public class ControladorMesaDeJuego {
 		int height = 101;
 		int cont = 1;
 		_vistaInicio.panelContenedorCartas();
+
+		_vistaInicio.getPanelContenedorCartas().JLabelMazoPilon(new listenerVistaJuego());
+		_vistaInicio.getPanelContenedorCartas().JLabelMazoPilon1(new listenerVistaJuego());
+		_vistaInicio.getPanelContenedorCartas().ButtonSalir();
+		_vistaInicio.getPanelContenedorCartas().addActionListener(new listenerMesaJuego());
 
 		_recorrerMazos = _mazoControladorDeListas.getCartasRestantesMesa();
 		while (_recorrerMazos != null) {
@@ -74,11 +87,11 @@ public class ControladorMesaDeJuego {
 			cont++;
 		}
 		_gestorDeCartas.getMazoMesa().setMazo(_mazoControladorDeListas.getCartasRestantesMesa());
-		 _gestorDeCartas.getMazoPersona().getJuego().setMazo(_mazoControladorDeListas.getCartasRestantesJugador());
+		_gestorDeCartas.getMazoPersona().getJuego().setMazo(_mazoControladorDeListas.getCartasRestantesJugador());
 		this._mazoControladorDeListas = new Mazo();
 		this._idCartasMesa = null;
 		this._idCartaJugador = null;
-		this._tomarCarta = false;	
+		this._tomarCarta = false;
 		this._lanzar = true;
 	}
 
@@ -88,6 +101,11 @@ public class ControladorMesaDeJuego {
 		int width = 82;
 		int height = 101;
 		int cont = 1;
+
+		_vistaInicio.getPanelContenedorCartas().JLabelMazoPilon(new listenerVistaJuego());
+		_vistaInicio.getPanelContenedorCartas().JLabelMazoPilon1(new listenerVistaJuego());
+		_vistaInicio.getPanelContenedorCartas().ButtonSalir();
+		_vistaInicio.getPanelContenedorCartas().addActionListener(new listenerMesaJuego());
 
 		_recorrerMazos = _gestorDeCartas.getMazoMesa().getMazo();
 		_recorrerMazos = _recorrerMazos.getProximo();
@@ -145,55 +163,65 @@ public class ControladorMesaDeJuego {
 						String idCartaJugadorInstance = (String) _listenerCartas.getText();
 						System.out.println("TOMÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
 						_idCartaJugador = _mazoControladorDeListas.InsertarId(idCartaJugadorInstance, _idCartaJugador);
-						if(_lanzar == false){
+						if (_lanzar == false) {
 							_mazoControladorDeListas.VerificarSumaCartas(_idCartasMesa, _idCartaJugador,
 									_gestorDeCartas.getMazoMesa().getMazo().getProximo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo().getProximo());
 							_tomarCarta = false;
 							_lanzar = false;
-						}else {
+						} else {
 							_mazoControladorDeListas.VerificarSumaCartas(_idCartasMesa, _idCartaJugador,
 									_gestorDeCartas.getMazoMesa().getMazo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo());
 							_tomarCarta = true;
 							_lanzar = true;
 						}
-						
-						if(_mazoControladorDeListas.is_VerificarSumarCartas()) {
+
+						if (_mazoControladorDeListas.is_VerificarSumarCartas()) {
 							_gestorDeCartas.setTurnoPersona(false);
 							_lanzar = true;
 							GestionDeturnos();
 							GestionDeturnos();
-						}else {
+						} else {
 							_lanzar = false;
 							_mazoControladorDeListas = new Mazo();
 							_idCartasMesa = null;
 							_idCartaJugador = null;
-							_tomarCarta = false;	
+							_tomarCarta = false;
 						}
-						
-					}else {
-						if(_lanzar == false) {
+
+					} else {
+						if (_lanzar == false) {
 							String idCartaJugadorInstance = (String) _listenerCartas.getText();
 							System.out.println("SE LANZÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
 							_mazoControladorDeListas.LanzarCartaAMesa(Integer.valueOf(idCartaJugadorInstance),
 									_gestorDeCartas.getMazoMesa().getMazo().getProximo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo().getProximo());
-							 _tomarCarta = false;
-								_gestorDeCartas.setTurnoPersona(true);
+							_tomarCarta = false;
+							_gestorDeCartas.setTurnoPersona(true);
 							GestionDeturnos();
-						}else if(_lanzar) {
+						} else if (_lanzar) {
 							String idCartaJugadorInstance = (String) _listenerCartas.getText();
 							System.out.println("SE LANZÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
 							_mazoControladorDeListas.LanzarCartaAMesa(Integer.valueOf(idCartaJugadorInstance),
 									_gestorDeCartas.getMazoMesa().getMazo(),
 									_gestorDeCartas.getMazoPersona().getJuego().getMazo());
-							 _tomarCarta = false;
-								_gestorDeCartas.setTurnoPersona(true);
+							_tomarCarta = false;
+							_gestorDeCartas.setTurnoPersona(true);
 							GestionDeturnos();
 						}
-						
+
 					}
+				} else if (_listenerCartas.getParent() == _vistaInicio.getPanelContenedorCartas()
+						.getJLabelMaderaFondo()) {
+					String pilon = (String) _listenerCartas.getText();
+
+					if (pilon == "1") {
+						System.out.println("culo");
+					} else if (pilon == "2") {
+						System.out.println("culo1");
+					}
+
 				}
 
 			}
@@ -219,5 +247,18 @@ public class ControladorMesaDeJuego {
 
 		}
 
+	}
+
+	public class listenerMesaJuego implements ActionListener {
+		public void actionPerformed(ActionEvent eventoMesa) {
+
+			try {
+				if (eventoMesa.getSource() == _vistaInicio.getPanelContenedorCartas().getBotonSalir()) {					
+					System.exit(0);
+				}
+			} catch (Error e) {
+				System.out.println("Error" + e);
+			}
+		}
 	}
 }

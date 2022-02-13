@@ -4,11 +4,10 @@ import modelo.Archivos;
 import modelo.Carta;
 import modelo.EstadoInicial;
 import modelo.Mazo;
+import vista.PilonJugador;
 import vista.VistaInicio;
 
 import javax.swing.*;
-
-import controlador.ControladorInicio.listenerVistaJuego;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +20,7 @@ public class ControladorMesaDeJuego {
 	private VistaInicio _vistaInicio;
 	private Carta _idCartasMesa;
 	private Carta _idCartaJugador;
+	private Carta _AcumuladoJugador;
 	private Mazo _mazoControladorDeListas;
 	private boolean _tomarCarta;
 	private boolean _lanzar;
@@ -43,6 +43,7 @@ public class ControladorMesaDeJuego {
 		this._idCartaJugador = null;
 		this._tomarCarta = false;
 		this._lanzar = false;
+		this._AcumuladoJugador = null;
 		vistaMesaJuego.panelContenedorCartas();
 
 		iniciarComponentes();
@@ -63,8 +64,7 @@ public class ControladorMesaDeJuego {
 
 		_recorrerMazos = _mazoControladorDeListas.getCartasRestantesMesa();
 		while (_recorrerMazos != null) {
-			_vistaInicio.getPanelContenedorCartas().CartasMesa("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
-					width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
+			_vistaInicio.getPanelContenedorCartas().CartasMesa("assets/cartas/" + _recorrerMazos.getImagen(), x, y,width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
 			_recorrerMazos = _recorrerMazos.getProximo();
 			x += 125;
 		}
@@ -73,8 +73,7 @@ public class ControladorMesaDeJuego {
 		x = 10;
 		y = 10;
 		while (_recorrerMazos != null) {
-			_vistaInicio.getPanelContenedorCartas().CartasJugador("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
-					width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
+			_vistaInicio.getPanelContenedorCartas().CartasJugador("assets/cartas/" + _recorrerMazos.getImagen(), x, y,width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
 			_recorrerMazos = _recorrerMazos.getProximo();
 			x += 125;
 		}
@@ -88,6 +87,20 @@ public class ControladorMesaDeJuego {
 		}
 		_gestorDeCartas.getMazoMesa().setMazo(_mazoControladorDeListas.getCartasRestantesMesa());
 		_gestorDeCartas.getMazoPersona().getJuego().setMazo(_mazoControladorDeListas.getCartasRestantesJugador());
+
+		_recorrerMazos = _mazoControladorDeListas.getListaCartasSumadasJugador();
+
+		while (_recorrerMazos != null) {
+			_AcumuladoJugador = _mazoControladorDeListas.InsertarSuma(_recorrerMazos.getIndiceCarta(),_recorrerMazos.getFigura(), _recorrerMazos.getValor(), _recorrerMazos.getImagen(),_AcumuladoJugador);
+			_recorrerMazos = _recorrerMazos.getProximo();
+		}
+
+		_recorrerMazos = _mazoControladorDeListas.getListaCartasSumadasMesa();
+		while (_recorrerMazos != null) {
+			_AcumuladoJugador = _mazoControladorDeListas.InsertarSuma(_recorrerMazos.getIndiceCarta(),_recorrerMazos.getFigura(), _recorrerMazos.getValor(), _recorrerMazos.getImagen(),_AcumuladoJugador);
+			_recorrerMazos = _recorrerMazos.getProximo();
+		}
+
 		this._mazoControladorDeListas = new Mazo();
 		this._idCartasMesa = null;
 		this._idCartaJugador = null;
@@ -110,8 +123,7 @@ public class ControladorMesaDeJuego {
 		_recorrerMazos = _gestorDeCartas.getMazoMesa().getMazo();
 		_recorrerMazos = _recorrerMazos.getProximo();
 		while (_recorrerMazos != null) {
-			_vistaInicio.getPanelContenedorCartas().CartasMesa("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
-					width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
+			_vistaInicio.getPanelContenedorCartas().CartasMesa("assets/cartas/" + _recorrerMazos.getImagen(), x, y,width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
 			_recorrerMazos = _recorrerMazos.getProximo();
 			x += 125;
 		}
@@ -121,8 +133,7 @@ public class ControladorMesaDeJuego {
 		x = 10;
 		y = 10;
 		while (_recorrerMazos != null) {
-			_vistaInicio.getPanelContenedorCartas().CartasJugador("assets/cartas/" + _recorrerMazos.getImagen(), x, y,
-					width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
+			_vistaInicio.getPanelContenedorCartas().CartasJugador("assets/cartas/" + _recorrerMazos.getImagen(), x, y,width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
 			_recorrerMazos = _recorrerMazos.getProximo();
 			x += 125;
 		}
@@ -164,15 +175,11 @@ public class ControladorMesaDeJuego {
 						System.out.println("TOMÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
 						_idCartaJugador = _mazoControladorDeListas.InsertarId(idCartaJugadorInstance, _idCartaJugador);
 						if (_lanzar == false) {
-							_mazoControladorDeListas.VerificarSumaCartas(_idCartasMesa, _idCartaJugador,
-									_gestorDeCartas.getMazoMesa().getMazo().getProximo(),
-									_gestorDeCartas.getMazoPersona().getJuego().getMazo().getProximo());
+							_mazoControladorDeListas.VerificarSumaCartas(_idCartasMesa, _idCartaJugador,_gestorDeCartas.getMazoMesa().getMazo().getProximo(),_gestorDeCartas.getMazoPersona().getJuego().getMazo().getProximo());
 							_tomarCarta = false;
 							_lanzar = false;
 						} else {
-							_mazoControladorDeListas.VerificarSumaCartas(_idCartasMesa, _idCartaJugador,
-									_gestorDeCartas.getMazoMesa().getMazo(),
-									_gestorDeCartas.getMazoPersona().getJuego().getMazo());
+							_mazoControladorDeListas.VerificarSumaCartas(_idCartasMesa, _idCartaJugador,_gestorDeCartas.getMazoMesa().getMazo(),_gestorDeCartas.getMazoPersona().getJuego().getMazo());
 							_tomarCarta = true;
 							_lanzar = true;
 						}
@@ -194,18 +201,14 @@ public class ControladorMesaDeJuego {
 						if (_lanzar == false) {
 							String idCartaJugadorInstance = (String) _listenerCartas.getText();
 							System.out.println("SE LANZÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
-							_mazoControladorDeListas.LanzarCartaAMesa(Integer.valueOf(idCartaJugadorInstance),
-									_gestorDeCartas.getMazoMesa().getMazo().getProximo(),
-									_gestorDeCartas.getMazoPersona().getJuego().getMazo().getProximo());
+							_mazoControladorDeListas.LanzarCartaAMesa(Integer.valueOf(idCartaJugadorInstance),_gestorDeCartas.getMazoMesa().getMazo().getProximo(),_gestorDeCartas.getMazoPersona().getJuego().getMazo().getProximo());
 							_tomarCarta = false;
 							_gestorDeCartas.setTurnoPersona(true);
 							GestionDeturnos();
 						} else if (_lanzar) {
 							String idCartaJugadorInstance = (String) _listenerCartas.getText();
 							System.out.println("SE LANZÓ LA CARTA DEL JUGADOR CON ID: " + idCartaJugadorInstance);
-							_mazoControladorDeListas.LanzarCartaAMesa(Integer.valueOf(idCartaJugadorInstance),
-									_gestorDeCartas.getMazoMesa().getMazo(),
-									_gestorDeCartas.getMazoPersona().getJuego().getMazo());
+							_mazoControladorDeListas.LanzarCartaAMesa(Integer.valueOf(idCartaJugadorInstance),_gestorDeCartas.getMazoMesa().getMazo(),_gestorDeCartas.getMazoPersona().getJuego().getMazo());
 							_tomarCarta = false;
 							_gestorDeCartas.setTurnoPersona(true);
 							GestionDeturnos();
@@ -217,7 +220,25 @@ public class ControladorMesaDeJuego {
 					String pilon = (String) _listenerCartas.getText();
 
 					if (pilon == "1") {
-						System.out.println("culo");
+						int x = 5;
+						int y = 50;
+						int width = 82;
+						int height = 101;
+						int cont = 0;
+						PilonJugador pilonJugador = new PilonJugador();
+						Carta recorrer = _AcumuladoJugador;
+						while (recorrer != null && cont <= 10) {
+							pilonJugador.MostrarPilon(recorrer.getImagen(), x, y, width, height,
+									recorrer.getIndiceCarta());
+							x += 90;
+							cont++;
+							recorrer = recorrer.getProximo();
+							if (cont == 10) {
+								y += 120;
+								cont = 0;
+							}
+						}
+
 					} else if (pilon == "2") {
 						System.out.println("culo1");
 					}
@@ -253,7 +274,7 @@ public class ControladorMesaDeJuego {
 		public void actionPerformed(ActionEvent eventoMesa) {
 
 			try {
-				if (eventoMesa.getSource() == _vistaInicio.getPanelContenedorCartas().getBotonSalir()) {					
+				if (eventoMesa.getSource() == _vistaInicio.getPanelContenedorCartas().getBotonSalir()) {
 					System.exit(0);
 				}
 			} catch (Error e) {

@@ -444,9 +444,10 @@ public class Mazo {
 
 	public void RepartirCartas(boolean reparteMesa, boolean reparte, Mazo mazoJugador, Mazo mazoComputadora,
 			Mazo mazoMesa) {
-		Carta aux = new Carta();
+		Carta aux = null;
 		int repartir = 1;
-		aux = _mazo.getProximo();
+		_mazo = _mazo.getProximo();
+		aux = _mazo;
 
 		if (aux != null) {
 			if (reparte) {

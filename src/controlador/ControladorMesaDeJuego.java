@@ -4,6 +4,7 @@ import modelo.Archivos;
 import modelo.Carta;
 import modelo.EstadoInicial;
 import modelo.Mazo;
+import modelo.Partida;
 import vista.PilonJugador;
 import vista.VistaInicio;
 
@@ -22,9 +23,12 @@ public class ControladorMesaDeJuego {
 	private Carta _idCartaJugador;
 	private Carta _AcumuladoJugador;
 	private Mazo _mazoControladorDeListas;
+	private Partida _partidaControl;
 	private boolean _tomarCarta;
 	private boolean _lanzar;
+	private boolean _recargarMazos;
 	private EstadoInicial _gestorDeCartas;
+	private int contGlobal;
 
 	/**
 	 * @author Arturo Perez
@@ -33,9 +37,10 @@ public class ControladorMesaDeJuego {
 	 *         insertaran las caras obtenidas
 	 */
 
-	public ControladorMesaDeJuego(VistaInicio vistaMesaJuego, EstadoInicial gestorDeCartas) {
+	public ControladorMesaDeJuego(VistaInicio vistaMesaJuego, EstadoInicial gestorDeCartas, Partida partidaControl) {
 		Archivos controlArchivos = new Archivos();
 		controlArchivos.DeleteArchivo("assets/baseDatos/MazoAcumuladorJugador.txt");
+		this._partidaControl = partidaControl;
 		this._gestorDeCartas = gestorDeCartas;
 		this._vistaInicio = vistaMesaJuego;
 		this._mazoControladorDeListas = new Mazo();
@@ -44,6 +49,7 @@ public class ControladorMesaDeJuego {
 		this._tomarCarta = false;
 		this._lanzar = false;
 		this._AcumuladoJugador = null;
+		
 		vistaMesaJuego.panelContenedorCartas();
 
 		iniciarComponentes();
@@ -63,10 +69,17 @@ public class ControladorMesaDeJuego {
 		_vistaInicio.getPanelContenedorCartas().addActionListener(new listenerMesaJuego());
 
 		_recorrerMazos = _mazoControladorDeListas.getCartasRestantesMesa();
+		this.contGlobal = 0;
 		while (_recorrerMazos != null) {
 			_vistaInicio.getPanelContenedorCartas().CartasMesa("assets/cartas/" + _recorrerMazos.getImagen(), x, y,width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
 			_recorrerMazos = _recorrerMazos.getProximo();
-			x += 125;
+			contGlobal++;
+			if(contGlobal == 5) {
+				y+= 125;
+				x = 20;
+			}else {
+				x += 125;
+			}
 		}
 
 		_recorrerMazos = _mazoControladorDeListas.getCartasRestantesJugador();
@@ -85,9 +98,11 @@ public class ControladorMesaDeJuego {
 			x += 125;
 			cont++;
 		}
+		
+		//seteo los mazos originales;	
 		_gestorDeCartas.getMazoMesa().setMazo(_mazoControladorDeListas.getCartasRestantesMesa());
 		_gestorDeCartas.getMazoPersona().getJuego().setMazo(_mazoControladorDeListas.getCartasRestantesJugador());
-
+//---------------------------------------------------
 		_recorrerMazos = _mazoControladorDeListas.getListaCartasSumadasJugador();
 
 		while (_recorrerMazos != null) {
@@ -100,12 +115,36 @@ public class ControladorMesaDeJuego {
 			_AcumuladoJugador = _mazoControladorDeListas.InsertarSuma(_recorrerMazos.getIndiceCarta(),_recorrerMazos.getFigura(), _recorrerMazos.getValor(), _recorrerMazos.getImagen(),_AcumuladoJugador);
 			_recorrerMazos = _recorrerMazos.getProximo();
 		}
-
-		this._mazoControladorDeListas = new Mazo();
-		this._idCartasMesa = null;
-		this._idCartaJugador = null;
-		this._tomarCarta = false;
-		this._lanzar = true;
+		
+		//-----------------------------------------------
+		//VERIFICAMOS SI MAZO DEL JUGADOR TIENE O NO CARTAS, USANDO UN CONTADOR
+		Carta auxCarta = _gestorDeCartas.getMazoPersona().getJuego().getMazo();
+		cont = 0;
+		while(auxCarta != null) {
+			cont++;
+			auxCarta = auxCarta.getProximo();
+		}
+		
+		if(cont > 0) {
+			_recargarMazos = false;
+		}else {
+			_recargarMazos = true;
+		}
+		
+		/*AHORA SI _RECARGARMAZOS ES TRUE LLAMAMOS DE NUEVO A LA FUNCION
+		 * TURNOS Y PARTIDAS PARA QUE REPARTA DE NUEVO LAS CARTAS EXCEPTUANDO A LA MEZA*/
+		if(_recargarMazos) {
+			_partidaControl.TurnosYPartidaCompleta();
+			_gestorDeCartas = _partidaControl.getGestionInicialJuego();
+			iniciarComponentesRecarga();
+		}else {
+			this._mazoControladorDeListas = new Mazo();
+			this._idCartasMesa = null;
+			this._idCartaJugador = null;
+			this._tomarCarta = false;
+			this._lanzar = true;
+		}
+		//-----------------------------------------------
 	}
 
 	public void iniciarComponentes() {
@@ -147,10 +186,47 @@ public class ControladorMesaDeJuego {
 		}
 
 	}
+	
+	public void iniciarComponentesRecarga(){
+		int x = 20;
+		int y = 50;
+		int width = 82;
+		int height = 101;
+		int cont = 1;
+
+		_vistaInicio.getPanelContenedorCartas().JLabelMazoPilon(new listenerVistaJuego());
+		_vistaInicio.getPanelContenedorCartas().JLabelMazoPilon1(new listenerVistaJuego());
+		_vistaInicio.getPanelContenedorCartas().ButtonSalir();
+		_vistaInicio.getPanelContenedorCartas().addActionListener(new listenerMesaJuego());
+
+		_recorrerMazos = _gestorDeCartas.getMazoPersona().getJuego().getMazo();
+		x = 10;
+		y = 10;
+		while (_recorrerMazos != null) {
+			_vistaInicio.getPanelContenedorCartas().CartasJugador("assets/cartas/" + _recorrerMazos.getImagen(), x, y,width, height, _recorrerMazos.getIndiceCarta(), new listenerVistaJuego());
+			_recorrerMazos = _recorrerMazos.getProximo();
+			x += 125;
+		}
+
+		x = 10;
+		y = 10;
+		while (cont <= 4) {
+			_vistaInicio.getPanelContenedorCartas().CartasPc("assets/cartas/back.png", x, y, width, height);
+			x += 125;
+			cont++;
+		}
+		
+		this._mazoControladorDeListas = new Mazo();
+		this._idCartasMesa = null;
+		this._idCartaJugador = null;
+		this._tomarCarta = false;
+		this._lanzar = true;
+	}
 
 	public void GestionDeturnos() {
 		if (_gestorDeCartas.isTurnoPersona() == false) {
 			System.out.println("computadora no implementada");
+			// poner a la mesa en su proximo
 			_gestorDeCartas.setTurnoPersona(true);
 		} else {
 			System.out.println("Se recoge lo antes sumado por el jugador");
@@ -240,7 +316,7 @@ public class ControladorMesaDeJuego {
 						}
 
 					} else if (pilon == "2") {
-						System.out.println("culo1");
+						System.out.println("yjhjhjj");
 					}
 
 				}

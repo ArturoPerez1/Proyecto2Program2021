@@ -1,6 +1,7 @@
 package controlador;
 
 import modelo.Archivos;
+import modelo.Carta;
 import modelo.EstadoInicial;
 import modelo.Partida;
 import vista.VistaInicio;
@@ -40,7 +41,8 @@ public class ControladorInicio {
 					_archivosControl.GuardarNombre(_vistaJuegoInicio.getTextoJTextField());
 				} else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonEmpezar()) {
 					_partida.partidaNueva(_vistaJuegoInicio.getTextoJTextField());
-					_controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio, _partida.getGestionInicialJuego());
+					_partida.TurnosYPartidaCompleta();
+					_controladorMesaDeJuego = new ControladorMesaDeJuego(_vistaJuegoInicio, _partida.getGestionInicialJuego(), _partida);
 				} else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonCargar()) {
 					_vistaJuegoInicio.mensaje("hola man1");
 				} else if (eventoVistaJuegoInicio.getSource() == _vistaJuegoInicio.getPanelMenuPrincipal().getJButtonSalir()) {

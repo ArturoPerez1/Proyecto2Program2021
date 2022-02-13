@@ -3,9 +3,14 @@ package modelo;
 public class Partida {
     private EstadoInicial _gestionInicialJuego;
     private JuegoInterno _miJuego;
+    private Carta listaCartaJugador;
+    private Carta listaCartaPc;
+    private  boolean reparteMesa;
 
     public Partida() {
         this._gestionInicialJuego = new EstadoInicial();
+        this.listaCartaJugador = null;
+        this.listaCartaPc = null;
 //		this._miJuego = new JuegoInterno();
     }
 
@@ -22,7 +27,8 @@ public class Partida {
             turnoPersona = false;
         return turnoPersona;
     }
-
+    
+    // esta es la funcion que devuelve el puntaje
     public void ValoracionCartas(Jugador jugadores) {
         Carta mazoJugadores = jugadores.getAcumulado().getMazo();
         int contarCartas = 0, cartaCorNegro = 0, puntos = 0;
@@ -56,10 +62,10 @@ public class Partida {
         jugadores.setPuntos(puntos);
     }
 
-    public void turnosDeJuego(boolean salir) {
+    public void turnosDeJuego() {
         _miJuego.juego = _gestionInicialJuego;
         if (_gestionInicialJuego.isTurnoPersona()) {
-            _miJuego.turnoPersonaJugar(salir);
+        	//llamar a la interfaz del jugador;
             _miJuego.juego.setTurnoPersona(false);
         } else {
             _miJuego.turnoComputadora();
@@ -81,73 +87,43 @@ public class Partida {
 
     public void partidaNueva(String nombre) {
         _gestionInicialJuego = _gestionInicialJuego.estadoInicial(nombre, turnoAleatorio());
-        boolean reparte = _gestionInicialJuego.isRepartePersona();
-        boolean reparteMesa = true;
-        boolean salir = false;
-
-
-        _gestionInicialJuego.getMazoPilon().RepartirCartas(reparteMesa, _gestionInicialJuego.isRepartePersona(),
-                _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
-                _gestionInicialJuego.getMazoMesa());
-
-        //-------------------------------------------------
-//		while (controladorJuego.getMazoPilon().getMazo() != null) {
-//			controladorJuego.getMazoPilon().RepartirCartas(reparteMesa, controladorJuego.isRepartePersona(),
-//					controladorJuego.getMazoPersona().getJuego(), controladorJuego.getMazoComputadora().getJuego(),
-//					controladorJuego.getMazoMesa());
-//			
-//			reparteMesa = false;
-//			if (reparte) {
-//				while (controladorJuego.getMazoPersona().getJuego().getMazo() != null) {
-//					turnosDeJuego(salir);
-//					if (salir) {
-//						System.out.println("salioiiii11.11");
-//						return;
-//					}
-//				}
-//			} else {
-//				while (controladorJuego.getMazoComputadora().getJuego().getMazo() != null) {
-//					turnosDeJuego(salir);
-//					if (salir) {
-//						System.out.println("salioiiii22.11");
-//						return;
-//					}
-//				}
-//			}
-//		}
-//		if (controladorJuego.getMazoMesa().getMazo() != null) {
-//			if (controladorJuego.isUltimoRecoger()) {
-//				System.out.println(
-//						" El ultimo que recogio fue la Persona: " + controladorJuego.getMazoPersona().getNombre());
-//				ultimoRecoger(controladorJuego.getMazoMesa(), controladorJuego.getMazoPersona());
-//			} else {
-//				System.out.println(
-//						" El ultimo que recogio fue la Persona: " + controladorJuego.getMazoComputadora().getNombre());
-//				ultimoRecoger(controladorJuego.getMazoMesa(), controladorJuego.getMazoComputadora());
-//			}
-//		}
-//		controladorJuego = miJuego.juego;
-//		ValoracionCartas(controladorJuego.getMazoComputadora());
-//		ValoracionCartas(controladorJuego.getMazoPersona());
-//		controladorJuego.mostrarJuego(controladorJuego);
-//		System.out.println();
-//		if (controladorJuego.getMazoPersona().getPuntos() > controladorJuego.getMazoComputadora().getPuntos()) {
-//			System.out
-//					.println(" El ganador es " + controladorJuego.getMazoPersona().getNombre() + " Felicidades... \n");
-//			System.out.println(" " + controladorJuego.getMazoPersona().getNombre() + " "
-//					+ controladorJuego.getMazoPersona().getPuntos() + " puntos\n");
-//			System.out.println(" " + controladorJuego.getMazoComputadora().getNombre() + " "
-//					+ controladorJuego.getMazoComputadora().getPuntos() + " puntos\n");
-//		} else {
-//			System.out.println(" El ganador es " + controladorJuego.getMazoComputadora().getNombre() + "\n");
-//			System.out.println(" " + controladorJuego.getMazoComputadora().getNombre() + " "
-//					+ controladorJuego.getMazoComputadora().getPuntos() + " puntos\n");
-//			System.out.println(" " + controladorJuego.getMazoPersona().getNombre() + " "
-//					+ controladorJuego.getMazoPersona().getPuntos() + " puntos\n");
-//			System.out.println(" Mejor suerte para la proxima\n");
-//		}
-//		System.out.println(" Fin del Juego \n");
-//		System.out.println(" Gracias por jugar....");
+        reparteMesa = true;
     }
-
+    
+    //------------------------------------------------------
+    //SISTEMA DE TURNOS Y PARTIDA COMPLETA;
+    public void TurnosYPartidaCompleta() {    
+        if(_gestionInicialJuego.isRepartePersona()) {
+        	System.out.println("ESTÁ REPARTIENDO EL JUGADOR");
+            //SE REPARTE A TODOS PRIMERO;
+        	if(reparteMesa) {
+        		_gestionInicialJuego.getMazoPilon().RepartirCartas(reparteMesa, _gestionInicialJuego.isRepartePersona(),
+                    _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
+                    _gestionInicialJuego.getMazoMesa());
+        		reparteMesa = false;
+        	}
+        	else {
+        		_gestionInicialJuego.getMazoPilon().RepartirCartas(reparteMesa, _gestionInicialJuego.isRepartePersona(),
+                        _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
+                        _gestionInicialJuego.getMazoMesa());
+        	}
+        	System.out.println("holaSoyReparte" + _gestionInicialJuego.isRepartePersona());
+        }
+//        else {
+//        	System.out.println("ESTÁ REPARTIENDO EL COMPUTADOR");
+//            //SE REPARTE A TODOS PRIMERO;
+//        	if(reparteMesa) {
+//        		_gestionInicialJuego.getMazoPilon().RepartirCartas(reparteMesa, _gestionInicialJuego.isRepartePersona(),
+//                    _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
+//                    _gestionInicialJuego.getMazoMesa());
+//        		reparteMesa = false;
+//        	}
+//        	else {
+//        		_gestionInicialJuego.getMazoPilon().RepartirCartas(reparteMesa, _gestionInicialJuego.isRepartePersona(),
+//                        _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
+//                        _gestionInicialJuego.getMazoMesa());
+//        	}
+//        }
+    }
+    //------------------------------------------------------
 }

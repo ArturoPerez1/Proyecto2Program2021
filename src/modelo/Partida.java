@@ -96,6 +96,7 @@ public class Partida {
         if(_gestionInicialJuego.isRepartePersona()) {
         	System.out.println("ESTÁ REPARTIENDO EL JUGADOR");
             //SE REPARTE A TODOS PRIMERO;
+        	
         	if(reparteMesa) {
         		_gestionInicialJuego.getMazoPilon().RepartirCartas(reparteMesa, _gestionInicialJuego.isRepartePersona(),
                     _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
@@ -103,9 +104,22 @@ public class Partida {
         		reparteMesa = false;
         	}
         	else {
+        		Carta verificarMazoPrincipal = _gestionInicialJuego.getMazoPilon().getMazo().getProximo();
+        		int cont = 0;
+        		while(verificarMazoPrincipal != null) {
+        			cont++;
+        			verificarMazoPrincipal = verificarMazoPrincipal.getProximo();
+        		}
+        		
+        		System.out.println("cont: "+cont);
+        		if(cont > 0 && _gestionInicialJuego.getMazoPilon().getMazo() != null) {
         		_gestionInicialJuego.getMazoPilon().RepartirCartas(reparteMesa, _gestionInicialJuego.isRepartePersona(),
                         _gestionInicialJuego.getMazoPersona().getJuego(), _gestionInicialJuego.getMazoComputadora().getJuego(),
                         _gestionInicialJuego.getMazoMesa());
+        		}
+        		else {
+        			System.out.println("MAZO PRINCIPAL VACIO");
+        		}
         	}
         	System.out.println("holaSoyReparte" + _gestionInicialJuego.isRepartePersona());
         }

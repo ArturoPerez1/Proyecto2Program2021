@@ -446,7 +446,6 @@ public class Mazo {
 			Mazo mazoMesa) {
 		Carta aux = null;
 		int repartir = 1;
-		_mazo = _mazo.getProximo();
 		aux = _mazo;
 
 		if (aux != null) {
